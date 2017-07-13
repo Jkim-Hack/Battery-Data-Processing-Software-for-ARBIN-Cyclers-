@@ -12,11 +12,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class VoltageVsChrgeCapacity extends MainMenu {
+public class VoltageVsChrgeCapacity {
 	
 	
 	private File fileName;
 	private double DataMass;
+	private double value;
+	
 	
 	public double getValue() {
 		return value;
@@ -44,21 +46,196 @@ public class VoltageVsChrgeCapacity extends MainMenu {
 		display();
 	}
 	
+	
+	
+public double FindGreatestCC()
+	{
+	
+		ExcelReader excelData = null;
+		try
+		{
+			if(fileName == null)
+		{
+			System.out.println("Null Exception");
+		}
+		excelData = new ExcelReader(fileName);
+		}
+		catch(Exception ioException)
+		{
+		ioException.printStackTrace();
+		}
+		
+	List<Data> electrictyData = excelData.getData().electrictyData;
+	
+	double greatestDoubleCC = ((electrictyData.get(0).getCharge_Capacity()) * 1000)/value;
 
-	public void display()
+	for(int i = 1; i < electrictyData.size(); i ++)	{
+		
+			double chargeGetin = (electrictyData.get(i).getCharge_Capacity()) * 1000;
+			double chargein = chargeGetin/value;
+			double stpIndex = electrictyData.get(i).getStepIndx();
+			
+			
+			if( greatestDoubleCC < chargein ){
+				if (stpIndex > 3){
+					break;
+			}
+				greatestDoubleCC = chargein;
+		}
+	}
+		return greatestDoubleCC;
+						
+}
+
+public double FindGreatestV()
+{
+
+	ExcelReader excelData = null;
+	try
+	{
+		if(fileName == null)
+	{
+		System.out.println("Null Exception");
+	}
+	excelData = new ExcelReader(fileName);
+	}
+	catch(Exception ioException)
+	{
+	ioException.printStackTrace();
+	}
+	
+List<Data> electrictyData = excelData.getData().electrictyData;
+
+double greatestDoubleV = electrictyData.get(0).getVoltage();
+
+for(int i = 0; i < electrictyData.size(); i ++)	{
+	
+		double voltagein = electrictyData.get(i).getVoltage();
+		double stpIndex = electrictyData.get(i).getStepIndx();
+		
+
+		if( greatestDoubleV < voltagein ){
+			if (stpIndex > 3){
+				break;
+		}
+			greatestDoubleV = voltagein;
+	}
+}
+	return greatestDoubleV;
+					
+}
+
+public double FindLeastCC()
+{
+
+	ExcelReader excelData = null;
+	try
+	{
+		if(fileName == null)
+	{
+		System.out.println("Null Exception");
+	}
+	excelData = new ExcelReader(fileName);
+	}
+	catch(Exception ioException)
+	{
+	ioException.printStackTrace();
+	}
+	
+List<Data> electrictyData = excelData.getData().electrictyData;
+
+double leastDoubleCC = electrictyData.get(0).getCharge_Capacity();
+
+for(int i = 0; i < electrictyData.size(); i ++)	{
+	
+		double chargeGetin = (electrictyData.get(i).getCharge_Capacity()) * 1000;
+		double chargein = chargeGetin/value;
+		double stpIndex = electrictyData.get(i).getStepIndx();
+		
+		if (stpIndex == 3){
+				
+			if (leastDoubleCC == chargein){
+					return leastDoubleCC;
+			
+			}
+				
+			break;
+			
+		}
+	}
+return leastDoubleCC;
+}
+
+public double FindLeastV()
+{
+
+	ExcelReader excelData = null;
+	try
+	{
+		if(fileName == null)
+	{
+		System.out.println("Null Exception");
+	}
+	excelData = new ExcelReader(fileName);
+	}
+	catch(Exception ioException)
+	{
+	ioException.printStackTrace();
+	}
+	
+List<Data> electrictyData = excelData.getData().electrictyData;
+
+double leastDoubleV = electrictyData.get(0).getVoltage();
+
+for(int i = 0; i < electrictyData.size(); i ++)	{
+	
+	double voltagein = electrictyData.get(i).getVoltage();
+	double stpIndex = electrictyData.get(i).getStepIndx();
+		
+		if (stpIndex == 3){
+				
+			if (leastDoubleV == voltagein){
+					return leastDoubleV;
+			
+			}
+				
+			break;
+			
+		}
+	}
+
+return leastDoubleV;
+
+}
+	
+
+// DISPLAY
+// DISPLAY
+
+
+public void display()
 	{
 		
 		
 	//Secondary stage is called for the graphs	
+ 
 	
-		
+	
+
+	
+System.out.println(FindLeastV());
+System.out.println(FindLeastCC());
+System.out.println(FindGreatestCC());
+System.out.println(FindGreatestV());
+
+
 	Stage secondaryStage = new Stage();
 	
 BorderPane borderPane = new BorderPane();
 secondaryStage.setTitle("Voltage vs Charge Capacity");
 //defining the axes
-final NumberAxis xAxis = new NumberAxis();
-final NumberAxis yAxis = new NumberAxis();
+final NumberAxis xAxis = new NumberAxis(FindLeastCC(), FindGreatestCC(), .04);
+final NumberAxis yAxis = new NumberAxis(0, FindGreatestV(), .5);
 xAxis.setLabel("Charge Capacity (mAh/g)");
 yAxis.setLabel("Voltage (V)");
 
@@ -73,17 +250,15 @@ ExcelReader excelData = null;
 try
 {
 	if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
+{
+	System.out.println("Null Exception");
+}
 excelData = new ExcelReader(fileName);
 }
-
 catch(Exception ioException)
 {
 ioException.printStackTrace();
 }
-
 
 //defining a series
 
@@ -100,13 +275,17 @@ for(int i = 0; i < electrictyData.size(); i ++)
 {
 	double chargeGet = (electrictyData.get(i).getCharge_Capacity()) * 1000;
 	double charge = chargeGet/value;
-	System.out.println(charge);
 	double voltage = electrictyData.get(i).getVoltage();
 	XYChart.Data data = new XYChart.Data(charge,voltage);
 	Rectangle rect = new Rectangle(0,0);
 	rect.setVisible(false);
 	data.setNode(rect);
 	series.getData().add(data);
+	double stpI = electrictyData.get(i).getStepIndx();
+	if (stpI == 3) {
+		break;
+	}
+	
 }
 
 XYChart.Series Dseries = new XYChart.Series();
@@ -114,15 +293,19 @@ Dseries.setName("Discharge");
 
 for(int i = 0; i < electrictyData.size(); i ++)
 {
-	double DchargeGet = (electrictyData.get(i).getDischarge_Capacity()) * 1000;
+	double DchargeGet = (electrictyData.get(i).getDischarge_Capacity()) * 1000 ;
 	double Dcharge = DchargeGet/value;
-	System.out.println(Dcharge);
+	//System.out.println(Dcharge);
 	double Dvoltage = electrictyData.get(i).getVoltage();
 	XYChart.Data Ddata = new XYChart.Data(Dcharge,Dvoltage);
 	Rectangle rect = new Rectangle(0,0);
 	rect.setVisible(false);
 	Ddata.setNode(rect);
 	Dseries.getData().add(Ddata);
+	double stpI = electrictyData.get(i).getStepIndx();
+	if (stpI == 5) {
+		break;
+	}
 }
 
 //populating the series with data
@@ -199,7 +382,7 @@ for(int i = 0; i < electrictyData.size(); i ++)
 
 
 
-Scene scene  = new Scene(borderPane,1250,800);
+Scene scene  = new Scene(borderPane,1000,800);
 
 
 lineChart1.getData().add(series1);
@@ -212,7 +395,7 @@ secondaryStage.show();
 borderPane.setTop(lineChart);
 borderPane.setBottom(lineChart1);
 }
-	}
+}
 }
 	
 	

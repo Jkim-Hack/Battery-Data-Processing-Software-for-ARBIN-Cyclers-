@@ -98,7 +98,7 @@ for(int i = 0; i < electrictyData.size(); i ++)
 {
 	double chargeGet = (electrictyData.get(i).getDischarge_Capacity()) * 1000 ;
 	double charge = chargeGet/value;
-	System.out.println(charge);
+	//System.out.println(charge);
 	double voltage = electrictyData.get(i).getVoltage();
 	XYChart.Data data = new XYChart.Data(charge,voltage);
 	Rectangle rect = new Rectangle(0,0);

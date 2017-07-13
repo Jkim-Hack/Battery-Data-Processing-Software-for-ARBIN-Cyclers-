@@ -68,23 +68,13 @@ public class MainMenu extends Application
         VBox topContainer = new VBox();
         VBox midinserts = new VBox();
         VBox graphVvC = new VBox();
-        VBox zeTable = new VBox();
         
-        Label labelMass = new Label("Insert Mass: ");
+        Label labelMass = new Label("Insert Mass (g) : ");
         labelMass.setFont(Font.font ("Segoe UI", 14));
         
         Label saveLabel = new Label(" Saved!");
         saveLabel.setVisible(false);
         
-        TableView selectGraph = new TableView();
-        selectGraph.setEditable(false);
-        
-        TableColumn firstCol = new TableColumn("Top Graph");
-        TableColumn	secondCol = new TableColumn("Right Graph");
-        TableColumn thirdCol = new TableColumn("Left Graph");
-        
-        selectGraph.getColumns().addAll(firstCol, secondCol, thirdCol);
-       
         TextField insertMass = new TextField();
         Button pseudoSave = new Button("Save Mass...");
         pseudoSave.addEventHandler(ActionEvent.ACTION, (e) -> isDouble(insertMass, insertMass.getText()));
@@ -138,10 +128,10 @@ public class MainMenu extends Application
         	VvCgraph = new VoltageVsChrgeCapacity(fileName, value);	
         //Voltage vs Charge Capacity class
         	
-        //Discharge class
-        	DischargeGraph dischrge;
-        	dischrge = new DischargeGraph(fileName, value);
-        //Discharge class
+        /*Discharge class
+        	//DischargeGraph dischrge;
+        	//dischrge = new DischargeGraph(fileName, value);
+         Discharge class */
         
         		 		
         });
@@ -156,9 +146,6 @@ public class MainMenu extends Application
        	createGraph.setPrefWidth(250);
        	createGraph.setPrefHeight(70);
        	
-       	pane.setRight(zeTable);
-       	zeTable.getChildren().addAll(selectGraph);
-       	zeTable.setAlignment(Pos.TOP_RIGHT);
        	
        	
        	pane.setTop(topContainer);
