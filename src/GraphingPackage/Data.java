@@ -11,6 +11,7 @@ public class Data
     private double Cycle_Number;
     private double Current;
     private double dtDv;
+    private double stepIndx;
 
 	public Data(List<Double> data) 
     {
@@ -18,10 +19,12 @@ public class Data
 		{
 			switch(i)
 			{
-				
+				case 4:setStepIndx(data.get(i));
+				break;
 				case 5:setCycle_Number(data.get(i));
 				break;
 				case 6:setCurrent(data.get(i));
+				break;
 				case 7:setVoltage(data.get(i));
 				break;
 				case 8:setCharge_Capacity(data.get(i));
@@ -33,9 +36,20 @@ public class Data
 			}
 		}
 	}
-    
-    
-	
+
+	public double getStepIndx() {
+		return stepIndx;
+	}
+
+
+
+
+	public void setStepIndx(double stepIndx) {
+		this.stepIndx = stepIndx;
+	}
+
+
+
 
 	public double getDtDv() {
 		return dtDv;
