@@ -234,8 +234,8 @@ System.out.println(FindGreatestV());
 BorderPane borderPane = new BorderPane();
 secondaryStage.setTitle("Voltage vs Charge Capacity");
 //defining the axes
-final NumberAxis xAxis = new NumberAxis(FindLeastCC(), FindGreatestCC(), .04);
-final NumberAxis yAxis = new NumberAxis(0, FindGreatestV(), .5);
+final NumberAxis xAxis = new NumberAxis(FindLeastCC(), FindGreatestCC(), (FindGreatestCC())/6);
+final NumberAxis yAxis = new NumberAxis(0, FindGreatestV(), (FindGreatestV())/4);
 xAxis.setLabel("Charge Capacity (mAh/g)");
 yAxis.setLabel("Voltage (V)");
 

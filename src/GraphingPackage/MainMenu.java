@@ -103,7 +103,7 @@ public class MainMenu extends Application
        openFile.setOnAction((ActionEvent event) -> {
         	
             //File Chooser class
-        	
+    	   
         	FileChoose file;
         	file = new FileChoose();
             file.start(primaryStage);
