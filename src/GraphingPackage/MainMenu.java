@@ -152,12 +152,21 @@ public class MainMenu extends Application
        openFile.setOnAction((ActionEvent event) -> {
         	
             //File Chooser class
+/*<<<<<<< HEAD
         	
         	fileChooser.chooseFile(primaryStage);
             fileName = fileChooser.getFileName();
             fileField.setText(fileName.getName());
            
-            //File Chooser class
+=======
+    	   
+        	FileChoose file;
+        	file = new FileChoose();
+            file.start(primaryStage);
+            fileName = file.getFileName();
+            
+>>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
+*/            //File Chooser class
        });
        
        files.getItems().add(openFile);
