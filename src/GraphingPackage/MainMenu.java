@@ -2,73 +2,57 @@ package GraphingPackage;
 
  
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import org.apache.xmlbeans.impl.regex.ParseException;
+import com.jogamp.newt.event.KeyEvent;
 
-
-
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.converter.IntegerStringConverter;
 import javafx.util.Duration;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 
 public class MainMenu extends Application 
 {
  
-	
+	//Instance Variables
 	
 	public File fileName;
-	public double value;
+	
+	
+	
+	public FileChoose fileChooser = new FileChoose();
 		
 	
 
 	
     @Override public void start(Stage primaryStage)
     {	
+    	
+    	
+    	//Display Panes
         VBox topContainer = new VBox();
         VBox midinserts = new VBox();
         VBox graphVvC = new VBox();
-        VBox zeTable = new VBox();
+        //VBox zeTable = new VBox();
         
         Label labelMass = new Label("Insert Mass: ");
         labelMass.setFont(Font.font ("Segoe UI", 14));
@@ -76,19 +60,66 @@ public class MainMenu extends Application
         Label saveLabel = new Label(" Saved!");
         saveLabel.setVisible(false);
         
-        TableView selectGraph = new TableView();
+       /* TableView selectGraph = new TableView();
         selectGraph.setEditable(false);
         
         TableColumn firstCol = new TableColumn("Top Graph");
         TableColumn	secondCol = new TableColumn("Right Graph");
-        TableColumn thirdCol = new TableColumn("Left Graph");
+        TableColumn thirdCol = new TableColumn("Left Graph");*/
         
-        selectGraph.getColumns().addAll(firstCol, secondCol, thirdCol);
+        
+        //Textbox for File 
+        
+        Label fileLabel = new Label("Choose File");
+        TextField fileField = new TextField();
+        
+        fileField.setOnMouseClicked(e -> {
+		
+				
+					
+					fileChooser.chooseFile(primaryStage);
+					if(fileChooser.getFileName() != null)
+					{	
+						fileName = fileChooser.getFileName();
+						fileField.setText(fileName.getName());
+					}
+					else
+					{
+						System.out.println("Need file");
+					}
+				//TODO ADD POP UP WINDOW ASKING TO SUBMIT FILE
+			
+		} );
+       
+        
+        //Creates Drop Down Boxes 
+        Label topLabel = new Label("Top Pane");
+        ChoiceBox<Graph> box1 = new ChoiceBox<Graph>();
+        
+        Label botLeft = new Label("Bottom Left Pane");
+        ChoiceBox<Graph> box2 = new ChoiceBox<Graph>();
+        
+        Label botRight = new Label("Bottom Right Pane");
+        ChoiceBox<Graph> box3 = new ChoiceBox<Graph>();
+        
+       
+        
+       
+        //graphs.add(new DischargeGraph(fileName, value));
+        
+       
+        
+
+      
+        
+        
+        //Mass textfield
        
         TextField insertMass = new TextField();
-        Button pseudoSave = new Button("Save Mass...");
+        Button pseudoSave = new Button("Apply");
         pseudoSave.addEventHandler(ActionEvent.ACTION, (e) -> isDouble(insertMass, insertMass.getText()));
-        pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> {
+        pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
+        {
      
         	saveLabel.setVisible(true);
         	PauseTransition visiblePause = new PauseTransition(
@@ -98,6 +129,14 @@ public class MainMenu extends Application
         	        event -> saveLabel.setVisible(false)
         	);
         	visiblePause.play();
+        	
+        	double mass = toMassDouble(insertMass.getText());
+        	
+        	 List<Graph> graphs = new ArrayList<Graph>();
+             graphs.add(new VoltageVsChrgeCapacity(fileName, mass));
+             box1.getItems().addAll(graphs);
+             box2.getItems().addAll(graphs);
+             box3.getItems().addAll(graphs);  
         
         });
         
@@ -114,37 +153,37 @@ public class MainMenu extends Application
         	
             //File Chooser class
         	
-        	FileChoose file;
-        	file = new FileChoose();
-            file.start(primaryStage);
-            fileName = file.getFileName();
-            
+        	fileChooser.chooseFile(primaryStage);
+            fileName = fileChooser.getFileName();
+            fileField.setText(fileName.getName());
+           
             //File Chooser class
        });
        
        files.getItems().add(openFile);
        ddMenu.getMenus().add(files);
+       
+       
         
     	//Button for the VvsCC window created
     	
     	Button createGraph = new Button();
     	createGraph.setText("Create Graph");
     	createGraph.setFont(Font.font ("Segoe UI", 16));
-    	createGraph.setOnAction((ActionEvent event) -> {
+    	createGraph.setOnAction(e -> 
+    	{
        
-    		double value = Double.parseDouble(insertMass.getText());
-        //Voltage vs Charge Capacity class
-        	VoltageVsChrgeCapacity VvCgraph;
-        	VvCgraph = new VoltageVsChrgeCapacity(fileName, value);	
-        //Voltage vs Charge Capacity class
-        	
-        //Discharge class
-        	DischargeGraph dischrge;
-        	dischrge = new DischargeGraph(fileName, value);
-        //Discharge class
-        
-        		 		
+    		MainGraphs graph = new MainGraphs(box1.getValue());
+    	
+    		
+    		graph.displayGraphs();
+    		
         });
+    	
+    	
+    	
+    	
+    	
        //The primary master window is created
        
        BorderPane pane = new BorderPane();
@@ -152,13 +191,13 @@ public class MainMenu extends Application
        	pane.setRight(graphVvC); 
        	graphVvC.setPadding(new Insets(20, 20, 20, 20));
        	graphVvC.setAlignment(Pos.BOTTOM_RIGHT);
-       	graphVvC.getChildren().addAll(createGraph);
+       	graphVvC.getChildren().addAll(topLabel,box1, botLeft, box2, botRight, box3,createGraph);
        	createGraph.setPrefWidth(250);
        	createGraph.setPrefHeight(70);
        	
-       	pane.setRight(zeTable);
-       	zeTable.getChildren().addAll(selectGraph);
-       	zeTable.setAlignment(Pos.TOP_RIGHT);
+       	//pane.setRight(zeTable);
+       	//zeTable.getChildren().addAll(topLabel,botLeft,box2,botRight,box3);
+       	//zeTable.setAlignment(Pos.TOP_RIGHT);
        	
        	
        	pane.setTop(topContainer);
@@ -166,7 +205,7 @@ public class MainMenu extends Application
        	
        	pane.setLeft(midinserts);
        	midinserts.setPadding(new Insets(20, 20, 20, 20));
-       	midinserts.getChildren().addAll(labelMass ,insertMass, pseudoSave, saveLabel);
+       	midinserts.getChildren().addAll(fileLabel,fileField,labelMass ,insertMass, pseudoSave, saveLabel);
        	
        Scene scene = new Scene(pane, 800, 600);
        
@@ -179,10 +218,21 @@ public class MainMenu extends Application
          
         primaryStage.setOnCloseRequest(e -> Platform.exit());
         
+        
+      
+        
     }
     
-    private boolean isDouble(TextField input, String mass){
-    	try{
+    
+    
+    
+    
+    
+    private boolean isDouble(TextField input, String mass)
+    {
+    	
+    	try
+    	{
     		double dataMass = Double.parseDouble(input.getText());
     		System.out.println("Saved!");
     		return true;
@@ -195,7 +245,14 @@ public class MainMenu extends Application
     	}
     }
 
+    
+    public double toMassDouble(String mass)
+    {
+    	double dataMass = Double.parseDouble(mass);
+    	return dataMass;
+    }
   
+    
     
 	public static void main(String[] args)
     {

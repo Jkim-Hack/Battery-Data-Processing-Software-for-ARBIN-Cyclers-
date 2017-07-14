@@ -7,7 +7,8 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class FileChoose extends MainMenu {
+public class FileChoose
+{
 
 	private File fileName;
 	
@@ -19,15 +20,18 @@ public File getFileName() {
 		this.fileName = fileName;
 	}
 
-@Override public void start(Stage primaryStage){	
+	public void chooseFile(Stage primaryStage)
+	{	
 
 	FileChooser fileChooser = new FileChooser();
     FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XLS Files (*.xls)", "*.xls");
     fileChooser.getExtensionFilters().add(extFilter);
     File fileName = fileChooser.showOpenDialog(primaryStage);   
-    System.out.println(fileName.getPath());
-    
-   setFileName(fileName);
+
+    if(fileName != null)
+    {
+    	setFileName(fileName);
+    }
     	
 
  

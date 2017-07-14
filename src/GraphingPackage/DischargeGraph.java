@@ -11,30 +11,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class DischargeGraph extends MainMenu {
+public class DischargeGraph extends Graph {
 	
 	
-	private File fileName;
-	private double DataMass;
-	
-	public double getValue() {
-		return value;
-	}
-
-	public void setValue(double value) {
-		this.value = value;
-	}
-
-	public File getFile()
-	{
-		return fileName;
-	}
-	
-	public void setFile(File fileName)
-	{
-		this.fileName = fileName;
-		
-	}
 	
 	public DischargeGraph(File fileName, double value) 
 	{
@@ -44,7 +23,7 @@ public class DischargeGraph extends MainMenu {
 	}
 	
 
-	public void display()
+	public LineChart<Number,Number> display()
 	{
 		
 		
@@ -97,7 +76,7 @@ List<Data> electrictyData = excelData.getData().electrictyData;
 for(int i = 0; i < electrictyData.size(); i ++)
 {
 	double chargeGet = (electrictyData.get(i).getDischarge_Capacity()) * 1000 ;
-	double charge = chargeGet/value;
+	double charge = chargeGet/mass;
 	System.out.println(charge);
 	double voltage = electrictyData.get(i).getVoltage();
 	XYChart.Data data = new XYChart.Data(charge,voltage);
