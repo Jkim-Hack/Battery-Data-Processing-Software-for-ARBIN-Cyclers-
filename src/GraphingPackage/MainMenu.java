@@ -24,6 +24,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -52,54 +54,30 @@ public class MainMenu extends Application
         VBox topContainer = new VBox();
         VBox midinserts = new VBox();
         VBox graphVvC = new VBox();
-        //VBox zeTable = new VBox();
+        VBox GraphChoose = new VBox();
+        
+        midinserts.setSpacing(10);
+        GraphChoose.setSpacing(20);
         
         Label labelMass = new Label("Insert Mass: ");
-        labelMass.setFont(Font.font ("Segoe UI", 14));
+        labelMass.setFont(Font.font ("Segoe UI", 12));
         
         Label saveLabel = new Label(" Saved!");
         saveLabel.setVisible(false);
         
-       /* TableView selectGraph = new TableView();
-        selectGraph.setEditable(false);
-        
-        TableColumn firstCol = new TableColumn("Top Graph");
-        TableColumn	secondCol = new TableColumn("Right Graph");
-        TableColumn thirdCol = new TableColumn("Left Graph");*/
-        
-        
         //Textbox for File 
         
-        Label fileLabel = new Label("Choose File");
-        TextField fileField = new TextField();
         
-        fileField.setOnMouseClicked(e -> {
-		
-				
-					
-					fileChooser.chooseFile(primaryStage);
-					if(fileChooser.getFileName() != null)
-					{	
-						fileName = fileChooser.getFileName();
-						fileField.setText(fileName.getName());
-					}
-					else
-					{
-						System.out.println("Need file");
-					}
-				//TODO ADD POP UP WINDOW ASKING TO SUBMIT FILE
-			
-		} );
        
         
         //Creates Drop Down Boxes 
-        Label topLabel = new Label("Top Pane");
+        Label topLabel = new Label("Top Pane 							    ");
         ChoiceBox<Graph> box1 = new ChoiceBox<Graph>();
         
-        Label botLeft = new Label("Bottom Left Pane");
+        Label botLeft = new Label("Bottom Left Pane 						    ");
         ChoiceBox<Graph> box2 = new ChoiceBox<Graph>();
         
-        Label botRight = new Label("Bottom Right Pane");
+        Label botRight = new Label("Bottom Right Pane 						    ");
         ChoiceBox<Graph> box3 = new ChoiceBox<Graph>();
         
        
@@ -108,6 +86,9 @@ public class MainMenu extends Application
         //graphs.add(new DischargeGraph(fileName, value));
         
        
+        Label fileLabel = new Label("Chosen File:");
+        TextField fileField = new TextField();
+        
         
 
       
@@ -134,6 +115,7 @@ public class MainMenu extends Application
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
              graphs.add(new VoltageVsChrgeCapacity(fileName, mass));
+             graphs.add(new DischargeGraph(fileName, mass));
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  
@@ -152,22 +134,17 @@ public class MainMenu extends Application
        openFile.setOnAction((ActionEvent event) -> {
         	
             //File Chooser class
-/*<<<<<<< HEAD
-        	
-        	fileChooser.chooseFile(primaryStage);
-            fileName = fileChooser.getFileName();
-            fileField.setText(fileName.getName());
-           
-=======
     	   
         	FileChoose file;
         	file = new FileChoose();
-            file.start(primaryStage);
+            file.chooseFile(primaryStage);
             fileName = file.getFileName();
-            
->>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
-*/            //File Chooser class
+            fileField.setText(fileName.getName());
+
+        //File Chooser class
        });
+       
+       fileField.setEditable(false);
        
        files.getItems().add(openFile);
        ddMenu.getMenus().add(files);
@@ -182,7 +159,7 @@ public class MainMenu extends Application
     	createGraph.setOnAction(e -> 
     	{
        
-    		MainGraphs graph = new MainGraphs(box1.getValue());
+    		MainGraphs graph = new MainGraphs(box1.getValue(), box2.getValue(), box3.getValue());
     	
     		
     		graph.displayGraphs();
@@ -195,28 +172,31 @@ public class MainMenu extends Application
     	
        //The primary master window is created
        
-       BorderPane pane = new BorderPane();
-       
-       	pane.setRight(graphVvC); 
+    	BorderPane pane = new BorderPane();
+        
+       	pane.setBottom(graphVvC); 
        	graphVvC.setPadding(new Insets(20, 20, 20, 20));
        	graphVvC.setAlignment(Pos.BOTTOM_RIGHT);
-       	graphVvC.getChildren().addAll(topLabel,box1, botLeft, box2, botRight, box3,createGraph);
+       	graphVvC.getChildren().addAll(createGraph);
        	createGraph.setPrefWidth(250);
        	createGraph.setPrefHeight(70);
        	
-       	//pane.setRight(zeTable);
-       	//zeTable.getChildren().addAll(topLabel,botLeft,box2,botRight,box3);
-       	//zeTable.setAlignment(Pos.TOP_RIGHT);
-       	
-       	
+       	pane.setCenter(GraphChoose);
+       	GraphChoose.setPadding(new Insets(20,20,20,20));
+       	GraphChoose.setAlignment(Pos.TOP_RIGHT);
+       	GraphChoose.getChildren().addAll(topLabel,box1, botLeft, box2, botRight, box3);
+       	box1.setPrefWidth(250);
+       	box2.setPrefWidth(250);
+       	box3.setPrefWidth(250);
+       
        	pane.setTop(topContainer);
        	topContainer.getChildren().add(ddMenu);
        	
        	pane.setLeft(midinserts);
        	midinserts.setPadding(new Insets(20, 20, 20, 20));
-       	midinserts.getChildren().addAll(fileLabel,fileField,labelMass ,insertMass, pseudoSave, saveLabel);
+       	midinserts.getChildren().addAll(labelMass ,insertMass, pseudoSave, saveLabel, fileLabel, fileField);
        	
-       Scene scene = new Scene(pane, 800, 600);
+       Scene scene = new Scene(pane, 700, 600);
        
        Image icon = new Image(new File("favicon.png").toURI().toString());
        
@@ -226,9 +206,6 @@ public class MainMenu extends Application
         primaryStage.show();
          
         primaryStage.setOnCloseRequest(e -> Platform.exit());
-        
-        
-      
         
     }
     

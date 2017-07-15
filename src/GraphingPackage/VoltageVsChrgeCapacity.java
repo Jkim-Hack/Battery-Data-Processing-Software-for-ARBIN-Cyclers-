@@ -22,94 +22,183 @@ public class VoltageVsChrgeCapacity extends Graph
 		
 	}
 	
-
-	public LineChart<Number,Number> display()
-	{		
 	
-		//defining the axes
-		final NumberAxis xAxis = new NumberAxis();
-		final NumberAxis yAxis = new NumberAxis();
-		xAxis.setLabel("Charge Capacity (mAh/g)");
-		yAxis.setLabel("Voltage (V)");
 	
-		//creating the chart
-
-		LineChart<Number,Number> lineChart = new LineChart<Number,Number>(xAxis,yAxis);
-        
-		lineChart.setTitle("Voltage vs Charge Capacity");
-
+	public double FindGreatestCC()
+	{
+	
 		ExcelReader excelData = null;
-		
 		try
 		{
 			if(fileName == null)
-			{
-				System.out.println("Null Exception");
-			}
-			excelData = new ExcelReader(fileName);
-			
+		{
+			System.out.println("Null Exception");
 		}
-
+		excelData = new ExcelReader(fileName);
+		}
 		catch(Exception ioException)
 		{
-			ioException.printStackTrace();
+		ioException.printStackTrace();
 		}
-
-
-		//defining a series
-
-		XYChart.Series series = new XYChart.Series();
-		series.setName("Charge");
-		series.nodeProperty();
-
-		//populating the series with data
-
-		if(excelData!= null)
-		{
-			System.out.println("Excel Data Not Null");
-			List<Data> electrictyData = excelData.getData().electrictyData;
-			for(int i = 0; i < electrictyData.size(); i ++)
-			{
-				double chargeGet = (electrictyData.get(i).getCharge_Capacity()) * 1000;
-				double charge = chargeGet/mass;
-				
-				//System.out.println(charge);
-				System.out.println(mass);
-			
-				double voltage = electrictyData.get(i).getVoltage();
-				XYChart.Data data = new XYChart.Data(charge,voltage);
-				
-
-				Rectangle rect = new Rectangle(0,0);
-				rect.setVisible(false);
-				data.setNode(rect);
-				series.getData().add(data);
-				
-			}
-			//populating the series with data
-
-			lineChart.getData().add(series);
-			
-		 }
 		
-		return lineChart;
+	List<Data> electrictyData = excelData.getData().electrictyData;
+	
+	double greatestDoubleCC = ((electrictyData.get(0).getCharge_Capacity()) * 1000)/mass;
+
+	for(int i = 1; i < electrictyData.size(); i ++)	{
+		
+			double chargeGetin = (electrictyData.get(i).getCharge_Capacity()) * 1000;
+			double chargein = chargeGetin/mass;
+			double stpIndex = electrictyData.get(i).getStepIndx();
+			
+			
+			if( greatestDoubleCC < chargein ){
+				if (stpIndex > 3){
+					break;
+			}
+				greatestDoubleCC = chargein;
+		}
+	}
+		return greatestDoubleCC;
+						
+}
+
+public double FindGreatestV()
+{
+
+	ExcelReader excelData = null;
+	try
+	{
+		if(fileName == null)
+	{
+		System.out.println("Null Exception");
+	}
+	excelData = new ExcelReader(fileName);
+	}
+	catch(Exception ioException)
+	{
+	ioException.printStackTrace();
+	}
+	
+List<Data> electrictyData = excelData.getData().electrictyData;
+
+double greatestDoubleV = electrictyData.get(0).getVoltage();
+
+for(int i = 0; i < electrictyData.size(); i ++)	{
+	
+		double voltagein = electrictyData.get(i).getVoltage();
+		double stpIndex = electrictyData.get(i).getStepIndx();
+		
+
+		if( greatestDoubleV < voltagein ){
+			if (stpIndex > 3){
+				break;
+		}
+			greatestDoubleV = voltagein;
 	}
 }
-/*<<<<<<< HEAD
-=======
+	return greatestDoubleV;
+					
+}
+
+public double FindLeastCC()
+{
+
+	ExcelReader excelData = null;
+	try
+	{
+		if(fileName == null)
+	{
+		System.out.println("Null Exception");
+	}
+	excelData = new ExcelReader(fileName);
+	}
+	catch(Exception ioException)
+	{
+	ioException.printStackTrace();
+	}
+	
+List<Data> electrictyData = excelData.getData().electrictyData;
+
+double leastDoubleCC = electrictyData.get(0).getCharge_Capacity();
+
+for(int i = 0; i < electrictyData.size(); i ++)	{
+	
+		double chargeGetin = (electrictyData.get(i).getCharge_Capacity()) * 1000;
+		double chargein = chargeGetin/mass;
+		double stpIndex = electrictyData.get(i).getStepIndx();
+		
+		if (stpIndex == 3){
+				
+			if (leastDoubleCC == chargein){
+					return leastDoubleCC;
+			
+			}
+				
+			break;
+			
+		}
+	}
+return leastDoubleCC;
+}
+
+public double FindLeastV()
+{
+
+	ExcelReader excelData = null;
+	try
+	{
+		if(fileName == null)
+	{
+		System.out.println("Null Exception");
+	}
+	excelData = new ExcelReader(fileName);
+	}
+	catch(Exception ioException)
+	{
+	ioException.printStackTrace();
+	}
+	
+List<Data> electrictyData = excelData.getData().electrictyData;
+
+double leastDoubleV = electrictyData.get(0).getVoltage();
+
+for(int i = 0; i < electrictyData.size(); i ++)	{
+	
+	double voltagein = electrictyData.get(i).getVoltage();
+	double stpIndex = electrictyData.get(i).getStepIndx();
+		
+		if (stpIndex == 3){
+				
+			if (leastDoubleV == voltagein){
+					return leastDoubleV;
+			
+			}
+				
+			break;
+			
+		}
+	}
 
 return leastDoubleV;
 
 }
 	
 
+	public LineChart<Number,Number> display()
+	{		
+	
+
+//<<<<<<< HEAD
+//=======
+
+
+
+	
+
 // DISPLAY
 // DISPLAY
 
-
-public void display()
-	{
-		
 		
 	//Secondary stage is called for the graphs	
  
@@ -128,8 +217,8 @@ System.out.println(FindGreatestV());
 BorderPane borderPane = new BorderPane();
 secondaryStage.setTitle("Voltage vs Charge Capacity");
 //defining the axes
-final NumberAxis xAxis = new NumberAxis(FindLeastCC(), FindGreatestCC(), (FindGreatestCC())/6);
-final NumberAxis yAxis = new NumberAxis(0, FindGreatestV(), (FindGreatestV())/4);
+final NumberAxis xAxis = new NumberAxis(FindLeastCC(), FindGreatestCC() + (FindGreatestCC()/4), (FindGreatestCC())/6);
+final NumberAxis yAxis = new NumberAxis(0, FindGreatestV() + (FindGreatestV()/4), (FindGreatestV())/6);
 xAxis.setLabel("Charge Capacity (mAh/g)");
 yAxis.setLabel("Voltage (V)");
 
@@ -168,7 +257,7 @@ List<Data> electrictyData = excelData.getData().electrictyData;
 for(int i = 0; i < electrictyData.size(); i ++)
 {
 	double chargeGet = (electrictyData.get(i).getCharge_Capacity()) * 1000;
-	double charge = chargeGet/value;
+	double charge = chargeGet/mass;
 	double voltage = electrictyData.get(i).getVoltage();
 	XYChart.Data data = new XYChart.Data(charge,voltage);
 	Rectangle rect = new Rectangle(0,0);
@@ -188,7 +277,7 @@ Dseries.setName("Discharge");
 for(int i = 0; i < electrictyData.size(); i ++)
 {
 	double DchargeGet = (electrictyData.get(i).getDischarge_Capacity()) * 1000 ;
-	double Dcharge = DchargeGet/value;
+	double Dcharge = DchargeGet/mass;
 	//System.out.println(Dcharge);
 	double Dvoltage = electrictyData.get(i).getVoltage();
 	XYChart.Data Ddata = new XYChart.Data(Dcharge,Dvoltage);
@@ -202,6 +291,7 @@ for(int i = 0; i < electrictyData.size(); i ++)
 	}
 }
 
+
 //populating the series with data
 
 
@@ -212,7 +302,11 @@ lineChart.getData().addAll(series, Dseries);
 
 
 
-
+		}
+return lineChart;
+	}
+	
+}
 
 //SECOND GRAPH IS CREATED (for now it will be the same)
 //SECOND GRAPH IS CREATED
@@ -221,7 +315,7 @@ lineChart.getData().addAll(series, Dseries);
 
 
 
-
+/*
 secondaryStage.setTitle("Voltage vs Charge Capacity");
 
 //defining the axes
@@ -288,9 +382,5 @@ secondaryStage.show();
 
 borderPane.setTop(lineChart);
 borderPane.setBottom(lineChart1);
-}
-}
->>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
-}*/
-	
+*/
 	

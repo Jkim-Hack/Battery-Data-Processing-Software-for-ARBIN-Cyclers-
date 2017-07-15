@@ -15,24 +15,11 @@ public class MainGraphs
 	
 	
 	
-	public MainGraphs(Graph one,Graph two, Graph three)
+	public MainGraphs(Graph one, Graph two, Graph three)
 	{
 		this.graphOne = one;
 		this.graphTwo = two;
 		this.graphThree = three;
-	}
-	
-	public MainGraphs(Graph one,Graph two)
-	{
-		this.graphOne = one;
-		this.graphTwo = two;
-		
-	}
-	
-	public MainGraphs(Graph one)
-	{
-		this.graphOne = one;
-	
 	}
 	
 
@@ -75,9 +62,11 @@ public class MainGraphs
 			
 		borderPane.setTop(graphOne.display());
 	
-		borderPane.setBottom(graphOne.display());
+		borderPane.setLeft(graphTwo.display());
 		
-		Scene scene = new Scene(borderPane, 1280,800);
+		borderPane.setRight(graphThree.display());
+		
+		Scene scene = new Scene(borderPane, 1100,800);
 		
 		stage.setScene(scene);
 		
