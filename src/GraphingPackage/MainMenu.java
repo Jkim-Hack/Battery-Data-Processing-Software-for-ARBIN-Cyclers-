@@ -87,7 +87,7 @@ public class MainMenu extends Application
         
        
         Label fileLabel = new Label("Chosen File:");
-        TextField fileField = new TextField();
+        TextField fileField = new TextField("File -> Open File...");
         
         
 
