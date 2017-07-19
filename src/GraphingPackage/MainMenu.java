@@ -89,11 +89,7 @@ public class MainMenu extends Application
         Label fileLabel = new Label("Chosen File:");
         TextField fileField = new TextField("File -> Open File...");
         
-        
-
-      
-        
-        
+       
         //Mass textfield
        
         TextField insertMass = new TextField();
@@ -112,9 +108,11 @@ public class MainMenu extends Application
         	visiblePause.play();
         	
         	double mass = toMassDouble(insertMass.getText());
+        	String ChargeCap = "Voltage vs Charge Capacity";
+        	
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
-             graphs.add(new VoltageVsChrgeCapacity(fileName, mass));
+             graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap));
              graphs.add(new DischargeGraph(fileName, mass));
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);

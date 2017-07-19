@@ -1,21 +1,19 @@
 package GraphingPackage;
+
 import java.io.File;
 import java.util.List;
 
-import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class DischargeGraph extends Graph {
+public class CycleNumberDC extends Graph {
+
 	
-	
-	
-	public DischargeGraph(File fileName, double value) 
+	public CycleNumberDC(File fileName, double value) 
 	{
 		setFile(fileName);
 		setValue(value);
@@ -187,11 +185,10 @@ return leastDoubleV;
 		
 		
 	//Secondary stage is called for the graphs	
-/*System.out.println(FindLeastV());
+System.out.println(FindLeastV());
 System.out.println(FindLeastDC());
 System.out.println(FindGreatestDC());
 System.out.println(FindGreatestV());
-*/
 		
 	Stage secondaryStage = new Stage();
 	
@@ -243,7 +240,7 @@ for(int i = 0; i < electrictyData.size(); i ++)
 	double chargeGet = (electrictyData.get(i).getDischarge_Capacity()) * 1000 ;
 
 	double charge = chargeGet/mass;
-	//System.out.println(charge);
+	System.out.println(charge);
 	
 	//System.out.println(charge);
 	
@@ -285,4 +282,8 @@ return lineChart;
 	
 }
 	
+
 	
+	
+	
+

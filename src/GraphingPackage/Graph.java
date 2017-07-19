@@ -11,7 +11,16 @@ public class Graph
 	protected File fileName;
 	protected double DataMass;
 	protected double mass;
+	protected String title;
 	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public double getValue()
 	{
 		return mass;

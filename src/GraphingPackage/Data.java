@@ -13,6 +13,7 @@ public class Data
     private double dtDv;
     private double stepIndx;
 
+
 	public Data(List<Double> data) 
     {
 		for(int i = 0; i < data.size(); i++)

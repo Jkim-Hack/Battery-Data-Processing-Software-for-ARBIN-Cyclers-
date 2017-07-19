@@ -12,7 +12,7 @@ public class FileChoose
 
 	private File fileName;
 	
-public File getFileName() {
+	public File getFileName() {
 		return fileName;
 	}
 
