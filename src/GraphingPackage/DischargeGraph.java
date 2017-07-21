@@ -1,19 +1,19 @@
 package GraphingPackage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class DischargeGraph extends Graph {
+public class DischargeGraph extends Graph
+{
 	
-	
+	private int CYCLE_INDEX = 1;
 	
 	public DischargeGraph(File fileName, double value) 
 	{
@@ -124,7 +124,8 @@ for(int i = 0; i < electrictyData.size(); i ++)	{
 		double Dischargein = DischargeGetin/mass;
 		double current = electrictyData.get(i).getCurrent();
 		
-		if (current == 0){
+		if (current == 0)
+		{
 				
 			if (leastDoubleDC == Dischargein){
 					return leastDoubleDC;
@@ -232,46 +233,76 @@ series.nodeProperty();
 series.setName("1st Discharge");
 //populating the series with data
 
-if(excelData != null)
-{
-List<Data> electrictyData = excelData.getData().electrictyData;
-
-for(int i = 0; i < electrictyData.size(); i ++)
-{
-	
-	double current = electrictyData.get(i).getCurrent();
-	
-	if ( current < 0 ) {
-	
-	double chargeGet = (electrictyData.get(i).getDischarge_Capacity()) * 1000 ;
-
-	double charge = chargeGet/mass;
-
-	System.out.println(charge);
-	
-	double voltage = electrictyData.get(i).getVoltage();
-	
-	XYChart.Data data = new XYChart.Data(charge,voltage);
-	Rectangle rect = new Rectangle(0,0);
-	rect.setVisible(false);
-	data.setNode(rect);
-	series.getData().add(data);
+	if(excelData != null)
+	{
+		List<Data> electrictyData = excelData.getData().electrictyData;
 		
-	
 		
-	}
-	if( current == 0 ) {
-		break;
-	}
+		
+		
+		List<Data> currentByCycle = new ArrayList<Data>();
+		for(int i = 0; i < electrictyData.size(); i++)
+		{
+			
+			if(electrictyData.get(i).getCycle_Number() == CYCLE_INDEX)
+			{
+				currentByCycle.add(electrictyData.get(i));
+			}
+			
+			
+		}
+		
+		
+		
+		
+		for(int i = 0; i < currentByCycle.size();)
+		{
+			if(currentByCycle.get(i).getCurrent() >= 0)
+			{
+				currentByCycle.remove(i);
+			}
+			else
+			{
+				i++;
+			}
+		}
+		
+		
+
+		for(Data temp : currentByCycle)
+		{
+			System.out.println(temp.getCurrent());
+		}
+		
+
+		for(int i = 0; i < currentByCycle.size(); i ++)
+		{
+	
+			double chargeGet = (currentByCycle.get(i).getDischarge_Capacity()) * 1000 ;
+
+			double charge = chargeGet/mass;
+
+			//System.out.println(charge);
+	
+			double voltage = currentByCycle.get(i).getVoltage();
+	
+			XYChart.Data data = new XYChart.Data(charge,voltage);
+			Rectangle rect = new Rectangle(0,0);
+			rect.setVisible(false);
+			data.setNode(rect);
+			series.getData().add(data);
+
+		}
 	
 
-}
+	}
 
 //populating the series with data
 
 lineChart.getData().add(series);
 
-		}
+	
+
 
 return lineChart;
 	
