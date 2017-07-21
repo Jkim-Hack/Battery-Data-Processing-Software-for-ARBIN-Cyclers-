@@ -166,9 +166,9 @@ double leastDoubleV = electrictyData.get(0).getVoltage();
 for(int i = 0; i < electrictyData.size(); i ++)	{
 	
 	double voltagein = electrictyData.get(i).getVoltage();
-	double stpIndex = electrictyData.get(i).getStepIndx();
+	double current = electrictyData.get(i).getCurrent();
 		
-		if (stpIndex == 0){
+		if (current == 0){
 				
 			if (leastDoubleV == voltagein){
 					return leastDoubleV;
@@ -248,6 +248,7 @@ if(excelData!= null)
 List<Data> electrictyData = excelData.getData().electrictyData;
 for(int i = 0; i < electrictyData.size(); i ++)
 {
+	double current = electrictyData.get(i).getCurrent();
 	double chargeGet = (electrictyData.get(i).getCharge_Capacity()) * 1000;
 	double charge = chargeGet/mass;
 	double voltage = electrictyData.get(i).getVoltage();
@@ -256,8 +257,7 @@ for(int i = 0; i < electrictyData.size(); i ++)
 	rect.setVisible(false);
 	data.setNode(rect);
 	series.getData().add(data);
-	double stpI = electrictyData.get(i).getStepIndx();
-	if (stpI == 3) {
+	if (current == 0) {
 		break;
 	}
 	

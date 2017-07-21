@@ -46,13 +46,13 @@ public class DischargeGraph extends Graph {
 		
 			double DischargeGetin = (electrictyData.get(i).getDischarge_Capacity()) * 1000;
 			double Dischargein = DischargeGetin/mass;
-			double stpIndex = electrictyData.get(i).getStepIndx();
+			double current = electrictyData.get(i).getCurrent();
 			
 			
 			if( greatestDoubleDC < Dischargein ){
-				if (stpIndex > 5){
+				if (current > 0){
 					break;
-			}
+				}
 				greatestDoubleDC = Dischargein;
 		}
 	}
@@ -84,14 +84,13 @@ double greatestDoubleV = electrictyData.get(0).getVoltage();
 for(int i = 0; i < electrictyData.size(); i ++)	{
 	
 		double voltagein = electrictyData.get(i).getVoltage();
-		double stpIndex = electrictyData.get(i).getStepIndx();
+		double current = electrictyData.get(i).getCurrent();
 		
 
 		if( greatestDoubleV < voltagein ){
-			if (stpIndex > 3){
+			if (current < 0){
 				break;
-		}
-			greatestDoubleV = voltagein;
+		}	greatestDoubleV = voltagein;
 	}
 }
 	return greatestDoubleV;
@@ -123,9 +122,9 @@ for(int i = 0; i < electrictyData.size(); i ++)	{
 	
 		double DischargeGetin = (electrictyData.get(i).getDischarge_Capacity()) * 1000;
 		double Dischargein = DischargeGetin/mass;
-		double stpIndex = electrictyData.get(i).getStepIndx();
+		double current = electrictyData.get(i).getCurrent();
 		
-		if (stpIndex == 5){
+		if (current == 0){
 				
 			if (leastDoubleDC == Dischargein){
 					return leastDoubleDC;
@@ -163,9 +162,9 @@ double leastDoubleV = electrictyData.get(0).getVoltage();
 for(int i = 0; i < electrictyData.size(); i ++)	{
 	
 	double voltagein = electrictyData.get(i).getVoltage();
-	double stpIndex = electrictyData.get(i).getStepIndx();
+	double current = electrictyData.get(i).getCurrent();
 		
-		if (stpIndex == 3){
+		if (current == 0){
 				
 			if (leastDoubleV == voltagein){
 					return leastDoubleV;
@@ -233,49 +232,44 @@ series.nodeProperty();
 series.setName("1st Discharge");
 //populating the series with data
 
-if(excelData!= null)
+if(excelData != null)
 {
 List<Data> electrictyData = excelData.getData().electrictyData;
+
 for(int i = 0; i < electrictyData.size(); i ++)
 {
-	double stpI = electrictyData.get(i).getStepIndx();
+	
+	double current = electrictyData.get(i).getCurrent();
+	
+	if ( current < 0 ) {
 	
 	double chargeGet = (electrictyData.get(i).getDischarge_Capacity()) * 1000 ;
 
 	double charge = chargeGet/mass;
-	//System.out.println(charge);
-	
-	//System.out.println(charge);
-	
-	
+
+	System.out.println(charge);
 	
 	double voltage = electrictyData.get(i).getVoltage();
+	
 	XYChart.Data data = new XYChart.Data(charge,voltage);
 	Rectangle rect = new Rectangle(0,0);
 	rect.setVisible(false);
 	data.setNode(rect);
 	series.getData().add(data);
+		
 	
-	if (stpI == 5) {
+		
+	}
+	if( current == 0 ) {
 		break;
 	}
+	
+
 }
 
 //populating the series with data
 
-
-
-
 lineChart.getData().add(series);
-
-
-
-
-
-
-
-
-
 
 		}
 
