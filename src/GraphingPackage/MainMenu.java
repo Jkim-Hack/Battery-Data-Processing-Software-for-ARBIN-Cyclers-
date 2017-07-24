@@ -114,6 +114,7 @@ public class MainMenu extends Application
         	 List<Graph> graphs = new ArrayList<Graph>();
              graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap));
              graphs.add(new DischargeGraph(fileName, mass));
+             graphs.add(new CycleNumberDC(fileName, mass));
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  
@@ -149,7 +150,7 @@ public class MainMenu extends Application
        
        
         
-    	//Button for the VvsCC window created
+    	//Button for the graph window created
     	
     	Button createGraph = new Button();
     	createGraph.setText("Create Graph");

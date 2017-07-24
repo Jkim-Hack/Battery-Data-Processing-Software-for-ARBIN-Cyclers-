@@ -268,11 +268,6 @@ series.setName("1st Discharge");
 		}
 		
 		
-
-		for(Data temp : currentByCycle)
-		{
-			System.out.println(temp.getCurrent());
-		}
 		
 
 		for(int i = 0; i < currentByCycle.size(); i ++)
