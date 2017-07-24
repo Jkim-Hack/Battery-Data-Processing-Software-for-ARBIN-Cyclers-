@@ -183,7 +183,7 @@ System.out.println(FindGreatestV());
 
 	Stage secondaryStage = new Stage();
 	
-BorderPane borderPane = new BorderPane();
+
 secondaryStage.setTitle("Voltage vs Charge Capacity");
 //defining the axes
 final NumberAxis xAxis = new NumberAxis(FindLeastCC(), FindGreatestCC() + (FindGreatestCC()/4), (FindGreatestCC())/6);

@@ -15,6 +15,7 @@ public class Graph
 	protected String title;
 	protected ExcelReader excelReader;
 	protected List<Data> electricityData;
+	protected List<StatData> electricityData1;
 	
 	
 	public Graph(File fileName, double value, String title)
@@ -25,6 +26,7 @@ public class Graph
 		{
 			excelReader = new ExcelReader(fileName);
 			electricityData = excelReader.getData().electrictyData;
+			electricityData1 = excelReader.getData().electrictyData1;
 		}
 		
 		catch(Exception ioException)

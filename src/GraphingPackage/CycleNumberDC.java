@@ -20,29 +20,13 @@ public class CycleNumberDC extends Graph {
 	public double FindGreatestDC()
 	{
 	
-		ExcelReader excelData = null;
-		try
-		{
-			if(fileName == null)
-		{
-			System.out.println("Null Exception");
-		}
-		excelData = new ExcelReader(fileName);
-		}
-		catch(Exception ioException)
-		{
-		ioException.printStackTrace();
-		}
-		
-	List<StatData> electrictyData1 = excelData.getData().electrictyData1;
-	
-	double greatestDoubleDC = ((electrictyData1.get(0).getDischarge_CapacityStat()) * 1000)/mass;
+	double greatestDoubleDC = ((electricityData1.get(0).getDischarge_CapacityStat()) * 1000)/mass;
 
-	for(int i = 1; i < electrictyData1.size(); i ++)	{
+	for(int i = 1; i < electricityData1.size(); i ++)	{
 		
-			double DischargeGetin = (electrictyData1.get(i).getDischarge_CapacityStat()) * 1000;
+			double DischargeGetin = (electricityData1.get(i).getDischarge_CapacityStat()) * 1000;
 			double Dischargein = DischargeGetin/mass;
-			double current = electrictyData1.get(i).getCurrentStat();
+			double current = electricityData1.get(i).getCurrentStat();
 			
 			
 			if( greatestDoubleDC < Dischargein ){
@@ -59,27 +43,14 @@ public class CycleNumberDC extends Graph {
 public double FindGreatestCycle()
 {
 
-	ExcelReader excelData = null;
-	try
-	{
-		if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
-	excelData = new ExcelReader(fileName);
-	}
-	catch(Exception ioException)
-	{
-	ioException.printStackTrace();
-	}
 	
-List<StatData> electrictyData1 = excelData.getData().electrictyData1;
 
-double greatestDoubleCycle = electrictyData1.get(0).getCycle_NumberStat();
 
-for(int i = 0; i < electrictyData1.size(); i ++)	{
+double greatestDoubleCycle = electricityData1.get(0).getCycle_NumberStat();
+
+for(int i = 0; i < electricityData1.size(); i ++)	{
 	
-		double Cycle = electrictyData1.get(i).getCycle_NumberStat();
+		double Cycle = electricityData1.get(i).getCycle_NumberStat();
 		
 		
 
@@ -96,29 +67,14 @@ for(int i = 0; i < electrictyData1.size(); i ++)	{
 public double FindLeastDC()
 {
 
-	ExcelReader excelData = null;
-	try
-	{
-		if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
-	excelData = new ExcelReader(fileName);
-	}
-	catch(Exception ioException)
-	{
-	ioException.printStackTrace();
-	}
 	
-List<StatData> electrictyData1 = excelData.getData().electrictyData1;
+double leastDoubleDC = electricityData1.get(0).getDischarge_CapacityStat();
 
-double leastDoubleDC = electrictyData1.get(0).getDischarge_CapacityStat();
-
-for(int i = 0; i < electrictyData1.size(); i ++)	{
+for(int i = 0; i < electricityData1.size(); i ++)	{
 	
-		double DischargeGetin = (electrictyData1.get(i).getDischarge_CapacityStat()) * 1000;
+		double DischargeGetin = (electricityData1.get(i).getDischarge_CapacityStat()) * 1000;
 		double Dischargein = DischargeGetin/mass;
-		double current = electrictyData1.get(i).getCurrentStat();
+		double current = electricityData1.get(i).getCurrentStat();
 		
 		if (current == 0){
 				
@@ -137,27 +93,13 @@ return leastDoubleDC;
 public double FindLeastCycle()
 {
 
-	ExcelReader excelData = null;
-	try
-	{
-		if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
-	excelData = new ExcelReader(fileName);
-	}
-	catch(Exception ioException)
-	{
-	ioException.printStackTrace();
-	}
 	
-List<StatData> electrictyData1 = excelData.getData().electrictyData1;
 
-double LeastCycle = electrictyData1.get(1).getCycle_NumberStat();
+double LeastCycle = electricityData1.get(1).getCycle_NumberStat();
 
-for(int i = 0; i < electrictyData1.size(); i ++)	{
+for(int i = 0; i < electricityData1.size(); i ++)	{
 	
-	double Cycle = electrictyData1.get(i).getCycle_NumberStat();
+	double Cycle = electricityData1.get(i).getCycle_NumberStat();
 		
 		if (Cycle == 1){
 				
@@ -188,7 +130,7 @@ return LeastCycle;
 		
 	Stage secondaryStage = new Stage();
 	
-BorderPane borderPane = new BorderPane();
+
 secondaryStage.setTitle("Discharge Capacity vs Cycle Index");
 //defining the axes
 final NumberAxis yAxis = new NumberAxis(FindLeastDC(), FindGreatestDC() + (FindGreatestDC()/4), (FindGreatestDC())/5);
@@ -203,21 +145,6 @@ final LineChart<Number,Number> lineChart =
         
 lineChart.setTitle("Discharge Capacity vs Cycle Index");
 
-ExcelReader excelData = null;
-try
-{
-	if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
-excelData = new ExcelReader(fileName);
-}
-
-catch(Exception ioException)
-{
-ioException.printStackTrace();
-}
-
 
 //defining a series
 
@@ -226,14 +153,13 @@ series.nodeProperty();
 series.setName("");
 //populating the series with data
 
-if(excelData!= null)
+if(excelReader!= null)
 {
-List<StatData> electrictyData1 = excelData.getData().electrictyData1;
-for(int i = 0; i < electrictyData1.size(); i ++)
+for(int i = 0; i < electricityData1.size(); i ++)
 {
-	double cycle = electrictyData1.get(i).getCycle_NumberStat();
+	double cycle = electricityData1.get(i).getCycle_NumberStat();
 	
-	double chargeGet = (electrictyData1.get(i).getDischarge_CapacityStat()) * 1000 ;
+	double chargeGet = (electricityData1.get(i).getDischarge_CapacityStat()) * 1000 ;
 
 	double charge = chargeGet/mass;
 	

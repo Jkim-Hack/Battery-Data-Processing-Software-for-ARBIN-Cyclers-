@@ -94,10 +94,10 @@ public class MainMenu extends Application
        
         TextField insertMass = new TextField();
         Button pseudoSave = new Button("Apply");
-        pseudoSave.addEventHandler(ActionEvent.ACTION, (e) -> isDouble(insertMass, insertMass.getText()));
         pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
         {
-     
+        	isDouble(insertMass, insertMass.getText());
+        	
         	saveLabel.setVisible(true);
         	PauseTransition visiblePause = new PauseTransition(
         	        Duration.seconds(10)

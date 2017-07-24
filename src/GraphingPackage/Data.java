@@ -39,6 +39,7 @@ public class Data
 	}
 
 	public double getStepIndx() {
+		
 		return stepIndx;
 	}
 
