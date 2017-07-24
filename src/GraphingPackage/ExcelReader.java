@@ -19,10 +19,6 @@ public class ExcelReader
 	private File fileName;
 	
 	
-
-	
-	
-	
 	public File getFileName()
 	{
 		return fileName;

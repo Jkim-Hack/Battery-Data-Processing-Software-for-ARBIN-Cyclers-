@@ -13,10 +13,9 @@ import javafx.stage.Stage;
 public class CoulombicEff extends Graph {
 
 	
-	public CoulombicEff(File fileName, double value) 
+	public CoulombicEff(File fileName, double value, String title) 
 	{
-		setFile(fileName);
-		setValue(value);
+		super(fileName, value, title);
 	
 	}
 	public double FindGreatestDC()

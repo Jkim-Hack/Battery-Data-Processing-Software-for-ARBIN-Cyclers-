@@ -1,6 +1,7 @@
 package GraphingPackage;
 
 import java.io.File;
+import java.util.List;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -12,6 +13,29 @@ public class Graph
 	protected double DataMass;
 	protected double mass;
 	protected String title;
+	protected ExcelReader excelReader;
+	protected List<Data> electricityData;
+	
+	
+	public Graph(File fileName, double value, String title)
+	{
+		excelReader = null;
+		
+		try
+		{
+			excelReader = new ExcelReader(fileName);
+			electricityData = excelReader.getData().electrictyData;
+		}
+		
+		catch(Exception ioException)
+		{
+			ioException.printStackTrace();
+		}
+		
+		this.mass = value;
+		
+		this.title = title;
+	}
 	
 	public String getTitle() {
 		return title;
