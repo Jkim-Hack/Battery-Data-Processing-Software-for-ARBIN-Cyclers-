@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class DischargeGraph extends Graph
 {
 	
-	private int CYCLE_INDEX = 1;
+	private int CYCLE_INDEX = 9;
 	
 	public DischargeGraph(File fileName, double value) 
 	{
