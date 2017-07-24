@@ -59,12 +59,18 @@ public class MainGraphs
 		Stage stage = new Stage();
 		
 		BorderPane borderPane = new BorderPane();
+		
+		double start = System.currentTimeMillis();
 			
 		borderPane.setTop(graphOne.display());
 	
 		borderPane.setLeft(graphTwo.display());
 		
 		borderPane.setRight(graphThree.display());
+		
+		double end = System.currentTimeMillis();
+		
+		System.out.println(end - start);
 		
 		Scene scene = new Scene(borderPane, 1100,800);
 		

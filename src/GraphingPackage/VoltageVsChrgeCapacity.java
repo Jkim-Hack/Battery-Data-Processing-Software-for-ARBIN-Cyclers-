@@ -15,79 +15,78 @@ import javafx.stage.Stage;
 public class VoltageVsChrgeCapacity extends Graph
 {
 	
+	
+	
+	
+	
+	
+	
 	public VoltageVsChrgeCapacity(File fileName, double value, String title) 
 	{
-		setFile(fileName);
-		setValue(value);
-		setTitle(title);
+		
+		
+		super(fileName, value, title);
+		
+		/*
+		excelReader = null;
+		
+		try
+		{
+			new ExcelReader(fileName);
+			electricityData = excelReader.getData().electrictyData;
+		}
+		
+		catch(Exception ioException)
+		{
+			ioException.printStackTrace();
+		}
+		*/
 	}
 	
 	
 	
 	public double FindGreatestCC()
-		{
+	{
 	
-			ExcelReader excelData = null;
-			try
-			{
-				if(fileName == null)
-				{
-					System.out.println("Null Exception");
-				}
-				excelData = new ExcelReader(fileName);
-			}
-			catch(Exception ioException)
-			{
-				ioException.printStackTrace();
-			}
 		
-			List<Data> electrictyData = excelData.getData().electrictyData;
 		
-			double greatestDoubleCC = ((electrictyData.get(0).getCharge_Capacity()) * 1000)/mass;
+		double greatestDoubleCC = ((electricityData.get(0).getCharge_Capacity()) * 1000)/mass;
 
-			for(int i = 1; i < electrictyData.size(); i ++)	{
+		for(int i = 1; i < electricityData.size(); i ++)
+		{
 		
-				double chargeGetin = (electrictyData.get(i).getCharge_Capacity()) * 1000;
-				double chargein = chargeGetin/mass;
-				double current = electrictyData.get(i).getCurrent();
+			double chargeGetin = (electricityData.get(i).getCharge_Capacity()) * 1000;
+			double chargein = chargeGetin/mass;
+			double current = electricityData.get(i).getCurrent();
 			
 			
-				if( greatestDoubleCC < chargein ){
-					if (current < 0){
-						break;
-					}
-					greatestDoubleCC = chargein;
+			if( greatestDoubleCC < chargein )
+			{
+				if (current < 0)
+				{
+					break;
 				}
+				greatestDoubleCC = chargein;
 			}
-			return greatestDoubleCC;
+		 }
+		
+		 return greatestDoubleCC;
 						
-		}
+	 }
 
 public double FindGreatestV()
 {
 
-	ExcelReader excelData = null;
-	try
-	{
-		if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
-	excelData = new ExcelReader(fileName);
-	}
-	catch(Exception ioException)
-	{
-	ioException.printStackTrace();
-	}
 	
-List<Data> electrictyData = excelData.getData().electrictyData;
-
-double greatestDoubleV = electrictyData.get(0).getVoltage();
-
-for(int i = 0; i < electrictyData.size(); i ++)	{
 	
-		double voltagein = electrictyData.get(i).getVoltage();
-		double current = electrictyData.get(i).getCurrent();
+
+
+double greatestDoubleV = electricityData.get(0).getVoltage();
+
+for(int i = 0; i < electricityData.size(); i ++)	{
+	
+		double voltagein = electricityData.get(i).getVoltage();
+		double current = electricityData.get(i).getCurrent();
 		
 
 		if( greatestDoubleV < voltagein ){
@@ -104,29 +103,17 @@ for(int i = 0; i < electrictyData.size(); i ++)	{
 public double FindLeastCC()
 {
 
-	ExcelReader excelData = null;
-	try
-	{
-		if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
-	excelData = new ExcelReader(fileName);
-	}
-	catch(Exception ioException)
-	{
-	ioException.printStackTrace();
-	}
 	
-List<Data> electrictyData = excelData.getData().electrictyData;
-
-double leastDoubleCC = electrictyData.get(0).getCharge_Capacity();
-
-for(int i = 0; i < electrictyData.size(); i ++)	{
 	
-		double chargeGetin = (electrictyData.get(i).getCharge_Capacity()) * 1000;
+
+
+double leastDoubleCC = electricityData.get(0).getCharge_Capacity();
+
+for(int i = 0; i < electricityData.size(); i ++)	{
+	
+		double chargeGetin = (electricityData.get(i).getCharge_Capacity()) * 1000;
 		double chargein = chargeGetin/mass;
-		double current = electrictyData.get(i).getCurrent();
+		double current = electricityData.get(i).getCurrent();
 		
 		if (current == 0){
 				
@@ -145,28 +132,17 @@ return leastDoubleCC;
 public double FindLeastV()
 {
 
-	ExcelReader excelData = null;
-	try
-	{
-		if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
-	excelData = new ExcelReader(fileName);
-	}
-	catch(Exception ioException)
-	{
-	ioException.printStackTrace();
-	}
-	
-List<Data> electrictyData = excelData.getData().electrictyData;
 
-double leastDoubleV = electrictyData.get(0).getVoltage();
-
-for(int i = 0; i < electrictyData.size(); i ++)	{
 	
-	double voltagein = electrictyData.get(i).getVoltage();
-	double current = electrictyData.get(i).getCurrent();
+
+	
+
+double leastDoubleV = electricityData.get(0).getVoltage();
+
+for(int i = 0; i < electricityData.size(); i ++)	{
+	
+	double voltagein = electricityData.get(i).getVoltage();
+	double current = electricityData.get(i).getCurrent();
 		
 		if (current == 0){
 				
@@ -189,6 +165,7 @@ return leastDoubleV;
 	{		
 	
 
+	
 
 	
 
@@ -221,19 +198,6 @@ final LineChart<Number,Number> lineChart =
         
 lineChart.setTitle("Voltage vs Charge Capacity");
 
-ExcelReader excelData = null;
-try
-{
-	if(fileName == null)
-{
-	System.out.println("Null Exception");
-}
-excelData = new ExcelReader(fileName);
-}
-catch(Exception ioException)
-{
-ioException.printStackTrace();
-}
 
 //defining a series
 
@@ -243,15 +207,15 @@ series.nodeProperty();
 
 //populating the series with data
 
-if(excelData!= null)
+if(excelReader!= null)
 {
-List<Data> electrictyData = excelData.getData().electrictyData;
-for(int i = 0; i < electrictyData.size(); i ++)
+
+for(int i = 0; i < electricityData.size(); i ++)
 {
-	double current = electrictyData.get(i).getCurrent();
-	double chargeGet = (electrictyData.get(i).getCharge_Capacity()) * 1000;
+	double current = electricityData.get(i).getCurrent();
+	double chargeGet = (electricityData.get(i).getCharge_Capacity()) * 1000;
 	double charge = chargeGet/mass;
-	double voltage = electrictyData.get(i).getVoltage();
+	double voltage = electricityData.get(i).getVoltage();
 	XYChart.Data data = new XYChart.Data(charge,voltage);
 	Rectangle rect = new Rectangle(0,0);
 	rect.setVisible(false);

@@ -109,12 +109,12 @@ public class MainMenu extends Application
         	
         	double mass = toMassDouble(insertMass.getText());
         	String ChargeCap = "Voltage vs Charge Capacity";
-        	
+        	String dischargeTitle = "Voltage vs Discharge Capacity";
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
              graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap));
-             graphs.add(new DischargeGraph(fileName, mass));
-             graphs.add(new CycleNumberDC(fileName, mass));
+             graphs.add(new DischargeGraph(fileName, mass, dischargeTitle));
+             graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  

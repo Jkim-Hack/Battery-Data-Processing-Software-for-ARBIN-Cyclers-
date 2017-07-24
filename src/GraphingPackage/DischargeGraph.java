@@ -15,38 +15,22 @@ public class DischargeGraph extends Graph
 	
 	private int CYCLE_INDEX = 9;
 	
-	public DischargeGraph(File fileName, double value) 
+	public DischargeGraph(File fileName, double value, String title) 
 	{
-		setFile(fileName);
-		setValue(value);
+		super(fileName, value, title);
 	
 	}
 	public double FindGreatestDC()
 	{
 	
-		ExcelReader excelData = null;
-		try
-		{
-			if(fileName == null)
-		{
-			System.out.println("Null Exception");
-		}
-		excelData = new ExcelReader(fileName);
-		}
-		catch(Exception ioException)
-		{
-		ioException.printStackTrace();
-		}
-		
-	List<Data> electrictyData = excelData.getData().electrictyData;
 	
-	double greatestDoubleDC = ((electrictyData.get(0).getDischarge_Capacity()) * 1000)/mass;
+	double greatestDoubleDC = ((electricityData.get(0).getDischarge_Capacity()) * 1000)/mass;
 
-	for(int i = 1; i < electrictyData.size(); i ++)	{
+	for(int i = 1; i < electricityData.size(); i ++)	{
 		
-			double DischargeGetin = (electrictyData.get(i).getDischarge_Capacity()) * 1000;
+			double DischargeGetin = (electricityData.get(i).getDischarge_Capacity()) * 1000;
 			double Dischargein = DischargeGetin/mass;
-			double current = electrictyData.get(i).getCurrent();
+			double current = electricityData.get(i).getCurrent();
 			
 			
 			if( greatestDoubleDC < Dischargein ){
@@ -63,28 +47,16 @@ public class DischargeGraph extends Graph
 public double FindGreatestV()
 {
 
-	ExcelReader excelData = null;
-	try
-	{
-		if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
-	excelData = new ExcelReader(fileName);
-	}
-	catch(Exception ioException)
-	{
-	ioException.printStackTrace();
-	}
 	
-List<Data> electrictyData = excelData.getData().electrictyData;
-
-double greatestDoubleV = electrictyData.get(0).getVoltage();
-
-for(int i = 0; i < electrictyData.size(); i ++)	{
 	
-		double voltagein = electrictyData.get(i).getVoltage();
-		double current = electrictyData.get(i).getCurrent();
+
+
+double greatestDoubleV = electricityData.get(0).getVoltage();
+
+for(int i = 0; i < electricityData.size(); i ++)	{
+	
+		double voltagein = electricityData.get(i).getVoltage();
+		double current = electricityData.get(i).getCurrent();
 		
 
 		if( greatestDoubleV < voltagein ){
@@ -100,29 +72,17 @@ for(int i = 0; i < electrictyData.size(); i ++)	{
 public double FindLeastDC()
 {
 
-	ExcelReader excelData = null;
-	try
-	{
-		if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
-	excelData = new ExcelReader(fileName);
-	}
-	catch(Exception ioException)
-	{
-	ioException.printStackTrace();
-	}
 	
-List<Data> electrictyData = excelData.getData().electrictyData;
-
-double leastDoubleDC = electrictyData.get(0).getDischarge_Capacity();
-
-for(int i = 0; i < electrictyData.size(); i ++)	{
 	
-		double DischargeGetin = (electrictyData.get(i).getDischarge_Capacity()) * 1000;
+
+
+double leastDoubleDC = electricityData.get(0).getDischarge_Capacity();
+
+for(int i = 0; i < electricityData.size(); i ++)	{
+	
+		double DischargeGetin = (electricityData.get(i).getDischarge_Capacity()) * 1000;
 		double Dischargein = DischargeGetin/mass;
-		double current = electrictyData.get(i).getCurrent();
+		double current = electricityData.get(i).getCurrent();
 		
 		if (current == 0)
 		{
@@ -142,28 +102,14 @@ return leastDoubleDC;
 public double FindLeastV()
 {
 
-	ExcelReader excelData = null;
-	try
-	{
-		if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
-	excelData = new ExcelReader(fileName);
-	}
-	catch(Exception ioException)
-	{
-	ioException.printStackTrace();
-	}
 	
-List<Data> electrictyData = excelData.getData().electrictyData;
 
-double leastDoubleV = electrictyData.get(0).getVoltage();
+double leastDoubleV = electricityData.get(0).getVoltage();
 
-for(int i = 0; i < electrictyData.size(); i ++)	{
+for(int i = 0; i < electricityData.size(); i ++)	{
 	
-	double voltagein = electrictyData.get(i).getVoltage();
-	double current = electrictyData.get(i).getCurrent();
+	double voltagein = electricityData.get(i).getVoltage();
+	double current = electricityData.get(i).getCurrent();
 		
 		if (current == 0){
 				
@@ -210,20 +156,7 @@ final LineChart<Number,Number> lineChart =
         
 lineChart.setTitle("Voltage vs Discharge Capacity");
 
-ExcelReader excelData = null;
-try
-{
-	if(fileName == null)
-	{
-		System.out.println("Null Exception");
-	}
-excelData = new ExcelReader(fileName);
-}
 
-catch(Exception ioException)
-{
-ioException.printStackTrace();
-}
 
 
 //defining a series
@@ -233,20 +166,18 @@ series.nodeProperty();
 series.setName("1st Discharge");
 //populating the series with data
 
-	if(excelData != null)
+	if(excelReader != null)
 	{
-		List<Data> electrictyData = excelData.getData().electrictyData;
-		
 		
 		
 		
 		List<Data> currentByCycle = new ArrayList<Data>();
-		for(int i = 0; i < electrictyData.size(); i++)
+		for(int i = 0; i < electricityData.size(); i++)
 		{
 			
-			if(electrictyData.get(i).getCycle_Number() == CYCLE_INDEX)
+			if(electricityData.get(i).getCycle_Number() == CYCLE_INDEX)
 			{
-				currentByCycle.add(electrictyData.get(i));
+				currentByCycle.add(electricityData.get(i));
 			}
 			
 			
