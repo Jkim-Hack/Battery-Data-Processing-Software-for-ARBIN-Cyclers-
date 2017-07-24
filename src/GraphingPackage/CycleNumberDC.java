@@ -183,10 +183,10 @@ return LeastCycle;
 		
 		
 	//Secondary stage is called for the graphs	
-System.out.println(FindLeastCycle());
-System.out.println(FindLeastDC());
-System.out.println(FindGreatestDC());
-System.out.println(FindGreatestCycle());
+//System.out.println(FindLeastCycle());
+//System.out.println(FindLeastDC());
+//System.out.println(FindGreatestDC());
+//System.out.println(FindGreatestCycle());
 		
 	Stage secondaryStage = new Stage();
 	
