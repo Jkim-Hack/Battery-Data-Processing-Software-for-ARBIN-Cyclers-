@@ -10,10 +10,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class CycleNumberDC extends Graph {
+public class CoulombicEff extends Graph {
 
 	
-	public CycleNumberDC(File fileName, double value) 
+	public CoulombicEff(File fileName, double value) 
 	{
 		setFile(fileName);
 		setValue(value);
@@ -38,7 +38,7 @@ public class CycleNumberDC extends Graph {
 		
 	List<StatData> electrictyData1 = excelData.getData().electrictyData1;
 	
-	double greatestDoubleDC = ((electrictyData1.get(0).getDischarge_CapacityStat()) * 1000)/mass;
+	double greatestDoubleCoul = (((electrictyData1.get(0).getDischarge_CapacityStat() * 1000)/mass)/(electrictyData1.get(0).getCharge_CapacityStat() * 1000)/mass) * 100;
 
 	for(int i = 1; i < electrictyData1.size(); i ++)	{
 		
@@ -47,14 +47,14 @@ public class CycleNumberDC extends Graph {
 			double current = electrictyData1.get(i).getCurrentStat();
 			
 			
-			if( greatestDoubleDC < Dischargein ){
+			if( greatestDoubleCoul < Dischargein ){
 				if (current > 0){
 					break;
 				}
-				greatestDoubleDC = Dischargein;
+				greatestDoubleCoul = Dischargein;
 		}
 	}
-		return greatestDoubleDC;
+		return greatestDoubleCoul;
 						
 }
 

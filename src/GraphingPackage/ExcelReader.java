@@ -76,10 +76,15 @@ public class ExcelReader
 		
 		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 		Sheet firstSheet = workbook.getSheetAt(1);
+		Sheet secondSheet = workbook.getSheetAt(2);
 		Iterator<Row> iterator = firstSheet.iterator();
 		iterator.next();
 		
+		Iterator<Row> iterator2 = secondSheet.iterator();
+		iterator2.next();
+		
 		List<Double> container;
+		List<Double> container1;
 		
 		
 		while (iterator.hasNext()) 
@@ -113,6 +118,39 @@ public class ExcelReader
            
 			data.electrictyData.add(new Data(container));
 		}
+		
+		while (iterator2.hasNext()) 
+		{
+			Row nextRow = iterator2.next();
+			Iterator<Cell> cellIterator = nextRow.cellIterator();
+			
+			container1 = new ArrayList<Double>();
+			
+			
+			while (cellIterator.hasNext()) {
+				Cell cell = cellIterator.next();
+				
+				double cellContent = 0;
+				switch(cell.getCellTypeEnum())
+				{
+				
+					case STRING: cellContent = Double.parseDouble(cell.getStringCellValue());
+					
+					break;
+					
+					case NUMERIC: cellContent = (double)(cell.getNumericCellValue());
+					break;
+					
+					
+				
+				
+				}
+				container1.add(cellContent);
+            }
+           
+			data.electrictyData1.add(new StatData(container1));
+		}
+		
 		
 		workbook.close();
 		inputStream.close();
