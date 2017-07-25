@@ -30,16 +30,10 @@ public class ExcelReader
 		this.fileName = fileName;
 	}
  
- 
- 
- 
 	public SheetData getData() 
 	{
 		return data;
 	}
- 
- 
- 
  
 	public void setData(SheetData data)
 	{
@@ -53,18 +47,13 @@ public class ExcelReader
 		data = new SheetData();
 		
 		readData();
-		
-		
 	}
  
  
 	private void readData() throws IOException
 	{
 		//System.out.println(fileName.getPath());
-		if(fileName == null)
-		{
-			System.out.println("Null Exception");
-		}
+		
 		FileInputStream inputStream = new FileInputStream(new File(fileName.getPath()));
 		
 		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
@@ -96,7 +85,6 @@ public class ExcelReader
 				{
 				
 					case STRING: cellContent = Double.parseDouble(cell.getStringCellValue());
-					
 					break;
 					
 					case NUMERIC: cellContent = (double)(cell.getNumericCellValue());

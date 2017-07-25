@@ -115,6 +115,7 @@ public class MainMenu extends Application
              graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap));
              graphs.add(new DischargeGraph(fileName, mass, dischargeTitle));
              graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
+             graphs.add(new CoulombicEff(fileName, mass, "Fill"));
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  

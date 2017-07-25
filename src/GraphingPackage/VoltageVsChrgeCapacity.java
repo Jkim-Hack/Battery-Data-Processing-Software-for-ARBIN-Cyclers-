@@ -24,23 +24,8 @@ public class VoltageVsChrgeCapacity extends Graph
 	public VoltageVsChrgeCapacity(File fileName, double value, String title) 
 	{
 		
-		
 		super(fileName, value, title);
 		
-		/*
-		excelReader = null;
-		
-		try
-		{
-			new ExcelReader(fileName);
-			electricityData = excelReader.getData().electrictyData;
-		}
-		
-		catch(Exception ioException)
-		{
-			ioException.printStackTrace();
-		}
-		*/
 	}
 	
 	
@@ -181,10 +166,7 @@ System.out.println(FindGreatestCC());
 System.out.println(FindGreatestV());
 */
 
-	Stage secondaryStage = new Stage();
-	
 
-secondaryStage.setTitle("Voltage vs Charge Capacity");
 //defining the axes
 final NumberAxis xAxis = new NumberAxis(FindLeastCC(), FindGreatestCC() + (FindGreatestCC()/4), (FindGreatestCC())/6);
 final NumberAxis yAxis = new NumberAxis(0, FindGreatestV() + (FindGreatestV()/4), (FindGreatestV())/6);

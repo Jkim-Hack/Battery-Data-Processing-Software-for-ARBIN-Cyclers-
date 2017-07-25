@@ -26,13 +26,11 @@ public class CycleNumberDC extends Graph {
 		
 			double DischargeGetin = (electricityData1.get(i).getDischarge_CapacityStat()) * 1000;
 			double Dischargein = DischargeGetin/mass;
-			double current = electricityData1.get(i).getCurrentStat();
+			
 			
 			
 			if( greatestDoubleDC < Dischargein ){
-				if (current > 0){
-					break;
-				}
+				
 				greatestDoubleDC = Dischargein;
 		}
 	}
@@ -74,16 +72,16 @@ for(int i = 0; i < electricityData1.size(); i ++)	{
 	
 		double DischargeGetin = (electricityData1.get(i).getDischarge_CapacityStat()) * 1000;
 		double Dischargein = DischargeGetin/mass;
-		double current = electricityData1.get(i).getCurrentStat();
 		
-		if (current == 0){
+		
+		
 				
 			if (leastDoubleDC == Dischargein){
 					return leastDoubleDC;
 			
-			}
+			
 				
-			break;
+		
 			
 		}
 	}
@@ -128,10 +126,7 @@ return LeastCycle;
 //System.out.println(FindGreatestDC());
 //System.out.println(FindGreatestCycle());
 		
-	Stage secondaryStage = new Stage();
 	
-
-secondaryStage.setTitle("Discharge Capacity vs Cycle Index");
 //defining the axes
 final NumberAxis yAxis = new NumberAxis(FindLeastDC(), FindGreatestDC() + (FindGreatestDC()/4), (FindGreatestDC())/5);
 final NumberAxis xAxis = new NumberAxis(0, FindGreatestCycle() + 1, 1);
