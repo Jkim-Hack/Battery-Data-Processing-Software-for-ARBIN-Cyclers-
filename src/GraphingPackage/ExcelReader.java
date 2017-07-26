@@ -68,7 +68,7 @@ public class ExcelReader
 		List<Double> container;
 		List<Double> container1;
 		
-		
+		//use for loop here instead of while
 		while (iterator.hasNext()) 
 		{
 			Row nextRow = iterator.next();
@@ -89,9 +89,6 @@ public class ExcelReader
 					
 					case NUMERIC: cellContent = (double)(cell.getNumericCellValue());
 					break;
-					
-					
-				
 				
 				}
 				container.add(cellContent);

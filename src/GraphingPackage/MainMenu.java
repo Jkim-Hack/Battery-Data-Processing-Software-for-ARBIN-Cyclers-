@@ -129,7 +129,6 @@ public class MainMenu extends Application
         Menu files = new Menu("File");
         MenuItem openFile = new MenuItem("Open File...");	
        
-       
         
        openFile.setOnAction((ActionEvent event) -> {
         	
@@ -144,13 +143,21 @@ public class MainMenu extends Application
         //File Chooser class
        });
        
+       
        fileField.setEditable(false);
        
        files.getItems().add(openFile);
-       ddMenu.getMenus().add(files);
-       
-       
+      
+       Menu help = new Menu("Help");
+       Menu about = new Menu("Contact");
         
+       about.getItems().addAll( new MenuItem("Main Developer - John Kim - johnkim1108@gmail.com"),
+    		   					new MenuItem("Helper - Chris Yao - chrisyao2@gmail.com"));
+       
+       help.getItems().add(about);
+       
+       ddMenu.getMenus().addAll(files, help);
+       
     	//Button for the graph window created
     	
     	Button createGraph = new Button();

@@ -14,12 +14,7 @@ import javafx.stage.Stage;
 
 public class VoltageVsChrgeCapacity extends Graph
 {
-	
-	
-	
-	
-	
-	
+
 	
 	public VoltageVsChrgeCapacity(File fileName, double value, String title) 
 	{
