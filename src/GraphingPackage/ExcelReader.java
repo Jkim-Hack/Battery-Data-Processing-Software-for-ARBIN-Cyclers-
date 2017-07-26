@@ -68,9 +68,9 @@ public class ExcelReader
 		{
 			System.out.println("Null Exception");
 		}
-		FileInputStream inputStream = new FileInputStream(new File(fileName.getPath()));
+		//FileInputStream inputStream = new FileInputStream(new File(fileName.getPath()));
 		
-		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+		XSSFWorkbook workbook = new XSSFWorkbook(fileName.getPath());
 		Sheet firstSheet = workbook.getSheetAt(1);
 		Sheet secondSheet = workbook.getSheetAt(2);
 		Iterator<Row> iterator = firstSheet.iterator();
@@ -114,7 +114,7 @@ public class ExcelReader
            
 			data.electrictyData.add(new Data(container));
 		}
-		
+		/*
 		while (iterator2.hasNext()) 
 		{
 			Row nextRow = iterator2.next();
@@ -146,10 +146,10 @@ public class ExcelReader
            
 			data.electrictyData1.add(new StatData(container1));
 		}
-		
+		*/
 		
 		workbook.close();
-		inputStream.close();
+		//inputStream.close();
 	}
  
 }
