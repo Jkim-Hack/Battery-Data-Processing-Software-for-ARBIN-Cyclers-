@@ -94,10 +94,10 @@ public class MainMenu extends Application
        
         TextField insertMass = new TextField();
         Button pseudoSave = new Button("Apply");
-        pseudoSave.addEventHandler(ActionEvent.ACTION, (e) -> isDouble(insertMass, insertMass.getText()));
         pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
         {
-     
+        	isDouble(insertMass, insertMass.getText());
+        	
         	saveLabel.setVisible(true);
         	PauseTransition visiblePause = new PauseTransition(
         	        Duration.seconds(10)
@@ -113,8 +113,14 @@ public class MainMenu extends Application
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
              graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap));
+
             // graphs.add(new DischargeGraph(fileName, mass, dischargeTitle));
              //graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
+
+             graphs.add(new DischargeGraph(fileName, mass, dischargeTitle));
+            // graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
+             //graphs.add(new CoulombicEff(fileName, mass, "Fill"));
+
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  
@@ -127,7 +133,6 @@ public class MainMenu extends Application
         MenuBar ddMenu = new MenuBar();
         Menu files = new Menu("File");
         MenuItem openFile = new MenuItem("Open File...");	
-       
        
         
        openFile.setOnAction((ActionEvent event) -> {
@@ -143,13 +148,21 @@ public class MainMenu extends Application
         //File Chooser class
        });
        
+       
        fileField.setEditable(false);
        
        files.getItems().add(openFile);
-       ddMenu.getMenus().add(files);
-       
-       
+      
+       Menu help = new Menu("Help");
+       Menu about = new Menu("Contact");
         
+       about.getItems().addAll( new MenuItem("Main Developer - John Kim - johnkim1108@gmail.com"),
+    		   					new MenuItem("Helper - Chris Yao - chrisyao2@gmail.com"));
+       
+       help.getItems().add(about);
+       
+       ddMenu.getMenus().addAll(files, help);
+       
     	//Button for the graph window created
     	
     	Button createGraph = new Button();

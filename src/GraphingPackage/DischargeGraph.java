@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class DischargeGraph extends Graph
 {
 	
-	private int CYCLE_INDEX = 9;
+	private int CYCLE_INDEX = 1;
 	
 	public DischargeGraph(File fileName, double value, String title) 
 	{
@@ -139,10 +139,6 @@ System.out.println(FindGreatestDC());
 System.out.println(FindGreatestV());
 */
 		
-	Stage secondaryStage = new Stage();
-	
-BorderPane borderPane = new BorderPane();
-secondaryStage.setTitle("Voltage vs Discharge Capacity");
 //defining the axes
 final NumberAxis xAxis = new NumberAxis(FindLeastDC(), FindGreatestDC() + (FindGreatestDC()/4), (FindGreatestDC())/6);
 final NumberAxis yAxis = new NumberAxis(0, FindGreatestV() + (FindGreatestV()/4), (FindGreatestV())/6);

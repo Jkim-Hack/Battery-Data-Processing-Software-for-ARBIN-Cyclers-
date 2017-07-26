@@ -24,25 +24,16 @@ public class ExcelReader
 		return fileName;
 		
 	}
- 
- 
- 
- 
+
 	public void setFileName(File fileName) 
 	{
 		this.fileName = fileName;
 	}
  
- 
- 
- 
 	public SheetData getData() 
 	{
 		return data;
 	}
- 
- 
- 
  
 	public void setData(SheetData data)
 	{
@@ -56,19 +47,13 @@ public class ExcelReader
 		data = new SheetData();
 		
 		readData();
-		
-		
 	}
  
  
 	private void readData() throws IOException
 	{
 		//System.out.println(fileName.getPath());
-		if(fileName == null)
-		{
-			System.out.println("Null Exception");
-		}
-		//FileInputStream inputStream = new FileInputStream(new File(fileName.getPath()));
+
 		
 		XSSFWorkbook workbook = new XSSFWorkbook(fileName.getPath());
 		Sheet firstSheet = workbook.getSheetAt(1);
@@ -82,7 +67,7 @@ public class ExcelReader
 		List<Double> container;
 		List<Double> container1;
 		
-		
+		//use for loop here instead of while
 		while (iterator.hasNext()) 
 		{
 			Row nextRow = iterator.next();
@@ -99,14 +84,10 @@ public class ExcelReader
 				{
 				
 					case STRING: cellContent = Double.parseDouble(cell.getStringCellValue());
-					
 					break;
 					
 					case NUMERIC: cellContent = (double)(cell.getNumericCellValue());
 					break;
-					
-					
-				
 				
 				}
 				container.add(cellContent);

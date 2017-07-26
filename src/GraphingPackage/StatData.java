@@ -21,7 +21,10 @@ public class StatData
 			{
 			case 0:setCycle_NumberStat(data.get(i));
 			break;
+			case 5:setCharge_CapacityStat(data.get(i));
+			break;
 			case 6:setDischarge_CapacityStat(data.get(i));
+			break;
 			}
 		}
 	}
