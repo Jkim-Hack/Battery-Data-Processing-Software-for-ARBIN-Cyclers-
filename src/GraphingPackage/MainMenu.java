@@ -89,6 +89,11 @@ public class MainMenu extends Application
         Label fileLabel = new Label("Chosen File:");
         TextField fileField = new TextField("File -> Open File...");
         
+        Label Cycles = new Label("Enter Three Cycles: ");
+        TextField insertCycle1 = new TextField();
+        TextField insertCycle2 = new TextField();
+        TextField insertCycle3 = new TextField();
+        
        
         //Mass textfield
        
@@ -96,7 +101,10 @@ public class MainMenu extends Application
         Button pseudoSave = new Button("Apply");
         pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
         {
-        	isDouble(insertMass, insertMass.getText());
+        	 isDouble(insertMass, insertMass.getText());
+        	 isDouble(insertCycle1, insertCycle1.getText());
+             isDouble(insertCycle2, insertCycle2.getText());
+             isDouble(insertCycle3, insertCycle3.getText());
         	
         	saveLabel.setVisible(true);
         	PauseTransition visiblePause = new PauseTransition(
@@ -108,6 +116,10 @@ public class MainMenu extends Application
         	visiblePause.play();
         	
         	double mass = toMassDouble(insertMass.getText());
+        	double Cycle1 = toCycle1Double(insertCycle1.getText());
+            double Cycle2 = toCycle1Double(insertCycle2.getText());
+            double Cycle3 = toCycle1Double(insertCycle3.getText());
+             
         	String ChargeCap = "Voltage vs Charge Capacity";
         	String dischargeTitle = "Voltage vs Discharge Capacity";
         	
@@ -201,7 +213,7 @@ public class MainMenu extends Application
        	
        	pane.setLeft(midinserts);
        	midinserts.setPadding(new Insets(20, 20, 20, 20));
-       	midinserts.getChildren().addAll(labelMass ,insertMass, pseudoSave, saveLabel, fileLabel, fileField);
+       	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass, Cycles, insertCycle1, insertCycle2, insertCycle3, pseudoSave, saveLabel);
        	
        Scene scene = new Scene(pane, 700, 600);
        
@@ -245,6 +257,11 @@ public class MainMenu extends Application
     	return dataMass;
     }
   
+    public double toCycle1Double(String Cycle)
+    {
+    	double AllCycle = Double.parseDouble(Cycle);
+    	return AllCycle;
+    }
     
     
 	public static void main(String[] args)
