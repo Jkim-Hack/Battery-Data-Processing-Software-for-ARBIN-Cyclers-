@@ -83,7 +83,7 @@ public class MainMenu extends Application
        
         
        
-        //graphs.add(new DischargeGraph(fileName, value));
+        
         
        
         Label fileLabel = new Label("Chosen File:");
