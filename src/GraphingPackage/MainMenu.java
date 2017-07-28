@@ -5,6 +5,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.hslf.util.SystemTimeUtils;
+
 import com.jogamp.newt.event.KeyEvent;
 
 import javafx.animation.PauseTransition;
@@ -94,8 +96,10 @@ public class MainMenu extends Application
        
         TextField insertMass = new TextField();
         Button pseudoSave = new Button("Apply");
+        
         pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
         {
+        	long start = System.currentTimeMillis();
         	isDouble(insertMass, insertMass.getText());
         	
         	saveLabel.setVisible(true);
@@ -118,15 +122,16 @@ public class MainMenu extends Application
              //graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
 
              graphs.add(new DischargeGraph(fileName, mass, dischargeTitle));
-            // graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
-             //graphs.add(new CoulombicEff(fileName, mass, "Fill"));
+             graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
+             graphs.add(new CoulombicEff(fileName, mass, "Fill"));
 
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  
-        
+             long end = System.currentTimeMillis();
+             System.out.println(end - start);
         });
-        
+                
        
         	
         //Menu drop down bar
