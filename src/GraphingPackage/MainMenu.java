@@ -125,9 +125,14 @@ public class MainMenu extends Application
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
              graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap));
+
+            // graphs.add(new DischargeGraph(fileName, mass, dischargeTitle));
+             //graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
+
              graphs.add(new DischargeGraph(fileName, mass, dischargeTitle));
-             graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
-             graphs.add(new CoulombicEff(fileName, mass, "Fill"));
+            // graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
+             //graphs.add(new CoulombicEff(fileName, mass, "Fill"));
+
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  
