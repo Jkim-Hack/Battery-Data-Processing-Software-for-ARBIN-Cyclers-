@@ -20,19 +20,18 @@ public class Data
 		{
 			switch(i)
 			{
-				case 4:setStepIndx(data.get(i));
+			
+				case 0:setCycle_Number(data.get(i));
 				break;
-				case 5:setCycle_Number(data.get(i));
+				case 1:setCurrent(data.get(i));
 				break;
-				case 6:setCurrent(data.get(i));
+				case 2:setVoltage(data.get(i));
 				break;
-				case 7:setVoltage(data.get(i));
+				case 3:setCharge_Capacity(data.get(i));
 				break;
-				case 8:setCharge_Capacity(data.get(i));
+				case 4:setDischarge_Capacity(data.get(i));
 				break;
-				case 9:setDischarge_Capacity(data.get(i));
-				break;
-				case 12:setDtDv(data.get(i));
+				case 7:setDtDv(data.get(i));
 				
 			}
 		}
