@@ -15,8 +15,34 @@ public class ExcelReader
 	
 	private SheetData data;
 	private File fileName;
+	protected double Cycle1;
+	protected double Cycle2;
+	protected double Cycle3;
 	
-	
+	public double getCycle1() {
+		return Cycle1;
+	}
+
+	public void setCycle1(double cycle1) {
+		Cycle1 = cycle1;
+	}
+
+	public double getCycle2() {
+		return Cycle2;
+	}
+
+	public void setCycle2(double cycle2) {
+		Cycle2 = cycle2;
+	}
+
+	public double getCycle3() {
+		return Cycle3;
+	}
+
+	public void setCycle3(double cycle3) {
+		Cycle3 = cycle3;
+	}
+
 	public File getFileName()
 	{
 		return fileName;
@@ -71,7 +97,6 @@ public class ExcelReader
 		{
 			Row nextRow = iterator.next();
 			Iterator<Cell> cellIterator = nextRow.cellIterator();
-			
 			container = new ArrayList<Double>();
 			
 			
@@ -92,14 +117,13 @@ public class ExcelReader
 				container.add(cellContent);
             }
            
-			data.electrictyData.add(0,new Data(container));
+			data.electrictyData.add(new Data(container));
 		}
 		
 		while (iterator2.hasNext()) 
 		{
 			Row nextRow = iterator2.next();
 			Iterator<Cell> cellIterator = nextRow.cellIterator();
-			
 			container1 = new ArrayList<Double>();
 			
 			
