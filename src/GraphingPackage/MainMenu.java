@@ -104,24 +104,21 @@ public class MainMenu extends Application
         
         pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
         {
-<<<<<<< HEAD
-        	/* isDouble(insertMass, insertMass.getText());
-=======
-
-        	long start = System.currentTimeMillis();
-        	isDouble(insertMass, insertMass.getText());
 
         	 isDouble(insertMass, insertMass.getText());
->>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
+
+
+        	 long start = System.currentTimeMillis();
+        	 isDouble(insertMass, insertMass.getText());
+
+      
+/*
         	 isDouble(insertCycle1, insertCycle1.getText());
              isDouble(insertCycle2, insertCycle2.getText());
              isDouble(insertCycle3, insertCycle3.getText());
-<<<<<<< HEAD
-        	*/
-=======
 
         	
->>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
+*/
         	saveLabel.setVisible(true);
         	PauseTransition visiblePause = new PauseTransition(
         	        Duration.seconds(10)
@@ -132,17 +129,17 @@ public class MainMenu extends Application
         	visiblePause.play();
         	
         	double mass = toMassDouble(insertMass.getText());
-<<<<<<< HEAD
+
         	/* double Cycle1 = toCycle1Double(insertCycle1.getText());
             double Cycle2 = toCycle1Double(insertCycle2.getText());
             double Cycle3 = toCycle1Double(insertCycle3.getText());
              */
-=======
+
         	//double Cycle1 = toCycle1Double(insertCycle1.getText());
             //double Cycle2 = toCycle1Double(insertCycle2.getText());
             //double Cycle3 = toCycle1Double(insertCycle3.getText());
              
->>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
+
         	String ChargeCap = "Voltage vs Charge Capacity";
         	String dischargeTitle = "Voltage vs Discharge Capacity";
         	
