@@ -1,14 +1,12 @@
 package GraphingPackage;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
- 
+
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -73,9 +71,11 @@ public class ExcelReader
 		data = new SheetData();
 		
 		readData();
+		
 	}
  
  
+	@SuppressWarnings("incomplete-switch")
 	private void readData() throws IOException
 	{
 		//System.out.println(fileName.getPath());
@@ -97,30 +97,38 @@ public class ExcelReader
 		while (iterator.hasNext()) 
 		{
 			Row nextRow = iterator.next();
-			Iterator<Cell> cellIterator = nextRow.cellIterator();
+			
 			container = new ArrayList<Double>();
 			
 			
-			while (cellIterator.hasNext()) {
-				Cell cell = cellIterator.next();
+			for(int i = 5; i <= 12; i++)
+			{
+				Cell currentCell = nextRow.getCell(i);
 				
 				double cellContent = 0;
-				switch(cell.getCellTypeEnum())
+				
+				switch(currentCell.getCellTypeEnum())
 				{
-				
-					case STRING: cellContent = Double.parseDouble(cell.getStringCellValue());
+					case NUMERIC: cellContent = (double)(currentCell.getNumericCellValue());
 					break;
-					
-					case NUMERIC: cellContent = (double)(cell.getNumericCellValue());
-					break;
-				
 				}
-				container.add(cellContent);
+				
+				if(cellContent == Cycle1 || cellContent == Cycle2 || cellContent == Cycle3)
+				{
+					container.add(cellContent);
+				}
+					
+				
             }
            
+		
 			data.electrictyData.add(new Data(container));
 		}
+<<<<<<< HEAD
 	/*
+=======
+		
+>>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
 		while (iterator2.hasNext()) 
 		{
 			Row nextRow = iterator2.next();
@@ -151,7 +159,7 @@ public class ExcelReader
            
 			data.electrictyData1.add(new StatData(container1));
 		}
-		*/
+		
 		
 		workbook.close();
 		//inputStream.close();

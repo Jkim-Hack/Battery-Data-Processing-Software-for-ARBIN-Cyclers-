@@ -5,6 +5,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.poi.hslf.util.SystemTimeUtils;
+
 import com.jogamp.newt.event.KeyEvent;
 
 import javafx.animation.PauseTransition;
@@ -99,13 +101,27 @@ public class MainMenu extends Application
        
         TextField insertMass = new TextField();
         Button pseudoSave = new Button("Apply");
+        
         pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
         {
+<<<<<<< HEAD
         	/* isDouble(insertMass, insertMass.getText());
+=======
+
+        	long start = System.currentTimeMillis();
+        	isDouble(insertMass, insertMass.getText());
+
+        	 isDouble(insertMass, insertMass.getText());
+>>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
         	 isDouble(insertCycle1, insertCycle1.getText());
              isDouble(insertCycle2, insertCycle2.getText());
              isDouble(insertCycle3, insertCycle3.getText());
+<<<<<<< HEAD
         	*/
+=======
+
+        	
+>>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
         	saveLabel.setVisible(true);
         	PauseTransition visiblePause = new PauseTransition(
         	        Duration.seconds(10)
@@ -116,10 +132,17 @@ public class MainMenu extends Application
         	visiblePause.play();
         	
         	double mass = toMassDouble(insertMass.getText());
+<<<<<<< HEAD
         	/* double Cycle1 = toCycle1Double(insertCycle1.getText());
             double Cycle2 = toCycle1Double(insertCycle2.getText());
             double Cycle3 = toCycle1Double(insertCycle3.getText());
              */
+=======
+        	//double Cycle1 = toCycle1Double(insertCycle1.getText());
+            //double Cycle2 = toCycle1Double(insertCycle2.getText());
+            //double Cycle3 = toCycle1Double(insertCycle3.getText());
+             
+>>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
         	String ChargeCap = "Voltage vs Charge Capacity";
         	String dischargeTitle = "Voltage vs Discharge Capacity";
         	
@@ -136,9 +159,10 @@ public class MainMenu extends Application
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  
-        
+             long end = System.currentTimeMillis();
+             System.out.println(end - start);
         });
-        
+                
        
         	
         //Menu drop down bar
