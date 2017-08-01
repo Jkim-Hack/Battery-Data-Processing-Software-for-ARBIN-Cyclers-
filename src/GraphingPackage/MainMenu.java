@@ -124,9 +124,9 @@ public class MainMenu extends Application
         	visiblePause.play();
         	
         	double mass = toMassDouble(insertMass.getText());
-        	//double Cycle1 = toCycle1Double(insertCycle1.getText());
-            //double Cycle2 = toCycle1Double(insertCycle2.getText());
-            //double Cycle3 = toCycle1Double(insertCycle3.getText());
+        	double Cycle1 = toCycle1Double(insertCycle1.getText());
+            double Cycle2 = toCycle1Double(insertCycle2.getText());
+            double Cycle3 = toCycle1Double(insertCycle3.getText());
              
         	String ChargeCap = "Voltage vs Charge Capacity";
         	String dischargeTitle = "Voltage vs Discharge Capacity";
