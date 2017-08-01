@@ -15,34 +15,11 @@ public class ExcelReader
 	
 	private SheetData data;
 	private File fileName;
-	protected double Cycle1;
-	protected double Cycle2;
-	protected double Cycle3;
+	protected double Cycle1 = 1;
+	protected double Cycle2 = 1;
+	protected double Cycle3 = 1;
+
 	
-	public double getCycle1() {
-		return Cycle1;
-	}
-
-	public void setCycle1(double cycle1) {
-		Cycle1 = cycle1;
-	}
-
-	public double getCycle2() {
-		return Cycle2;
-	}
-
-	public void setCycle2(double cycle2) {
-		Cycle2 = cycle2;
-	}
-
-	public double getCycle3() {
-		return Cycle3;
-	}
-
-	public void setCycle3(double cycle3) {
-		Cycle3 = cycle3;
-	}
-
 	public File getFileName()
 	{
 		return fileName;
@@ -93,13 +70,15 @@ public class ExcelReader
 		List<Double> container;
 		List<Double> container1;
 		
+		System.out.println(Cycle1);
+		System.out.println(Cycle2);
+		System.out.println(Cycle3);
 		//use for loop here instead of while
 		while (iterator.hasNext()) 
 		{
 			Row nextRow = iterator.next();
 			
 			container = new ArrayList<Double>();
-			
 			
 			for(int i = 5; i <= 12; i++)
 			{

@@ -40,9 +40,30 @@ public class MainMenu extends Application
 	//Instance Variables
 	
 	public File fileName;
+	protected double Cycle1;
+	protected double Cycle2;
+	protected double Cycle3;
 	
-	
-	
+	public double getCycle1() {
+		return Cycle1;
+	}
+	public void setCycle1(double cycle1) {
+		Cycle1 = cycle1;
+	}
+	public double getCycle2() {
+		return Cycle2;
+	}
+	public void setCycle2(double cycle2) {
+		Cycle2 = cycle2;
+	}
+	public double getCycle3() {
+		return Cycle3;
+	}
+	public void setCycle3(double cycle3) {
+		Cycle3 = cycle3;
+	}
+
+
 	public FileChoose fileChooser = new FileChoose();
 		
 	
@@ -90,8 +111,8 @@ public class MainMenu extends Application
        
         Label fileLabel = new Label("Chosen File:");
         TextField fileField = new TextField("File -> Open File...");
-        
-        /*Label Cycles = new Label("Enter Three Cycles: ");
+      /*  
+        Label Cycles = new Label("Enter Three Cycles: ");
         TextField insertCycle1 = new TextField();
         TextField insertCycle2 = new TextField();
         TextField insertCycle3 = new TextField();
@@ -117,8 +138,8 @@ public class MainMenu extends Application
              isDouble(insertCycle2, insertCycle2.getText());
              isDouble(insertCycle3, insertCycle3.getText());
 
-        	
-*/
+     */   	
+
         	saveLabel.setVisible(true);
         	PauseTransition visiblePause = new PauseTransition(
         	        Duration.seconds(10)
@@ -129,26 +150,21 @@ public class MainMenu extends Application
         	visiblePause.play();
         	
         	double mass = toMassDouble(insertMass.getText());
-
-        	/* double Cycle1 = toCycle1Double(insertCycle1.getText());
+/*
+        	double Cycle1 = toCycle1Double(insertCycle1.getText());
+        	setCycle1(Cycle1);
             double Cycle2 = toCycle1Double(insertCycle2.getText());
+            setCycle2(Cycle2);
             double Cycle3 = toCycle1Double(insertCycle3.getText());
-             */
-
-        	//double Cycle1 = toCycle1Double(insertCycle1.getText());
-            //double Cycle2 = toCycle1Double(insertCycle2.getText());
-            //double Cycle3 = toCycle1Double(insertCycle3.getText());
+            setCycle3(Cycle3);
              
+*/
 
         	String ChargeCap = "Voltage vs Charge Capacity";
         	String dischargeTitle = "Voltage vs Discharge Capacity";
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
              graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap));
-
-            // graphs.add(new DischargeGraph(fileName, mass, dischargeTitle));
-             //graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
-
              graphs.add(new DischargeGraph(fileName, mass, dischargeTitle));
              graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
              graphs.add(new CoulombicEff(fileName, mass, "Fill"));
