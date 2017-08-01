@@ -129,7 +129,7 @@ return LeastCycle;
 	
 //defining the axes
 final NumberAxis yAxis = new NumberAxis(FindLeastDC(), FindGreatestDC() + (FindGreatestDC()/4), (FindGreatestDC())/5);
-final NumberAxis xAxis = new NumberAxis(0, FindGreatestCycle() + 1, 1);
+final NumberAxis xAxis = new NumberAxis(0, FindGreatestCycle()+1, 5);
 yAxis.setLabel("Capacity (mAh/g)");
 xAxis.setLabel("Cycle Number");
 

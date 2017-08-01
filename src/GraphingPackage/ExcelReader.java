@@ -60,7 +60,7 @@ public class ExcelReader
 		
 		XSSFWorkbook workbook = new XSSFWorkbook(fileName.getPath());
 		Sheet firstSheet = workbook.getSheetAt(1);
-		Sheet secondSheet = workbook.getSheetAt(2);
+		Sheet secondSheet = workbook.getSheetAt(4);
 		Iterator<Row> iterator = firstSheet.iterator();
 		iterator.next();
 		
@@ -118,44 +118,40 @@ public class ExcelReader
 		}
 		
 		
-	/*
-
 		while (iterator2.hasNext()) 
 		{
 			Row nextRow = iterator2.next();
-			Iterator<Cell> cellIterator = nextRow.cellIterator();
+			
 			container1 = new ArrayList<Double>();
 			
 			
-			while (cellIterator.hasNext()) {
-				Cell cell = cellIterator.next();
+			
+			for(int i = 0; i <= 14; i++)
+			{
+				Cell currentCell = nextRow.getCell(i);
 				
-				double cellContent = 0;
-				switch(cell.getCellTypeEnum())
+				double cellContent1 = 0;
+				
+				switch(currentCell.getCellTypeEnum())
 				{
-				
-					case STRING: cellContent = Double.parseDouble(cell.getStringCellValue());
-					
+					case NUMERIC: cellContent1 = (double)(currentCell.getNumericCellValue());
 					break;
-					
-					case NUMERIC: cellContent = (double)(cell.getNumericCellValue());
-					break;
-					
-					
-				
-				
 				}
-				container1.add(cellContent);
+				
+					container1.add(cellContent1);
+				}
+					
+				data.electrictyData1.add(new StatData(container1));
+			
             }
-           
-			data.electrictyData1.add(new StatData(container1));
+			
+		workbook.close();
 		}
 		
-		*/
-		workbook.close();
+	
 		//inputStream.close();
 	}
  
-}
+
  
  
