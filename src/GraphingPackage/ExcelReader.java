@@ -74,11 +74,15 @@ public class ExcelReader
 		System.out.println(Cycle2);
 		System.out.println(Cycle3);
 		//use for loop here instead of while
+		
+		
 		while (iterator.hasNext()) 
 		{
 			Row nextRow = iterator.next();
 			
 			container = new ArrayList<Double>();
+			
+			boolean isCycle = false;
 			
 			for(int i = 5; i <= 12; i++)
 			{
@@ -86,24 +90,34 @@ public class ExcelReader
 				
 				double cellContent = 0;
 				
+				double cycleCell = nextRow.getCell(5).getNumericCellValue();
+				
 				switch(currentCell.getCellTypeEnum())
 				{
 					case NUMERIC: cellContent = (double)(currentCell.getNumericCellValue());
 					break;
 				}
 				
-				if(cellContent == Cycle1 || cellContent == Cycle2 || cellContent == Cycle3)
+				if(cycleCell == Cycle1 || cycleCell == Cycle2 || cycleCell == Cycle3)
 				{
+					isCycle = true;
 					container.add(cellContent);
 				}
 					
 				
             }
+			
+			
            
-		
-			data.electrictyData.add(new Data(container));
+			if(isCycle)
+			{	
+				data.electrictyData.add(new Data(container));
+			}
+			
+			
 		}
-
+		
+		
 	/*
 
 		while (iterator2.hasNext()) 
