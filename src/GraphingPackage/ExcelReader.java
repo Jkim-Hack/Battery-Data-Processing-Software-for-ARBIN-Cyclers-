@@ -15,10 +15,33 @@ public class ExcelReader
 	
 	private SheetData data;
 	private File fileName;
-	protected double Cycle1 = 1;
-	protected double Cycle2 = 1;
-	protected double Cycle3 = 1;
+	protected MainMenu Cycle1;
+	protected MainMenu Cycle2;
+	protected MainMenu Cycle3;
 
+	public MainMenu getCycle1() {
+		return Cycle1;
+	}
+
+	public void setCycle1(MainMenu cycle1) {
+		Cycle1 = cycle1;
+	}
+
+	public MainMenu getCycle2() {
+		return Cycle2;
+	}
+
+	public void setCycle2(MainMenu cycle2) {
+		Cycle2 = cycle2;
+	}
+
+	public MainMenu getCycle3() {
+		return Cycle3;
+	}
+
+	public void setCycle3(MainMenu cycle3) {
+		Cycle3 = cycle3;
+	}
 	
 	public File getFileName()
 	{
@@ -52,6 +75,7 @@ public class ExcelReader
 	}
  
  
+
 	@SuppressWarnings("incomplete-switch")
 	private void readData() throws IOException
 	{
@@ -60,7 +84,7 @@ public class ExcelReader
 		
 		XSSFWorkbook workbook = new XSSFWorkbook(fileName.getPath());
 		Sheet firstSheet = workbook.getSheetAt(1);
-		Sheet secondSheet = workbook.getSheetAt(4);
+		Sheet secondSheet = workbook.getSheetAt(2);
 		Iterator<Row> iterator = firstSheet.iterator();
 		iterator.next();
 		
@@ -70,9 +94,9 @@ public class ExcelReader
 		List<Double> container;
 		List<Double> container1;
 		
-		System.out.println(Cycle1);
-		System.out.println(Cycle2);
-		System.out.println(Cycle3);
+		System.out.println(Cycle1.getCycle1());
+		System.out.println(Cycle2.getCycle2());
+		System.out.println(Cycle3.getCycle3());
 		//use for loop here instead of while
 		
 		
@@ -98,7 +122,7 @@ public class ExcelReader
 					break;
 				}
 				
-				if(cycleCell == Cycle1 || cycleCell == Cycle2 || cycleCell == Cycle3)
+				if(cycleCell == Cycle1.getCycle1() || cycleCell == Cycle2.getCycle2() || cycleCell == Cycle3.getCycle3())
 				{
 					isCycle = true;
 					container.add(cellContent);
