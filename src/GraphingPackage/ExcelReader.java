@@ -15,9 +15,9 @@ public class ExcelReader
 	
 	private SheetData data;
 	private File fileName;
-	protected double Cycle1 = 1;
-	protected double Cycle2 = 1;
-	protected double Cycle3 = 1;
+	protected double cycleOne;
+	protected double cycleTwo;
+	protected double cycleThree;
 
 	
 	public File getFileName()
@@ -41,9 +41,45 @@ public class ExcelReader
 		this.data = data;
 	}
 	
-	public ExcelReader(File fileName) throws IOException
+	
+	
+	public double getCycleOne()
+	{
+		return cycleOne;
+	}
+
+	public void setCycleOne(double cycleOne) 
+	{
+		this.cycleOne = cycleOne;
+	}
+
+	public double getCycleTwo()
+	{
+		return cycleTwo;
+	}
+
+	public void setCycleTwo(double cycleTwo) 
+	{
+		this.cycleTwo = cycleTwo;
+	}
+
+	public double getCycleThree()
+	{
+		return cycleThree;
+	}
+
+	public void setCycleThree(double cycleThree)
+	{
+		this.cycleThree = cycleThree;
+	}
+
+	public ExcelReader(File fileName, double cycleOne, double cycleTwo, double cycleThree) throws IOException
 	{
 		this.fileName = fileName;
+		
+		this.cycleOne = cycleOne;
+		this.cycleTwo = cycleTwo;
+		this.cycleThree = cycleThree;
 		
 		data = new SheetData();
 		
@@ -70,11 +106,8 @@ public class ExcelReader
 		List<Double> container;
 		List<Double> container1;
 		
-		System.out.println(Cycle1);
-		System.out.println(Cycle2);
-		System.out.println(Cycle3);
 		//use for loop here instead of while
-		
+		System.out.println(cycleOne);
 		
 		while (iterator.hasNext()) 
 		{
@@ -98,7 +131,7 @@ public class ExcelReader
 					break;
 				}
 				
-				if(cycleCell == Cycle1 || cycleCell == Cycle2 || cycleCell == Cycle3)
+				if(cycleCell == cycleOne || cycleCell == cycleTwo || cycleCell == cycleThree)
 				{
 					isCycle = true;
 					container.add(cellContent);
@@ -106,8 +139,6 @@ public class ExcelReader
 					
 				
             }
-			
-			
            
 			if(isCycle)
 			{	

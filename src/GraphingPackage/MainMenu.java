@@ -112,13 +112,13 @@ public class MainMenu extends Application
         	 isDouble(insertMass, insertMass.getText());
 
       
-/*
-        	 isDouble(insertCycle1, insertCycle1.getText());
-             isDouble(insertCycle2, insertCycle2.getText());
-             isDouble(insertCycle3, insertCycle3.getText());
+
+        	 double cycleOne = toCycleDouble(insertCycle1.getText());
+             double cycleTwo = toCycleDouble(insertCycle2.getText());
+             double cycleThree = toCycleDouble(insertCycle3.getText());
 
         	
-*/
+
         	saveLabel.setVisible(true);
         	PauseTransition visiblePause = new PauseTransition(
         	        Duration.seconds(10)
@@ -132,12 +132,7 @@ public class MainMenu extends Application
 
         	
 
-            /*
-            double Cycle1 = toCycle1Double(insertCycle1.getText());
-            double Cycle2 = toCycle1Double(insertCycle2.getText());
-            double Cycle3 = toCycle1Double(insertCycle3.getText());
-             */
-
+           
         	
              
 
@@ -145,14 +140,14 @@ public class MainMenu extends Application
         	String dischargeTitle = "Voltage vs Discharge Capacity";
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
-             graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap));
+             graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap,cycleOne,cycleTwo,cycleThree));
 
             // graphs.add(new DischargeGraph(fileName, mass, dischargeTitle));
              //graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
 
-             graphs.add(new DischargeGraph(fileName, mass, dischargeTitle));
-             graphs.add(new CycleNumberDC(fileName, mass, "Filler"));
-             graphs.add(new CoulombicEff(fileName, mass, "Fill"));
+             graphs.add(new DischargeGraph(fileName, mass, dischargeTitle,cycleOne,cycleTwo,cycleThree));
+             graphs.add(new CycleNumberDC(fileName, mass, "Filler",cycleOne,cycleTwo,cycleThree));
+             //graphs.add(new CoulombicEff(fileName, mass, "Fill"));
 
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);
@@ -240,7 +235,7 @@ public class MainMenu extends Application
        	
        	pane.setLeft(midinserts);
        	midinserts.setPadding(new Insets(20, 20, 20, 20));
-       	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass, pseudoSave, saveLabel);
+       	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass, pseudoSave, saveLabel,Cycles,insertCycle1,insertCycle2,insertCycle3);
        	
        Scene scene = new Scene(pane, 700, 600);
        
@@ -283,8 +278,8 @@ public class MainMenu extends Application
     	double dataMass = Double.parseDouble(mass);
     	return dataMass;
     }
-  
-    public double toCycle1Double(String Cycle)
+    //TODO check if cycle is number
+    public double toCycleDouble(String Cycle)
     {
     	double AllCycle = Double.parseDouble(Cycle);
     	return AllCycle;

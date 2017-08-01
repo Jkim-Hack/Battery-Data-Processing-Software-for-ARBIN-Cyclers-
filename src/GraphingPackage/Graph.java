@@ -18,13 +18,13 @@ public class Graph
 	protected List<StatData> electricityData1;
 	
 	
-	public Graph(File fileName, double value, String title)
+	public Graph(File fileName, double value, String title, double cycleOne, double cycleTwo, double cycleThree)
 	{
 		excelReader = null;
 		
 		try
 		{
-			excelReader = new ExcelReader(fileName);
+			excelReader = new ExcelReader(fileName, cycleOne, cycleTwo, cycleThree);
 			electricityData = excelReader.getData().electrictyData;
 			electricityData1 = excelReader.getData().electrictyData1;
 		}
@@ -75,6 +75,8 @@ public class Graph
 		
 		LineChart<Number,Number> defaultGraph = new LineChart<Number,Number>(xAxis,yAxis);
 		return defaultGraph;
+		
+		
 		
 	}
 }
