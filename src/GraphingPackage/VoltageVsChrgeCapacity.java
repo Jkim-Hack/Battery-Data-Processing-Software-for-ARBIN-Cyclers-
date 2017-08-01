@@ -1,6 +1,7 @@
 package GraphingPackage;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.Scene;
@@ -12,8 +13,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+
+
 public class VoltageVsChrgeCapacity extends Graph
 {
+	private int CYCLE_INDEX = 1;
 
 	public VoltageVsChrgeCapacity(File fileName, double value, String title,  double cycleOne, double cycleTwo, double cycleThree) 
 	{
@@ -183,25 +187,64 @@ series.nodeProperty();
 
 //populating the series with data
 
-if(excelReader!= null)
+if(excelReader != null)
 {
-
-for(int i = 0; i < electricityData.size(); i ++)
-{
-	double current = electricityData.get(i).getCurrent();
-	double chargeGet = (electricityData.get(i).getCharge_Capacity()) * 1000;
-	double charge = chargeGet/mass;
-	double voltage = electricityData.get(i).getVoltage();
-	XYChart.Data data = new XYChart.Data(charge,voltage);
-	Rectangle rect = new Rectangle(0,0);
-	rect.setVisible(false);
-	data.setNode(rect);
-	series.getData().add(data);
-	if (current == 0) {
-		break;
+	
+	
+	
+	List<Data> currentByCycle = new ArrayList<Data>();
+	for(int i = 0; i < electricityData.size(); i++)
+	{
+		
+		if(electricityData.get(i).getCycle_Number() == CYCLE_INDEX)
+		{
+			currentByCycle.add(electricityData.get(i));
+		}
+		
+		
 	}
 	
+	
+	
+	
+	for(int i = 0; i < currentByCycle.size();)
+	{
+		if(currentByCycle.get(i).getCurrent() <= 0)
+		{
+			currentByCycle.remove(i);
+		}
+		else
+		{
+			i++;
+		}
+	}
+	
+	
+	
+
+	for(int i = 0; i < currentByCycle.size(); i ++)
+	{
+
+		double chargeGet = (currentByCycle.get(i).getCharge_Capacity()) * 1000 ;
+
+		double charge = chargeGet/mass;
+
+		//System.out.println(charge);
+
+		double voltage = currentByCycle.get(i).getVoltage();
+
+		XYChart.Data data = new XYChart.Data(charge,voltage);
+		Rectangle rect = new Rectangle(0,0);
+		rect.setVisible(false);
+		data.setNode(rect);
+		series.getData().add(data);
+
+	}
+
+
 }
+
+
 
 
 
@@ -210,7 +253,7 @@ lineChart.getData().addAll(series);
 
 
 
-		}
+		
 return lineChart;
 	}
 	

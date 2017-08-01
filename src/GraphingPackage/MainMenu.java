@@ -40,9 +40,32 @@ public class MainMenu extends Application
 	//Instance Variables
 	
 	public File fileName;
+	protected double Cycle1;
+	protected double Cycle2;
+	protected double Cycle3;
 	
 	
 	
+	public double getCycle1() {
+		return Cycle1;
+	}
+	public void setCycle1(double cycle1) {
+		Cycle1 = cycle1;
+	}
+	public double getCycle2() {
+		return Cycle2;
+	}
+	public void setCycle2(double cycle2) {
+		Cycle2 = cycle2;
+	}
+	public double getCycle3() {
+		return Cycle3;
+	}
+	public void setCycle3(double cycle3) {
+		Cycle3 = cycle3;
+	}
+
+
 	public FileChoose fileChooser = new FileChoose();
 		
 	
@@ -113,6 +136,7 @@ public class MainMenu extends Application
 
       
 
+
         	 double cycleOne = toCycleDouble(insertCycle1.getText());
              double cycleTwo = toCycleDouble(insertCycle2.getText());
              double cycleThree = toCycleDouble(insertCycle3.getText());
@@ -129,7 +153,6 @@ public class MainMenu extends Application
         	visiblePause.play();
         	
         	double mass = toMassDouble(insertMass.getText());
-
         	
 
            
@@ -235,7 +258,11 @@ public class MainMenu extends Application
        	
        	pane.setLeft(midinserts);
        	midinserts.setPadding(new Insets(20, 20, 20, 20));
+/*
        	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass, pseudoSave, saveLabel,Cycles,insertCycle1,insertCycle2,insertCycle3);
+*/
+       	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass,Cycles, insertCycle1, insertCycle2, insertCycle3, pseudoSave, saveLabel);
+
        	
        Scene scene = new Scene(pane, 700, 600);
        
