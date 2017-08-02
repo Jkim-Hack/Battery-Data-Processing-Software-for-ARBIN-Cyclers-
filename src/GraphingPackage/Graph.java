@@ -16,6 +16,9 @@ public class Graph
 	protected ExcelReader excelReader;
 	protected List<Data> electricityData;
 	protected List<StatData> electricityData1;
+	protected double cycleOne;
+	protected double cycleTwo;
+	protected double cycleThree;
 	
 	
 	public Graph(File fileName, double value, String title, double cycleOne, double cycleTwo, double cycleThree)
@@ -35,8 +38,10 @@ public class Graph
 		}
 		
 		this.mass = value;
-		
 		this.title = title;
+		this.cycleOne = cycleOne;
+		this.cycleTwo = cycleTwo;
+		this.cycleThree = cycleThree;
 	}
 	
 	public String getTitle() {
@@ -67,6 +72,36 @@ public class Graph
 		
 	}
 	
+	public double getCycleOne()
+	{
+		return cycleOne;
+	}
+
+	public void setCycleOne(double cycleOne) 
+	{
+		this.cycleOne = cycleOne;
+	}
+
+	public double getCycleTwo()
+	{
+		return cycleTwo;
+	}
+
+	public void setCycleTwo(double cycleTwo) 
+	{
+		this.cycleTwo = cycleTwo;
+	}
+
+	public double getCycleThree()
+	{
+		return cycleThree;
+	}
+
+	public void setCycleThree(double cycleThree)
+	{
+		this.cycleThree = cycleThree;
+	}
+
 	public LineChart<Number, Number> display()
 	{
 		

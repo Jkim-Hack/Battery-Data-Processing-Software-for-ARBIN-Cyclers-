@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 public class ExcelReader 
 {
 	
@@ -20,11 +21,6 @@ public class ExcelReader
 	protected double cycleTwo;
 	protected double cycleThree;
 
-	
-
-	
-	
-	
 	public File getFileName()
 	{
 		return fileName;
@@ -45,8 +41,6 @@ public class ExcelReader
 	{
 		this.data = data;
 	}
-	
-	
 	
 	public double getCycleOne()
 	{

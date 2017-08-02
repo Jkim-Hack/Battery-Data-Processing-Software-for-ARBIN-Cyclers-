@@ -126,7 +126,7 @@ return LeastCycle;
 		
 //defining the axes
 final NumberAxis yAxis = new NumberAxis(0, FindGreatestCoul() + (FindGreatestCoul()/4), (FindGreatestCoul())/5);
-final NumberAxis xAxis = new NumberAxis(0, FindGreatestCycle() + 1, 1);
+final NumberAxis xAxis = new NumberAxis(0, FindGreatestCycle() + 1, 10);
 yAxis.setLabel("Capacity (mAh/g)");
 xAxis.setLabel("Cycle Number");
 
@@ -135,7 +135,7 @@ xAxis.setLabel("Cycle Number");
 final LineChart<Number,Number> lineChart = 
         new LineChart<Number,Number>(xAxis,yAxis);
         
-lineChart.setTitle("Coulombic Efficiency vs Cycle Index");
+lineChart.setTitle("Coulombic Efficiency vs Cycle Number");
 
 
 
@@ -143,7 +143,7 @@ lineChart.setTitle("Coulombic Efficiency vs Cycle Index");
 
 XYChart.Series series = new XYChart.Series();
 series.nodeProperty();
-series.setName("");
+series.setName("All Cycles");
 //populating the series with data
 
 if(excelReader!= null)

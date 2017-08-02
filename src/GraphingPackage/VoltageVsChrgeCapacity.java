@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class VoltageVsChrgeCapacity extends Graph
 {
-	private int CYCLE_INDEX = 1;
+	
 
 	public VoltageVsChrgeCapacity(File fileName, double value, String title,  double cycleOne, double cycleTwo, double cycleThree) 
 	{
@@ -26,7 +26,9 @@ public class VoltageVsChrgeCapacity extends Graph
 		
 	}
 	
-	
+	private double CYCLE_INDEX = cycleOne;
+	private double CYCLE_INDEX1 = cycleTwo;
+	private double CYCLE_INDEX2 = cycleThree;
 	
 	public double FindGreatestCC()
 	{
@@ -182,7 +184,7 @@ lineChart.setTitle("Voltage vs Charge Capacity");
 //defining a series
 
 XYChart.Series series = new XYChart.Series();
-series.setName("Charge");
+series.setName("Cycle " + cycleOne);
 series.nodeProperty();
 
 //populating the series with data
@@ -244,13 +246,136 @@ if(excelReader != null)
 
 }
 
+XYChart.Series series1 = new XYChart.Series();
+series1.setName("Cycle " + cycleTwo);
+series1.nodeProperty();
+
+//populating the series with data
+
+if(excelReader != null)
+{
+	
+	
+	
+	List<Data> currentByCycle = new ArrayList<Data>();
+	for(int i = 0; i < electricityData.size(); i++)
+	{
+		
+		if(electricityData.get(i).getCycle_Number() == CYCLE_INDEX1)
+		{
+			currentByCycle.add(electricityData.get(i));
+		}
+		
+		
+	}
+	
+	
+	
+	
+	for(int i = 0; i < currentByCycle.size();)
+	{
+		if(currentByCycle.get(i).getCurrent() <= 0)
+		{
+			currentByCycle.remove(i);
+		}
+		else
+		{
+			i++;
+		}
+	}
+	
+	
+	
+
+	for(int i = 0; i < currentByCycle.size(); i ++)
+	{
+
+		double chargeGet = (currentByCycle.get(i).getCharge_Capacity()) * 1000 ;
+
+		double charge = chargeGet/mass;
+
+		//System.out.println(charge);
+
+		double voltage = currentByCycle.get(i).getVoltage();
+
+		XYChart.Data data1 = new XYChart.Data(charge,voltage);
+		Rectangle rect = new Rectangle(0,0);
+		rect.setVisible(false);
+		data1.setNode(rect);
+		series1.getData().add(data1);
+
+	}
+
+
+}
+
+XYChart.Series series2 = new XYChart.Series();
+series2.setName("Cycle " + cycleThree);
+series2.nodeProperty();
+
+//populating the series with data
+
+if(excelReader != null)
+{
+	
+	
+	
+	List<Data> currentByCycle = new ArrayList<Data>();
+	for(int i = 0; i < electricityData.size(); i++)
+	{
+		
+		if(electricityData.get(i).getCycle_Number() == CYCLE_INDEX2)
+		{
+			currentByCycle.add(electricityData.get(i));
+		}
+		
+		
+	}
+	
+	
+	
+	
+	for(int i = 0; i < currentByCycle.size();)
+	{
+		if(currentByCycle.get(i).getCurrent() <= 0)
+		{
+			currentByCycle.remove(i);
+		}
+		else
+		{
+			i++;
+		}
+	}
+	
+	
+	
+
+	for(int i = 0; i < currentByCycle.size(); i ++)
+	{
+
+		double chargeGet = (currentByCycle.get(i).getCharge_Capacity()) * 1000 ;
+
+		double charge = chargeGet/mass;
+
+		//System.out.println(charge);
+
+		double voltage = currentByCycle.get(i).getVoltage();
+
+		XYChart.Data data2 = new XYChart.Data(charge,voltage);
+		Rectangle rect = new Rectangle(0,0);
+		rect.setVisible(false);
+		data2.setNode(rect);
+		series2.getData().add(data2);
+
+	}
+
+
+}
 
 
 
 
-lineChart.getData().addAll(series);
-
-
+lineChart.getData().addAll(series, series1, series2);
 
 
 		

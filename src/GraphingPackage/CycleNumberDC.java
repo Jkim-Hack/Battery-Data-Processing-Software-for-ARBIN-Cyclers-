@@ -138,14 +138,14 @@ xAxis.setLabel("Cycle Number");
 final LineChart<Number,Number> lineChart = 
         new LineChart<Number,Number>(xAxis,yAxis);
         
-lineChart.setTitle("Discharge Capacity vs Cycle Index");
+lineChart.setTitle("Discharge Capacity vs Cycle Number");
 
 
 //defining a series
 
 XYChart.Series series = new XYChart.Series();
 series.nodeProperty();
-series.setName("");
+series.setName("All Cycles");
 //populating the series with data
 
 if(excelReader!= null)
