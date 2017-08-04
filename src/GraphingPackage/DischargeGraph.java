@@ -136,13 +136,6 @@ return leastDoubleV;
 	{
 		
 		
-	//Secondary stage is called for the graphs	
-/*System.out.println(FindLeastV());
-System.out.println(FindLeastDC());
-System.out.println(FindGreatestDC());
-System.out.println(FindGreatestV());
-*/
-		
 //defining the axes
 final NumberAxis xAxis = new NumberAxis(FindLeastDC(), FindGreatestDC() + (FindGreatestDC()/4), (FindGreatestDC())/6);
 final NumberAxis yAxis = new NumberAxis(0, FindGreatestV() + (FindGreatestV()/4), (FindGreatestV())/6);

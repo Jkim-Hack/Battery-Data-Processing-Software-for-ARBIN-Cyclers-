@@ -24,8 +24,8 @@ public class FileChoose
 	{	
 
 	FileChooser fileChooser = new FileChooser();
-    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XLS Files (*.xls)", "*.xls");
-    fileChooser.getExtensionFilters().add(extFilter);
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XLS Files (*.xls)", "*.xls"));
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XLSX Files (*.xlsx)", "*.xlsx"));
     File fileName = fileChooser.showOpenDialog(primaryStage);   
 
     if(fileName != null)
