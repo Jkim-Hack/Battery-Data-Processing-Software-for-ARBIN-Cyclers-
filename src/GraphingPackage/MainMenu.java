@@ -1,7 +1,9 @@
 package GraphingPackage;
 
  
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +63,7 @@ public class MainMenu extends Application
         midinserts.setSpacing(10);
         GraphChoose.setSpacing(20);
         
-        Label labelMass = new Label("Insert Mass: ");
+        Label labelMass = new Label("Insert Mass in Grams (g): ");
         labelMass.setFont(Font.font ("Segoe UI", 12));
         
         Label saveLabel = new Label(" Saved!");
@@ -103,10 +105,22 @@ public class MainMenu extends Application
         Button pseudoSave = new Button("Apply");
         
         
+        
         pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
         {
-
-        	 isDouble(insertMass, insertMass.getText());
+        	
+        	
+        	saveLabel.setVisible(false);
+        	PauseTransition visiblePause = new PauseTransition(
+        	        Duration.seconds(2)
+        	);
+        	visiblePause.setOnFinished(
+        	        event -> saveLabel.setVisible(true)
+        	);
+        	visiblePause.play();
+        	
+        	
+        	isDouble(insertMass, insertMass.getText());
 
 
         	 long start = System.currentTimeMillis();
@@ -121,14 +135,7 @@ public class MainMenu extends Application
 
         	
 
-        	saveLabel.setVisible(true);
-        	PauseTransition visiblePause = new PauseTransition(
-        	        Duration.seconds(180)
-        	);
-        	visiblePause.setOnFinished(
-        	        event -> saveLabel.setVisible(false)
-        	);
-        	visiblePause.play();
+        	
         	
         	
         	double mass = toMassDouble(insertMass.getText());
@@ -139,15 +146,18 @@ public class MainMenu extends Application
         	 List<Graph> graphs = new ArrayList<Graph>();
              graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap ,cycleOne,cycleTwo,cycleThree));
              graphs.add(new DischargeGraph(fileName, mass, dischargeTitle,cycleOne,cycleTwo,cycleThree));
-             graphs.add(new CycleNumberDC(fileName, mass, "Filler",cycleOne,cycleTwo,cycleThree));
-             graphs.add(new CoulombicEff(fileName, mass, "Fill", cycleOne,cycleTwo,cycleThree));
+             graphs.add(new CycleNumberDC(fileName, mass, "Discharge Capacity vs Cycle Number",cycleOne,cycleTwo,cycleThree));
+             graphs.add(new CoulombicEff(fileName, mass, "Coulombic Efficiency vs Cycle Number", cycleOne,cycleTwo,cycleThree));
              
-             
-           
+             box1.getItems().clear();
+             box2.getItems().clear();
+             box3.getItems().clear();  
              
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  
+           
+             
              long end = System.currentTimeMillis();
              System.out.println(end - start);
         });
@@ -181,22 +191,33 @@ public class MainMenu extends Application
       
        Menu help = new Menu("Help");
        Menu about = new Menu("Contact");
-       Menu htu = new Menu("How to use");
-        
+       MenuItem htu = new MenuItem("How to Use");
+       
        about.getItems().addAll( new MenuItem("Main Developer - John Kim - johnkim1108@gmail.com"),
     		   					new MenuItem("Helper - Chris Yao - chrisyao2@gmail.com"));
        
-       help.getItems().add(about);
+       help.getItems().addAll(htu, about);
+       
+       htu.setOnAction((ActionEvent event) -> {
+    	  
+    	   File howtouse = new File("HowToUse.txt");
+    	   try {
+			Desktop.getDesktop().open(howtouse);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+       });
        
        ddMenu.getMenus().addAll(files, help);
        
     	//Button for the graph window created
     	
     	Button createGraph = new Button();
-    	createGraph.setText("Create Graph");
+    	createGraph.setText("Create Graphs");
     	createGraph.setFont(Font.font ("Segoe UI", 16));
     	createGraph.setOnAction(e -> 
     	{
+    		
     		MainGraphs graph = new MainGraphs(box1.getValue(), box2.getValue(), box3.getValue());
     		graph.displayGraphs();
     		
@@ -233,7 +254,7 @@ public class MainMenu extends Application
        	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass, Cycles, insertCycle1, insertCycle2, insertCycle3, pseudoSave, saveLabel);
 
        	
-       Scene scene = new Scene(pane, 700, 600);
+       Scene scene = new Scene(pane, 600, 497);
        
        Image icon = new Image(new File("favicon.png").toURI().toString());
        
@@ -274,7 +295,7 @@ public class MainMenu extends Application
     	double dataMass = Double.parseDouble(mass);
     	return dataMass;
     }
-    //TODO check if cycle is number
+ 
     public double toCycleDouble(String Cycle)
     {
     	double AllCycle = Double.parseDouble(Cycle);

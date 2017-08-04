@@ -108,8 +108,7 @@ public class ExcelReader
 		
 
 	
-		//use for loop here instead of while
-		System.out.println(cycleOne);
+		
 		
 		while (iterator.hasNext()) 
 		{

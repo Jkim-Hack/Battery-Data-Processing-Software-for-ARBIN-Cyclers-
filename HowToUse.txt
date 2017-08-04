@@ -1,0 +1,13 @@
+How to use (program name) :
+
+1. Start by selecting an .xls file of your choice by going to (File -> Choose File...). Once you have selected the file,
+
+the file will be shown in the box labeled "Chosen File:"
+
+2. Next, insert the mass of your choice in grams. Ex. 20
+
+3. Then, insert three cycles of your choice. Ex. 1 3 6
+
+4. Once you have selected three cycles of your choice, press the "Apply" button and wait until it says "Saved!".
+
+5. Finally select three graphs from the dropdown items labeled, "Top Pane", "Bottom Left Pane" , and "Bottom Right Pane" and press "Create Graphs".
