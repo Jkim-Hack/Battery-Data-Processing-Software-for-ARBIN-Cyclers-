@@ -26,9 +26,7 @@ public class VoltageVsChrgeCapacity extends Graph
 		
 	}
 	
-	private double CYCLE_INDEX = cycleOne;
-	private double CYCLE_INDEX1 = cycleTwo;
-	private double CYCLE_INDEX2 = cycleThree;
+	
 	
 	public double FindGreatestCC()
 	{
@@ -198,7 +196,7 @@ if(excelReader != null)
 	for(int i = 0; i < electricityData.size(); i++)
 	{
 		
-		if(electricityData.get(i).getCycle_Number() == CYCLE_INDEX)
+		if(electricityData.get(i).getCycle_Number() == cycleOne)
 		{
 			currentByCycle.add(electricityData.get(i));
 		}
@@ -261,7 +259,7 @@ if(excelReader != null)
 	for(int i = 0; i < electricityData.size(); i++)
 	{
 		
-		if(electricityData.get(i).getCycle_Number() == CYCLE_INDEX1)
+		if(electricityData.get(i).getCycle_Number() == cycleTwo)
 		{
 			currentByCycle.add(electricityData.get(i));
 		}
@@ -324,7 +322,7 @@ if(excelReader != null)
 	for(int i = 0; i < electricityData.size(); i++)
 	{
 		
-		if(electricityData.get(i).getCycle_Number() == CYCLE_INDEX2)
+		if(electricityData.get(i).getCycle_Number() == cycleThree)
 		{
 			currentByCycle.add(electricityData.get(i));
 		}
