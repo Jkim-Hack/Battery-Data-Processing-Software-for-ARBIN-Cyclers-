@@ -141,7 +141,10 @@ public class MainMenu extends Application
              graphs.add(new DischargeGraph(fileName, mass, dischargeTitle,cycleOne,cycleTwo,cycleThree));
              graphs.add(new CycleNumberDC(fileName, mass, "Filler",cycleOne,cycleTwo,cycleThree));
              graphs.add(new CoulombicEff(fileName, mass, "Fill", cycleOne,cycleTwo,cycleThree));
-
+             
+             
+           
+             
              box1.getItems().addAll(graphs);
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  

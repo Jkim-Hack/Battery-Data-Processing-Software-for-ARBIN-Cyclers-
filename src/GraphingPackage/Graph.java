@@ -114,4 +114,12 @@ public class Graph
 		
 		
 	}
+	
+	
+	@Override
+	public String toString()
+	{
+		return title;
+	}
+
 }

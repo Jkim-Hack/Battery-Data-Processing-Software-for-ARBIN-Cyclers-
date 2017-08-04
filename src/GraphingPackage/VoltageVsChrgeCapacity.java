@@ -380,4 +380,5 @@ lineChart.getData().addAll(series, series1, series2);
 return lineChart;
 	}
 	
+		
 }
