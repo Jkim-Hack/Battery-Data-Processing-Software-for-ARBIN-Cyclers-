@@ -75,13 +75,13 @@ public class MainMenu extends Application
        
         
         //Creates Drop Down Boxes 
-        Label topLabel = new Label("Top Pane 							    ");
+        Label topLabel = new Label("Bottom Pane 							    ");
         ChoiceBox<Graph> box1 = new ChoiceBox<Graph>();
         
-        Label botLeft = new Label("Bottom Left Pane 						    ");
+        Label botLeft = new Label("Top Left Pane 						    	    ");
         ChoiceBox<Graph> box2 = new ChoiceBox<Graph>();
         
-        Label botRight = new Label("Bottom Right Pane 						    ");
+        Label botRight = new Label("Top Right Pane 						    ");
         ChoiceBox<Graph> box3 = new ChoiceBox<Graph>();
         
        

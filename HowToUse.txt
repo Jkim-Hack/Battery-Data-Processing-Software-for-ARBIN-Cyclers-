@@ -10,4 +10,4 @@ the file will be shown in the box labeled "Chosen File:"
 
 4. Once you have selected three cycles of your choice, press the "Apply" button and wait until it says "Saved!".
 
-5. Finally select three graphs from the dropdown items labeled, "Top Pane", "Bottom Left Pane" , and "Bottom Right Pane" and press "Create Graphs".
+5. Finally select three graphs from the dropdown items labeled, "Bottom Pane", "Top Left Pane" , and "Top Right Pane" and press "Create Graphs".
