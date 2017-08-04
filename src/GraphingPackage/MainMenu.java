@@ -102,6 +102,7 @@ public class MainMenu extends Application
         TextField insertMass = new TextField();
         Button pseudoSave = new Button("Apply");
         
+        
         pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
         {
 
@@ -122,12 +123,13 @@ public class MainMenu extends Application
 
         	saveLabel.setVisible(true);
         	PauseTransition visiblePause = new PauseTransition(
-        	        Duration.seconds(10)
+        	        Duration.seconds(180)
         	);
         	visiblePause.setOnFinished(
         	        event -> saveLabel.setVisible(false)
         	);
         	visiblePause.play();
+        	
         	
         	double mass = toMassDouble(insertMass.getText());
         	
@@ -135,7 +137,7 @@ public class MainMenu extends Application
         	String dischargeTitle = "Voltage vs Discharge Capacity";
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
-             graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap,cycleOne,cycleTwo,cycleThree));
+             graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap ,cycleOne,cycleTwo,cycleThree));
              graphs.add(new DischargeGraph(fileName, mass, dischargeTitle,cycleOne,cycleTwo,cycleThree));
              graphs.add(new CycleNumberDC(fileName, mass, "Filler",cycleOne,cycleTwo,cycleThree));
              graphs.add(new CoulombicEff(fileName, mass, "Fill", cycleOne,cycleTwo,cycleThree));
@@ -176,6 +178,7 @@ public class MainMenu extends Application
       
        Menu help = new Menu("Help");
        Menu about = new Menu("Contact");
+       Menu htu = new Menu("How to use");
         
        about.getItems().addAll( new MenuItem("Main Developer - John Kim - johnkim1108@gmail.com"),
     		   					new MenuItem("Helper - Chris Yao - chrisyao2@gmail.com"));
