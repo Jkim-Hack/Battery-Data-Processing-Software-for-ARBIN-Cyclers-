@@ -1,7 +1,9 @@
 package GraphingPackage;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,7 +11,12 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import org.slf4j.LoggerFactory;
+
+import com.monitorjbl.xlsx.StreamingReader;
 
 public class ExcelReader 
 {
@@ -94,9 +101,13 @@ public class ExcelReader
 		//System.out.println(fileName.getPath());
 
 		
-		XSSFWorkbook workbook = new XSSFWorkbook(fileName.getPath());
+		File is = new File(fileName.getPath());
+		Workbook workbook = StreamingReader.builder()
+		        .rowCacheSize(63990)   
+		        .bufferSize(4096)     
+		        .open(is);            
 		Sheet firstSheet = workbook.getSheetAt(1);
-		Sheet secondSheet = workbook.getSheetAt(2);
+		Sheet secondSheet = workbook.getSheetAt(4);
 		Iterator<Row> iterator = firstSheet.iterator();
 		iterator.next();
 		
