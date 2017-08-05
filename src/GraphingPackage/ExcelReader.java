@@ -103,7 +103,7 @@ public class ExcelReader
 		
 		File is = new File(fileName.getPath());
 		Workbook workbook = StreamingReader.builder()
-		        .rowCacheSize(63990)   
+		        .rowCacheSize(64000)   
 		        .bufferSize(4096)     
 		        .open(is);            
 		Sheet firstSheet = workbook.getSheetAt(1);
@@ -118,9 +118,6 @@ public class ExcelReader
 		List<Double> container1;
 		
 
-	
-		
-		
 		while (iterator.hasNext()) 
 		{
 			Row nextRow = iterator.next();
