@@ -119,6 +119,13 @@ return LeastCycle;
 	public LineChart<Number,Number> display()
 	{
 		
+		
+	//Secondary stage is called for the graphs	
+//System.out.println(FindLeastCycle());
+//System.out.println(FindLeastDC());
+//System.out.println(FindGreatestDC());
+//System.out.println(FindGreatestCycle());
+		
 	
 //defining the axes
 final NumberAxis yAxis = new NumberAxis(FindLeastDC(), FindGreatestDC() + (FindGreatestDC()/4), (FindGreatestDC())/5);

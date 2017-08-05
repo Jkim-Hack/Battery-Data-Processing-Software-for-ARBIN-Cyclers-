@@ -146,6 +146,24 @@ return leastDoubleV;
 
 	public LineChart<Number,Number> display()
 	{		
+	
+
+	
+
+	
+
+// DISPLAY
+// DISPLAY
+
+	
+
+	
+/*System.out.println(FindLeastV());
+System.out.println(FindLeastCC());
+System.out.println(FindGreatestCC());
+System.out.println(FindGreatestV());
+*/
+
 
 //defining the axes
 final NumberAxis xAxis = new NumberAxis(FindLeastCC(), FindGreatestCC() + (FindGreatestCC()/4), (FindGreatestCC())/6);

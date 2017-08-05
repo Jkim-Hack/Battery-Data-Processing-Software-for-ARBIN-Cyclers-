@@ -118,7 +118,11 @@ return LeastCycle;
 	{
 		
 		
-	
+	//Secondary stage is called for the graphs	
+//System.out.println(FindLeastCycle());
+//System.out.println(FindLeastCoul());
+//System.out.println(FindGreatestCoul());
+//System.out.println(FindGreatestCycle());
 		
 //defining the axes
 final NumberAxis yAxis = new NumberAxis(0, FindGreatestCoul() + (FindGreatestCoul()/4), (FindGreatestCoul())/5);

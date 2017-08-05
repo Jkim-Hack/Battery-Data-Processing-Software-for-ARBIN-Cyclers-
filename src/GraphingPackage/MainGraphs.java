@@ -94,7 +94,7 @@ public class MainGraphs
 		
 		Menu file = new Menu("File"); 
 		
-		MenuItem screenshot = new MenuItem("Save as Image...");
+		MenuItem screenshot = new MenuItem("Save Image...");
 			
 			screenshot.setOnAction((ActionEvent event) -> { 
 				WritableImage image = borderPane.snapshot(new SnapshotParameters(), null);
@@ -108,7 +108,7 @@ public class MainGraphs
 			        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", filech);
 			    } catch (IOException e) {
 			       
-			    	}
+			    }
 	            }
 			});
 		
