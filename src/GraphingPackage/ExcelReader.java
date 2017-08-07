@@ -27,6 +27,8 @@ public class ExcelReader
 	protected double cycleOne;
 	protected double cycleTwo;
 	protected double cycleThree;
+	protected int Channel;
+	protected int Stat;
 
 	public File getFileName()
 	{
@@ -79,13 +81,16 @@ public class ExcelReader
 		this.cycleThree = cycleThree;
 	}
 
-	public ExcelReader(File fileName, double cycleOne, double cycleTwo, double cycleThree) throws IOException
+	public ExcelReader(File fileName, double cycleOne, double cycleTwo, double cycleThree, int Channel, int Stat) throws IOException
 	{
 		this.fileName = fileName;
 		
 		this.cycleOne = cycleOne;
 		this.cycleTwo = cycleTwo;
 		this.cycleThree = cycleThree;
+		
+		this.Channel = Channel;
+		this.Stat = Stat;
 		
 		data = new SheetData();
 		
@@ -104,15 +109,25 @@ public class ExcelReader
 		File is = new File(fileName.getPath());
 		Workbook workbook = StreamingReader.builder()
 		        .rowCacheSize(64000)   
-		        .bufferSize(4096)     
+		        .bufferSize(3072)     
 		        .open(is);            
+		
 		Sheet firstSheet = workbook.getSheetAt(1);
-		Sheet secondSheet = workbook.getSheetAt(4);
+		Sheet secondSheet = workbook.getSheetAt(2);
+		Sheet thirdSheet = workbook.getSheetAt(3);
+		Sheet statSheet = workbook.getSheetAt(4);
+		
 		Iterator<Row> iterator = firstSheet.iterator();
 		iterator.next();
 		
-		Iterator<Row> iterator2 = secondSheet.iterator();
-		iterator2.next();
+		Iterator<Row> iteratortwo = secondSheet.iterator();
+		iteratortwo.next();
+		
+		Iterator<Row> iteratorthree = thirdSheet.iterator();
+		iteratorthree.next();
+		
+		Iterator<Row> iteratorstat = statSheet.iterator();
+		iteratorstat.next();
 		
 		List<Double> container;
 		List<Double> container1;
@@ -158,10 +173,89 @@ public class ExcelReader
 			
 		}
 		
-		
-		while (iterator2.hasNext()) 
+		while (iteratortwo.hasNext()) 
 		{
-			Row nextRow = iterator2.next();
+			Row nextRow = iteratortwo.next();
+			
+			container = new ArrayList<Double>();
+			
+			boolean isCycle = false;
+			
+			for(int i = 5; i <= 12; i++)
+			{
+				Cell currentCell = nextRow.getCell(i);
+				
+				double cellContent = 0;
+				
+				double cycleCell = nextRow.getCell(5).getNumericCellValue();
+				
+				switch(currentCell.getCellTypeEnum())
+				{
+					case NUMERIC: cellContent = (double)(currentCell.getNumericCellValue());
+					break;
+				}
+				
+
+				if(cycleCell == cycleOne || cycleCell == cycleTwo || cycleCell == cycleThree)
+				{
+					isCycle = true;
+					container.add(cellContent);
+				}
+					
+				
+            }
+           
+			if(isCycle)
+			{	
+				data.electrictyData.add(new Data(container));
+			}
+			
+			
+		}
+		
+		while (iteratorthree.hasNext()) 
+		{
+			Row nextRow = iteratorthree.next();
+			
+			container = new ArrayList<Double>();
+			
+			boolean isCycle = false;
+			
+			for(int i = 5; i <= 12; i++)
+			{
+				Cell currentCell = nextRow.getCell(i);
+				
+				double cellContent = 0;
+				
+				double cycleCell = nextRow.getCell(5).getNumericCellValue();
+				
+				switch(currentCell.getCellTypeEnum())
+				{
+					case NUMERIC: cellContent = (double)(currentCell.getNumericCellValue());
+					break;
+				}
+				
+
+				if(cycleCell == cycleOne || cycleCell == cycleTwo || cycleCell == cycleThree)
+				{
+					isCycle = true;
+					container.add(cellContent);
+				}
+					
+				
+            }
+           
+			if(isCycle)
+			{	
+				data.electrictyData.add(new Data(container));
+			}
+			
+			
+		}
+		
+		while (iteratorstat.hasNext()) 
+		{
+			Row nextRow = iteratorstat.next();
 			
 			container1 = new ArrayList<Double>();
 			

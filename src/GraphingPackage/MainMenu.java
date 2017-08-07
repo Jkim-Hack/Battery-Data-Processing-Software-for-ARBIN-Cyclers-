@@ -93,6 +93,12 @@ public class MainMenu extends Application
         Label fileLabel = new Label("Chosen File:");
         TextField fileField = new TextField("File -> Open File...");
         
+        Label SheetField = new Label("Enter Channel Sheet Amount: ");
+        TextField SheetText = new TextField();
+        
+        Label StatField = new Label("Enter Amount of Statistic Sheets");
+        TextField StatText = new TextField();
+        
         Label Cycles = new Label("Enter Three Cycles: ");
         TextField insertCycle1 = new TextField();
         TextField insertCycle2 = new TextField();
@@ -120,24 +126,18 @@ public class MainMenu extends Application
         	visiblePause.play();
         	
         	
-        	isDouble(insertMass, insertMass.getText());
-
 
         	 long start = System.currentTimeMillis();
         	 isDouble(insertMass, insertMass.getText());
 
       
-
-
         	 double cycleOne = toCycleDouble(insertCycle1.getText());
              double cycleTwo = toCycleDouble(insertCycle2.getText());
              double cycleThree = toCycleDouble(insertCycle3.getText());
 
-        	
-
-        	
-        	
-        	
+             int Channel = toSheetInt(SheetText.getText());
+             int Stat = toSheetInt(StatText.getText());
+             
         	double mass = toMassDouble(insertMass.getText());
         	
         	String ChargeCap = "Voltage vs Charge Capacity";
@@ -238,7 +238,7 @@ public class MainMenu extends Application
        	createGraph.setPrefWidth(250);
        	createGraph.setPrefHeight(70);
        	
-       	pane.setCenter(GraphChoose);
+       	pane.setRight(GraphChoose);
        	GraphChoose.setPadding(new Insets(20,20,20,20));
        	GraphChoose.setAlignment(Pos.TOP_RIGHT);
        	GraphChoose.getChildren().addAll(topLabel,box1, botLeft, box2, botRight, box3);
@@ -294,6 +294,12 @@ public class MainMenu extends Application
     {
     	double dataMass = Double.parseDouble(mass);
     	return dataMass;
+    }
+    
+    public int toSheetInt(String number)
+    {
+    	int sheet = Integer.parseInt(number);
+    	return sheet;
     }
  
     public double toCycleDouble(String Cycle)
