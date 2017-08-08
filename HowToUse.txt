@@ -1,6 +1,6 @@
-How to use (program name) :
+How to use Battery Data Processing Software (Dedicated to ARBIN Cycler) :
 
-1. Start by selecting an .xls file of your choice by going to (File -> Choose File...). Once you have selected the file,
+1. Start by selecting an .xls (or .xlsx) file of your choice by going to (File -> Choose File...). Once you have selected the file,
 
 the file will be shown in the box labeled "Chosen File:"
 

@@ -266,7 +266,7 @@ public class MainMenu extends Application
        Image icon = new Image(new File("favicon.png").toURI().toString());
        
         primaryStage.getIcons().add(icon);
-        primaryStage.setTitle("Grapher");
+        primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler)");
         primaryStage.setScene(scene);
         primaryStage.show();
          
