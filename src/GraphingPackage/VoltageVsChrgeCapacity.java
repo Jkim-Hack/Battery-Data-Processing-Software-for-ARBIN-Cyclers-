@@ -209,7 +209,7 @@ if(excelReader != null)
 	
 	for(int i = 0; i < currentByCycle.size();)
 	{
-		if(currentByCycle.get(i).getCurrent() <= 0)
+		if(currentByCycle.get(i).getCurrent() == 0)
 		{
 			currentByCycle.remove(i);
 		}
@@ -228,16 +228,22 @@ if(excelReader != null)
 		double chargeGet = (currentByCycle.get(i).getCharge_Capacity()) * 1000 ;
 
 		double charge = chargeGet/mass;
+		
+		double DischargeGet = (currentByCycle.get(i).getDischarge_Capacity()) * 1000 ;
+
+		double Discharge = DischargeGet/mass;
+
 
 		//System.out.println(charge);
 
 		double voltage = currentByCycle.get(i).getVoltage();
 
 		XYChart.Data data = new XYChart.Data(charge,voltage);
+		XYChart.Data dataDis = new XYChart.Data(Discharge, voltage);
 		Rectangle rect = new Rectangle(0,0);
 		rect.setVisible(false);
 		data.setNode(rect);
-		series.getData().add(data);
+		series.getData().addAll(data, dataDis);
 
 	}
 
@@ -272,7 +278,7 @@ if(excelReader != null)
 	
 	for(int i = 0; i < currentByCycle.size();)
 	{
-		if(currentByCycle.get(i).getCurrent() <= 0)
+		if(currentByCycle.get(i).getCurrent() == 0)
 		{
 			currentByCycle.remove(i);
 		}
@@ -292,15 +298,21 @@ if(excelReader != null)
 
 		double charge = chargeGet/mass;
 
+		double DischargeGet = (currentByCycle.get(i).getDischarge_Capacity()) * 1000 ;
+
+		double Discharge = DischargeGet/mass;
+
+		
 		//System.out.println(charge);
 
 		double voltage = currentByCycle.get(i).getVoltage();
 
 		XYChart.Data data1 = new XYChart.Data(charge,voltage);
+		XYChart.Data data1Dis = new XYChart.Data(Discharge,voltage);
 		Rectangle rect = new Rectangle(0,0);
 		rect.setVisible(false);
 		data1.setNode(rect);
-		series1.getData().add(data1);
+		series1.getData().addAll(data1, data1Dis);
 
 	}
 
@@ -335,7 +347,7 @@ if(excelReader != null)
 	
 	for(int i = 0; i < currentByCycle.size();)
 	{
-		if(currentByCycle.get(i).getCurrent() <= 0)
+		if(currentByCycle.get(i).getCurrent() == 0)
 		{
 			currentByCycle.remove(i);
 		}
@@ -355,15 +367,20 @@ if(excelReader != null)
 
 		double charge = chargeGet/mass;
 
+		double DischargeGet = (currentByCycle.get(i).getDischarge_Capacity()) * 1000 ;
+
+		double Discharge = DischargeGet/mass;
+		
 		//System.out.println(charge);
 
 		double voltage = currentByCycle.get(i).getVoltage();
 
 		XYChart.Data data2 = new XYChart.Data(charge,voltage);
+		XYChart.Data data2Dis = new XYChart.Data(Discharge,voltage);
 		Rectangle rect = new Rectangle(0,0);
 		rect.setVisible(false);
 		data2.setNode(rect);
-		series2.getData().add(data2);
+		series2.getData().addAll(data2, data2Dis);
 
 	}
 
