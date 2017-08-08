@@ -110,28 +110,21 @@ public class ExcelReader
 		Workbook workbook = StreamingReader.builder()
 		        .rowCacheSize(64000)   
 		        .bufferSize(3072)     
-		        .open(is);            
+		        .open(is);         
 		
-		Sheet firstSheet = workbook.getSheetAt(1);
-		Sheet secondSheet = workbook.getSheetAt(2);
-		Sheet thirdSheet = workbook.getSheetAt(3);
-		Sheet statSheet = workbook.getSheetAt(4);
+		List<Double> container;
+		List<Double> container1;   
+		
+		
+		int j;
+		for(j = 1; j>=Channel; j++) {
+		
+		Sheet firstSheet = workbook.getSheetAt(j);
+		
 		
 		Iterator<Row> iterator = firstSheet.iterator();
 		iterator.next();
-		
-		Iterator<Row> iteratortwo = secondSheet.iterator();
-		iteratortwo.next();
-		
-		Iterator<Row> iteratorthree = thirdSheet.iterator();
-		iteratorthree.next();
-		
-		Iterator<Row> iteratorstat = statSheet.iterator();
-		iteratorstat.next();
-		
-		List<Double> container;
-		List<Double> container1;
-		
+	
 
 		while (iterator.hasNext()) 
 		{
@@ -173,85 +166,15 @@ public class ExcelReader
 			
 		}
 		
-		while (iteratortwo.hasNext()) 
-		{
-			Row nextRow = iteratortwo.next();
-			
-			container = new ArrayList<Double>();
-			
-			boolean isCycle = false;
-			
-			for(int i = 5; i <= 12; i++)
-			{
-				Cell currentCell = nextRow.getCell(i);
-				
-				double cellContent = 0;
-				
-				double cycleCell = nextRow.getCell(5).getNumericCellValue();
-				
-				switch(currentCell.getCellTypeEnum())
-				{
-					case NUMERIC: cellContent = (double)(currentCell.getNumericCellValue());
-					break;
-				}
-				
-
-				if(cycleCell == cycleOne || cycleCell == cycleTwo || cycleCell == cycleThree)
-				{
-					isCycle = true;
-					container.add(cellContent);
-				}
-					
-				
-            }
-           
-			if(isCycle)
-			{	
-				data.electrictyData.add(new Data(container));
-			}
-			
-			
+		
 		}
 		
-		while (iteratorthree.hasNext()) 
-		{
-			Row nextRow = iteratorthree.next();
-			
-			container = new ArrayList<Double>();
-			
-			boolean isCycle = false;
-			
-			for(int i = 5; i <= 12; i++)
-			{
-				Cell currentCell = nextRow.getCell(i);
-				
-				double cellContent = 0;
-				
-				double cycleCell = nextRow.getCell(5).getNumericCellValue();
-				
-				switch(currentCell.getCellTypeEnum())
-				{
-					case NUMERIC: cellContent = (double)(currentCell.getNumericCellValue());
-					break;
-				}
-				
-
-				if(cycleCell == cycleOne || cycleCell == cycleTwo || cycleCell == cycleThree)
-				{
-					isCycle = true;
-					container.add(cellContent);
-				}
-					
-				
-            }
-           
-			if(isCycle)
-			{	
-				data.electrictyData.add(new Data(container));
-			}
-			
-			
-		}
+		Sheet statSheet = workbook.getSheetAt(2);
+	
+		
+		Iterator<Row> iteratorstat = statSheet.iterator();
+		iteratorstat.next();
+		
 		
 		while (iteratorstat.hasNext()) 
 		{

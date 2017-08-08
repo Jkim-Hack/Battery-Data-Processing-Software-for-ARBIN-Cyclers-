@@ -63,6 +63,7 @@ public class MainMenu extends Application
         midinserts.setSpacing(10);
         GraphChoose.setSpacing(20);
         
+        
         Label labelMass = new Label("Insert Mass in Grams (g): ");
         labelMass.setFont(Font.font ("Segoe UI", 12));
         
@@ -93,11 +94,15 @@ public class MainMenu extends Application
         Label fileLabel = new Label("Chosen File:");
         TextField fileField = new TextField("File -> Open File...");
         
-        Label SheetField = new Label("Enter Channel Sheet Amount: ");
+        Label SheetField = new Label("Enter Amount of Channel Sheets: ");
         TextField SheetText = new TextField();
         
         Label StatField = new Label("Enter Amount of Statistic Sheets");
         TextField StatText = new TextField();
+        
+    
+        
+        
         
         Label Cycles = new Label("Enter Three Cycles: ");
         TextField insertCycle1 = new TextField();
@@ -130,13 +135,13 @@ public class MainMenu extends Application
         	 long start = System.currentTimeMillis();
         	 isDouble(insertMass, insertMass.getText());
 
-      
+        	 int Channel = toSheetInt(SheetText.getText());
+             int Stat = toSheetInt(StatText.getText());
+        	 
         	 double cycleOne = toCycleDouble(insertCycle1.getText());
              double cycleTwo = toCycleDouble(insertCycle2.getText());
              double cycleThree = toCycleDouble(insertCycle3.getText());
 
-             int Channel = toSheetInt(SheetText.getText());
-             int Stat = toSheetInt(StatText.getText());
              
         	double mass = toMassDouble(insertMass.getText());
         	
@@ -231,7 +236,7 @@ public class MainMenu extends Application
        
     	BorderPane pane = new BorderPane();
         
-       	pane.setBottom(graphVvC); 
+       	pane.setRight(graphVvC); 
        	graphVvC.setPadding(new Insets(20, 20, 20, 20));
        	graphVvC.setAlignment(Pos.BOTTOM_RIGHT);
        	graphVvC.getChildren().addAll(createGraph);
@@ -251,7 +256,8 @@ public class MainMenu extends Application
        	
        	pane.setLeft(midinserts);
        	midinserts.setPadding(new Insets(20, 20, 20, 20));
-       	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass, Cycles, insertCycle1, insertCycle2, insertCycle3, pseudoSave, saveLabel);
+       	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass, Cycles, insertCycle1, insertCycle2, insertCycle3, 
+       			SheetField, SheetText, StatField, StatText, pseudoSave, saveLabel);
 
        	
        Scene scene = new Scene(pane, 600, 497);

@@ -20,7 +20,7 @@ public class Graph
 	protected double cycleTwo;
 	protected double cycleThree;
 	protected int Channel;
-	protected int Sheet;
+	protected int Stat;
 	
 	
 	public Graph(File fileName, double value, String title, double cycleOne, double cycleTwo, double cycleThree)
@@ -29,7 +29,7 @@ public class Graph
 		
 		try
 		{
-			excelReader = new ExcelReader(fileName, cycleOne, cycleTwo, cycleThree, Channel, Sheet);
+			excelReader = new ExcelReader(fileName, cycleOne, cycleTwo, cycleThree, Channel, Stat);
 			electricityData = excelReader.getData().electrictyData;
 			electricityData1 = excelReader.getData().electrictyData1;
 		}
