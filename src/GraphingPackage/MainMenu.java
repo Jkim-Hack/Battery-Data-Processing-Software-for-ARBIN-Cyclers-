@@ -57,7 +57,6 @@ public class MainMenu extends Application
     	//Display Panes
         VBox topContainer = new VBox();
         VBox midinserts = new VBox();
-        VBox graphVvC = new VBox();
         VBox GraphChoose = new VBox();
         
         
@@ -112,7 +111,9 @@ public class MainMenu extends Application
         
        
         //Mass textfield
-       
+        Button createGraph = new Button();
+        createGraph.setDisable(true);
+        
         TextField insertMass = new TextField();
         Button pseudoSave = new Button("Apply");
         
@@ -167,7 +168,7 @@ public class MainMenu extends Application
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  
            
-             
+             createGraph.setDisable(false);
              long end = System.currentTimeMillis();
              System.out.println(end - start);
         });
@@ -222,10 +223,10 @@ public class MainMenu extends Application
        
     	//Button for the graph window created
     	
-    	Button createGraph = new Button();
+    	
     	createGraph.setText("Create Graphs");
     	createGraph.setFont(Font.font ("Segoe UI", 16));
-    	createGraph.setOnAction((ActionEvent event) -> 
+    	createGraph.setOnAction((ActionEvent event) ->
     	{
     		
     		MainGraphs graph = new MainGraphs(box1.getValue(), box2.getValue(), box3.getValue());
@@ -233,25 +234,20 @@ public class MainMenu extends Application
     		
         });
     	
-    	
+    	createGraph.setPrefWidth(250);
+       	createGraph.setPrefHeight(70);
     	
     	
     	
        //The primary master window is created
        
     	BorderPane pane = new BorderPane();
-       
-       	pane.setBottom(graphVvC); 
-       	graphVvC.setPadding(new Insets(-87,20,400,330));
-       	graphVvC.getChildren().addAll(createGraph);
-       	createGraph.setPrefWidth(250);
-       	createGraph.setPrefHeight(70);
-       
-       	
+    	
        	pane.setRight(GraphChoose);
+       	GraphChoose.setMargin(createGraph, new Insets(115,0,0,0));
        	GraphChoose.setPadding(new Insets(20,20,20,20));
        	GraphChoose.setAlignment(Pos.TOP_RIGHT);
-       	GraphChoose.getChildren().addAll(topLabel,box1, botLeft, box2, botRight, box3);
+       	GraphChoose.getChildren().addAll(topLabel,box1, botLeft, box2, botRight, box3, createGraph);
        	box1.setPrefWidth(250);
        	box2.setPrefWidth(250);
        	box3.setPrefWidth(250);

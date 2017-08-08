@@ -8,6 +8,10 @@ the file will be shown in the box labeled "Chosen File:"
 
 3. Then, insert three cycles of your choice. Ex. 1 3 6
 
-4. Once you have selected three cycles of your choice, press the "Apply" button and wait until it says "Saved!".
+4. After that, insert how many channel sheets and statistic sheets there are.
 
-5. Finally select three graphs from the dropdown items labeled, "Bottom Pane", "Top Left Pane" , and "Top Right Pane" and press "Create Graphs".
+5. Press the "Apply" button and wait until it says "Saved!".
+
+5. Finally select three graphs from the dropdown items labeled, "Bottom Pane", "Top Left Pane" , and "Top Right Pane" 
+
+and press "Create Graphs".
