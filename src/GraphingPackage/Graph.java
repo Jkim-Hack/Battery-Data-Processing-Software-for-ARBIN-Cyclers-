@@ -23,7 +23,8 @@ public class Graph
 	protected int Stat;
 	
 	
-	public Graph(File fileName, double value, String title, double cycleOne, double cycleTwo, double cycleThree)
+	public Graph(File fileName, double value, String title, 
+			double cycleOne, double cycleTwo, double cycleThree, int Channel, int Stat)
 	{
 		excelReader = null;
 		

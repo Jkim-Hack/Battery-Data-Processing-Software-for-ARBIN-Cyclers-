@@ -116,8 +116,8 @@ public class ExcelReader
 		List<Double> container1;   
 		
 		
-		int j;
-		for(j = 1; j>=Channel; j++) {
+		
+		for(int j = 1; j<=Channel; j++) {
 		
 		Sheet firstSheet = workbook.getSheetAt(j);
 		
@@ -169,7 +169,9 @@ public class ExcelReader
 		
 		}
 		
-		Sheet statSheet = workbook.getSheetAt(2);
+		int s = Channel + Stat;
+		
+		Sheet statSheet = workbook.getSheetAt(s);
 	
 		
 		Iterator<Row> iteratorstat = statSheet.iterator();
@@ -202,7 +204,7 @@ public class ExcelReader
 				data.electrictyData1.add(new StatData(container1));
 			
             }
-			
+		
 		workbook.close();
 		}
 		

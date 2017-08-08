@@ -57,8 +57,8 @@ public class MainMenu extends Application
     	//Display Panes
         VBox topContainer = new VBox();
         VBox midinserts = new VBox();
-        VBox graphVvC = new VBox();
         VBox GraphChoose = new VBox();
+        
         
         midinserts.setSpacing(10);
         GraphChoose.setSpacing(20);
@@ -111,7 +111,9 @@ public class MainMenu extends Application
         
        
         //Mass textfield
-       
+        Button createGraph = new Button();
+        createGraph.setDisable(true);
+        
         TextField insertMass = new TextField();
         Button pseudoSave = new Button("Apply");
         
@@ -149,10 +151,14 @@ public class MainMenu extends Application
         	String dischargeTitle = "Voltage vs Discharge Capacity";
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
-             graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap ,cycleOne,cycleTwo,cycleThree));
-             graphs.add(new DischargeGraph(fileName, mass, dischargeTitle,cycleOne,cycleTwo,cycleThree));
-             graphs.add(new CycleNumberDC(fileName, mass, "Discharge Capacity vs Cycle Number",cycleOne,cycleTwo,cycleThree));
-             graphs.add(new CoulombicEff(fileName, mass, "Coulombic Efficiency vs Cycle Number", cycleOne,cycleTwo,cycleThree));
+             graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap ,
+            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
+             graphs.add(new DischargeGraph(fileName, mass, dischargeTitle,
+            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
+             graphs.add(new CycleNumberDC(fileName, mass, "Discharge Capacity vs Cycle Number",
+            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
+             graphs.add(new CoulombicEff(fileName, mass, "Coulombic Efficiency vs Cycle Number",
+            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
              
              box1.getItems().clear();
              box2.getItems().clear();
@@ -162,7 +168,7 @@ public class MainMenu extends Application
              box2.getItems().addAll(graphs);
              box3.getItems().addAll(graphs);  
            
-             
+             createGraph.setDisable(false);
              long end = System.currentTimeMillis();
              System.out.println(end - start);
         });
@@ -217,10 +223,10 @@ public class MainMenu extends Application
        
     	//Button for the graph window created
     	
-    	Button createGraph = new Button();
+    	
     	createGraph.setText("Create Graphs");
     	createGraph.setFont(Font.font ("Segoe UI", 16));
-    	createGraph.setOnAction(e -> 
+    	createGraph.setOnAction((ActionEvent event) ->
     	{
     		
     		MainGraphs graph = new MainGraphs(box1.getValue(), box2.getValue(), box3.getValue());
@@ -228,25 +234,20 @@ public class MainMenu extends Application
     		
         });
     	
-    	
+    	createGraph.setPrefWidth(250);
+       	createGraph.setPrefHeight(70);
     	
     	
     	
        //The primary master window is created
        
     	BorderPane pane = new BorderPane();
-        
-       	pane.setRight(graphVvC); 
-       	graphVvC.setPadding(new Insets(20, 20, 20, 20));
-       	graphVvC.setAlignment(Pos.BOTTOM_RIGHT);
-       	graphVvC.getChildren().addAll(createGraph);
-       	createGraph.setPrefWidth(250);
-       	createGraph.setPrefHeight(70);
-       	
+    	
        	pane.setRight(GraphChoose);
+       	GraphChoose.setMargin(createGraph, new Insets(115,0,0,0));
        	GraphChoose.setPadding(new Insets(20,20,20,20));
        	GraphChoose.setAlignment(Pos.TOP_RIGHT);
-       	GraphChoose.getChildren().addAll(topLabel,box1, botLeft, box2, botRight, box3);
+       	GraphChoose.getChildren().addAll(topLabel,box1, botLeft, box2, botRight, box3, createGraph);
        	box1.setPrefWidth(250);
        	box2.setPrefWidth(250);
        	box3.setPrefWidth(250);
@@ -265,7 +266,7 @@ public class MainMenu extends Application
        Image icon = new Image(new File("favicon.png").toURI().toString());
        
         primaryStage.getIcons().add(icon);
-        primaryStage.setTitle("Grapher");
+        primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler)");
         primaryStage.setScene(scene);
         primaryStage.show();
          

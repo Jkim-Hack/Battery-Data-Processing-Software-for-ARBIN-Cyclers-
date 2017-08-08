@@ -13,9 +13,10 @@ import javafx.stage.Stage;
 public class CycleNumberDC extends Graph {
 
 	
-	public CycleNumberDC(File fileName, double value,String title,double cycleOne, double cycleTwo, double cycleThree) 
+	public CycleNumberDC(File fileName, double value,String title,
+			double cycleOne, double cycleTwo, double cycleThree, int Channel, int Stat) 
 	{
-		super(fileName, value, title,cycleOne,cycleTwo,cycleThree);	
+		super(fileName, value, title,cycleOne,cycleTwo,cycleThree, Channel, Stat);	
 	}
 	public double FindGreatestDC()
 	{

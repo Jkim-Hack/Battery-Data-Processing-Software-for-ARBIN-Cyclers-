@@ -13,9 +13,10 @@ import javafx.stage.Stage;
 public class CoulombicEff extends Graph {
 
 	
-	public CoulombicEff(File fileName, double value, String title,double cycleOne, double cycleTwo, double cycleThree) 
+	public CoulombicEff(File fileName, double value, String title,
+			double cycleOne, double cycleTwo, double cycleThree, int Channel, int Stat) 
 	{
-		super(fileName, value, title, cycleOne,cycleTwo,cycleThree);
+		super(fileName, value, title, cycleOne,cycleTwo,cycleThree, Channel, Stat);
 	
 	}
 	public double FindGreatestCoul()

@@ -14,9 +14,10 @@ public class DischargeGraph extends Graph
 {
 	
 	
-	public DischargeGraph(File fileName, double value, String title,  double cycleOne, double cycleTwo, double cycleThree) 
+	public DischargeGraph(File fileName, double value, String title, 
+			double cycleOne, double cycleTwo, double cycleThree, int Channel, int Stat) 
 	{
-		super(fileName, value, title, cycleOne,cycleTwo,cycleThree);
+		super(fileName, value, title, cycleOne,cycleTwo,cycleThree, Channel, Stat);
 	
 	}
 	
