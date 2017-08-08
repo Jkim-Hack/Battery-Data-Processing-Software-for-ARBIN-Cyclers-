@@ -116,8 +116,8 @@ public class ExcelReader
 		List<Double> container1;   
 		
 		
-		int j;
-		for(j = 1; j>=Channel; j++) {
+		
+		for(int j = 1; j<=Channel; j++) {
 		
 		Sheet firstSheet = workbook.getSheetAt(j);
 		

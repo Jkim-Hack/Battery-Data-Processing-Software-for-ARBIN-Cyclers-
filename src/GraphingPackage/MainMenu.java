@@ -60,6 +60,7 @@ public class MainMenu extends Application
         VBox graphVvC = new VBox();
         VBox GraphChoose = new VBox();
         
+        
         midinserts.setSpacing(10);
         GraphChoose.setSpacing(20);
         
@@ -149,10 +150,14 @@ public class MainMenu extends Application
         	String dischargeTitle = "Voltage vs Discharge Capacity";
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
-             graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap ,cycleOne,cycleTwo,cycleThree));
-             graphs.add(new DischargeGraph(fileName, mass, dischargeTitle,cycleOne,cycleTwo,cycleThree));
-             graphs.add(new CycleNumberDC(fileName, mass, "Discharge Capacity vs Cycle Number",cycleOne,cycleTwo,cycleThree));
-             graphs.add(new CoulombicEff(fileName, mass, "Coulombic Efficiency vs Cycle Number", cycleOne,cycleTwo,cycleThree));
+             graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap ,
+            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
+             graphs.add(new DischargeGraph(fileName, mass, dischargeTitle,
+            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
+             graphs.add(new CycleNumberDC(fileName, mass, "Discharge Capacity vs Cycle Number",
+            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
+             graphs.add(new CoulombicEff(fileName, mass, "Coulombic Efficiency vs Cycle Number",
+            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
              
              box1.getItems().clear();
              box2.getItems().clear();
@@ -220,7 +225,7 @@ public class MainMenu extends Application
     	Button createGraph = new Button();
     	createGraph.setText("Create Graphs");
     	createGraph.setFont(Font.font ("Segoe UI", 16));
-    	createGraph.setOnAction(e -> 
+    	createGraph.setOnAction((ActionEvent event) -> 
     	{
     		
     		MainGraphs graph = new MainGraphs(box1.getValue(), box2.getValue(), box3.getValue());
@@ -235,13 +240,13 @@ public class MainMenu extends Application
        //The primary master window is created
        
     	BorderPane pane = new BorderPane();
-        
-       	pane.setRight(graphVvC); 
-       	graphVvC.setPadding(new Insets(20, 20, 20, 20));
-       	graphVvC.setAlignment(Pos.BOTTOM_RIGHT);
+       
+       	pane.setBottom(graphVvC); 
+       	graphVvC.setPadding(new Insets(-87,20,400,330));
        	graphVvC.getChildren().addAll(createGraph);
        	createGraph.setPrefWidth(250);
        	createGraph.setPrefHeight(70);
+       
        	
        	pane.setRight(GraphChoose);
        	GraphChoose.setPadding(new Insets(20,20,20,20));

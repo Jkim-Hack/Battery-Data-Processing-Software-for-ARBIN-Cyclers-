@@ -19,10 +19,11 @@ public class VoltageVsChrgeCapacity extends Graph
 {
 	
 
-	public VoltageVsChrgeCapacity(File fileName, double value, String title, double cycleOne, double cycleTwo, double cycleThree) 
+	public VoltageVsChrgeCapacity(File fileName, double value, String title,
+			double cycleOne, double cycleTwo, double cycleThree, int Channel, int Stat) 
 	{
 		
-		super(fileName, value, title, cycleOne, cycleTwo, cycleThree);
+		super(fileName, value, title, cycleOne, cycleTwo, cycleThree, Channel, Stat);
 		
 	}
 	
