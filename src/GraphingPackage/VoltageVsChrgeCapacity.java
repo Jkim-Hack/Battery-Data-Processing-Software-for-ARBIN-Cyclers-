@@ -181,7 +181,6 @@ lineChart.setTitle("Voltage vs Charge Capacity");
 
 
 //defining a series
-
 XYChart.Series series = new XYChart.Series();
 series.setName("Cycle " + cycleOne);
 series.nodeProperty();
@@ -210,7 +209,7 @@ if(excelReader != null)
 	
 	for(int i = 0; i < currentByCycle.size();)
 	{
-		if(currentByCycle.get(i).getCurrent() == 0)
+		if(currentByCycle.get(i).getCurrent() <= 0)
 		{
 			currentByCycle.remove(i);
 		}
@@ -230,9 +229,7 @@ if(excelReader != null)
 
 		double charge = chargeGet/mass;
 		
-		double DischargeGet = (currentByCycle.get(i).getDischarge_Capacity()) * 1000 ;
-
-		double Discharge = DischargeGet/mass;
+		
 
 
 		//System.out.println(charge);
@@ -240,11 +237,11 @@ if(excelReader != null)
 		double voltage = currentByCycle.get(i).getVoltage();
 
 		XYChart.Data data = new XYChart.Data(charge,voltage);
-		XYChart.Data dataDis = new XYChart.Data(Discharge, voltage);
 		Rectangle rect = new Rectangle(0,0);
+		Rectangle rect1 = new Rectangle(0,0);
 		rect.setVisible(false);
 		data.setNode(rect);
-		series.getData().addAll(data, dataDis);
+		series.getData().addAll(data);
 
 	}
 
@@ -279,7 +276,7 @@ if(excelReader != null)
 	
 	for(int i = 0; i < currentByCycle.size();)
 	{
-		if(currentByCycle.get(i).getCurrent() == 0)
+		if(currentByCycle.get(i).getCurrent() <= 0)
 		{
 			currentByCycle.remove(i);
 		}
@@ -298,22 +295,16 @@ if(excelReader != null)
 		double chargeGet = (currentByCycle.get(i).getCharge_Capacity()) * 1000 ;
 
 		double charge = chargeGet/mass;
-
-		double DischargeGet = (currentByCycle.get(i).getDischarge_Capacity()) * 1000 ;
-
-		double Discharge = DischargeGet/mass;
-
 		
 		//System.out.println(charge);
 
 		double voltage = currentByCycle.get(i).getVoltage();
 
 		XYChart.Data data1 = new XYChart.Data(charge,voltage);
-		XYChart.Data data1Dis = new XYChart.Data(Discharge,voltage);
 		Rectangle rect = new Rectangle(0,0);
 		rect.setVisible(false);
 		data1.setNode(rect);
-		series1.getData().addAll(data1, data1Dis);
+		series1.getData().addAll(data1);
 
 	}
 
@@ -325,6 +316,7 @@ series2.setName("Cycle " + cycleThree);
 series2.nodeProperty();
 
 //populating the series with data
+
 
 if(excelReader != null)
 {
@@ -348,7 +340,7 @@ if(excelReader != null)
 	
 	for(int i = 0; i < currentByCycle.size();)
 	{
-		if(currentByCycle.get(i).getCurrent() == 0)
+		if(currentByCycle.get(i).getCurrent() <= 0)
 		{
 			currentByCycle.remove(i);
 		}
@@ -367,31 +359,211 @@ if(excelReader != null)
 		double chargeGet = (currentByCycle.get(i).getCharge_Capacity()) * 1000 ;
 
 		double charge = chargeGet/mass;
-
-		double DischargeGet = (currentByCycle.get(i).getDischarge_Capacity()) * 1000 ;
-
-		double Discharge = DischargeGet/mass;
 		
 		//System.out.println(charge);
 
 		double voltage = currentByCycle.get(i).getVoltage();
 
 		XYChart.Data data2 = new XYChart.Data(charge,voltage);
-		XYChart.Data data2Dis = new XYChart.Data(Discharge,voltage);
 		Rectangle rect = new Rectangle(0,0);
 		rect.setVisible(false);
 		data2.setNode(rect);
-		series2.getData().addAll(data2, data2Dis);
+		series2.getData().addAll(data2);
 
 	}
 
 
 }
 
+XYChart.Series seriesdis = new XYChart.Series();
+seriesdis.nodeProperty();
+
+//populating the series with data
+
+	if(excelReader != null)
+	{
+		
+		
+		
+		List<Data> currentByCycle = new ArrayList<Data>();
+		for(int i = 0; i < electricityData.size(); i++)
+		{
+			
+			if(electricityData.get(i).getCycle_Number() == cycleOne)
+			{
+				currentByCycle.add(electricityData.get(i));
+			}
+			
+			
+		}
+		
+		
+		
+		
+		for(int i = 0; i < currentByCycle.size();)
+		{
+			if(currentByCycle.get(i).getCurrent() >= 0)
+			{
+				currentByCycle.remove(i);
+			}
+			else
+			{
+				i++;
+			}
+		}
+		
+		
+		
+
+		for(int i = 0; i < currentByCycle.size(); i ++)
+		{
+	
+			double chargeGet = (currentByCycle.get(i).getDischarge_Capacity()) * 1000 ;
+
+			double charge = chargeGet/mass;
+
+			//System.out.println(charge);
+	
+			double voltage = currentByCycle.get(i).getVoltage();
+	
+			XYChart.Data data = new XYChart.Data(charge,voltage);
+			Rectangle rect = new Rectangle(0,0);
+			rect.setVisible(false);
+			data.setNode(rect);
+			seriesdis.getData().add(data);
+
+		}
+	}
+
+XYChart.Series series1dis = new XYChart.Series();
+series1dis.nodeProperty();
+
+//populating the series with data
+
+	if(excelReader != null)
+	{
+		
+		
+		
+		List<Data> currentByCycle = new ArrayList<Data>();
+		for(int i = 0; i < electricityData.size(); i++)
+		{
+			
+			if(electricityData.get(i).getCycle_Number() == cycleTwo)
+			{
+				currentByCycle.add(electricityData.get(i));
+			}
+			
+			
+		}
+		
+		
+		
+		
+		for(int i = 0; i < currentByCycle.size();)
+		{
+			if(currentByCycle.get(i).getCurrent() >= 0)
+			{
+				currentByCycle.remove(i);
+			}
+			else
+			{
+				i++;
+			}
+		}
+		
+		
+		
+
+		for(int i = 0; i < currentByCycle.size(); i ++)
+		{
+	
+			double chargeGet = (currentByCycle.get(i).getDischarge_Capacity()) * 1000 ;
+
+			double charge = chargeGet/mass;
+
+			//System.out.println(charge);
+	
+			double voltage = currentByCycle.get(i).getVoltage();
+	
+			XYChart.Data data1 = new XYChart.Data(charge,voltage);
+			Rectangle rect = new Rectangle(0,0);
+			rect.setVisible(false);
+			data1.setNode(rect);
+			series1dis.getData().add(data1);
+
+		}
+	
+
+	}
+
+//populating the series with data
+
+	XYChart.Series series2dis = new XYChart.Series();
+	series2dis.nodeProperty();
+	
+	//populating the series with data
+
+		if(excelReader != null)
+		{
+			
+			
+			
+			List<Data> currentByCycle = new ArrayList<Data>();
+			for(int i = 0; i < electricityData.size(); i++)
+			{
+				
+				if(electricityData.get(i).getCycle_Number() == cycleThree)
+				{
+					currentByCycle.add(electricityData.get(i));
+				}
+				
+				
+			}
+			
+			
+			
+			
+			for(int i = 0; i < currentByCycle.size();)
+			{
+				if(currentByCycle.get(i).getCurrent() >= 0)
+				{
+					currentByCycle.remove(i);
+				}
+				else
+				{
+					i++;
+				}
+			}
+			
+			
+			
+
+			for(int i = 0; i < currentByCycle.size(); i ++)
+			{
+		
+				double chargeGet = (currentByCycle.get(i).getDischarge_Capacity()) * 1000 ;
+
+				double charge = chargeGet/mass;
+
+				//System.out.println(charge);
+		
+				double voltage = currentByCycle.get(i).getVoltage();
+		
+				XYChart.Data data2 = new XYChart.Data(charge,voltage);
+				Rectangle rect = new Rectangle(0,0);
+				rect.setVisible(false);
+				data2.setNode(rect);
+				series2dis.getData().add(data2);
+
+			}
+		
+
+		}
+	
 
 
-
-lineChart.getData().addAll(series, series1, series2);
+lineChart.getData().addAll(series, series1, series2, seriesdis, series1dis, series2dis);
 
 
 		

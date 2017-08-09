@@ -120,7 +120,7 @@ public class MainGraphs
 		topMenu.getChildren().addAll(topMen);
 			
 		Scene scene = new Scene(borderPane, 1100,800);
-		
+		scene.getStylesheets().add("GraphingPackage/Chart.css");
 		stage.setScene(scene);
 		
 		stage.show();
