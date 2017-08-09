@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -15,6 +16,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -111,6 +113,21 @@ public class MainGraphs
 			    }
 	            }
 			});
+			
+			AnimatedZoomOperator zoomOperator = new AnimatedZoomOperator();
+
+			borderPane.setOnScroll(new EventHandler<ScrollEvent>() {
+			    @Override
+			    public void handle(ScrollEvent event) {
+			        double zoomFactor = 1.5;
+			        if (event.getDeltaY() <= 0) {
+			            // zoom out
+			        	zoomFactor = 1 / zoomFactor;
+			        	
+			       }
+			        zoomOperator.zoom(borderPane, zoomFactor, event.getSceneX(), event.getSceneY());
+			    }
+			});
 		
 		file.getItems().add(screenshot);
 		topMen.getMenus().addAll(file);
@@ -120,7 +137,7 @@ public class MainGraphs
 		topMenu.getChildren().addAll(topMen);
 			
 		Scene scene = new Scene(borderPane, 1100,800);
-		scene.getStylesheets().add("GraphingPackage/Chart.css");
+		//scene.getStylesheets().add("GraphingPackage/Chart.css");
 		stage.setScene(scene);
 		
 		stage.show();

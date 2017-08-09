@@ -178,7 +178,16 @@ final LineChart<Number,Number> lineChart =
         new LineChart<Number,Number>(xAxis,yAxis);
         
 lineChart.setTitle("Voltage vs Charge Capacity");
+lineChart.getStylesheets().add("GraphingPackage/Chart.css");
 
+XYChart.Series filler = new XYChart.Series();
+filler.nodeProperty();
+
+XYChart.Series filler1 = new XYChart.Series();
+filler1.nodeProperty();
+
+XYChart.Series filler2 = new XYChart.Series();
+filler2.nodeProperty();
 
 //defining a series
 XYChart.Series series = new XYChart.Series();
@@ -378,6 +387,7 @@ if(excelReader != null)
 XYChart.Series seriesdis = new XYChart.Series();
 seriesdis.nodeProperty();
 
+
 //populating the series with data
 
 	if(excelReader != null)
@@ -426,11 +436,11 @@ seriesdis.nodeProperty();
 	
 			double voltage = currentByCycle.get(i).getVoltage();
 	
-			XYChart.Data data = new XYChart.Data(charge,voltage);
+			XYChart.Data data3 = new XYChart.Data(charge,voltage);
 			Rectangle rect = new Rectangle(0,0);
 			rect.setVisible(false);
-			data.setNode(rect);
-			seriesdis.getData().add(data);
+			data3.setNode(rect);
+			seriesdis.getData().add(data3);
 
 		}
 	}
@@ -486,11 +496,11 @@ series1dis.nodeProperty();
 	
 			double voltage = currentByCycle.get(i).getVoltage();
 	
-			XYChart.Data data1 = new XYChart.Data(charge,voltage);
+			XYChart.Data data4 = new XYChart.Data(charge,voltage);
 			Rectangle rect = new Rectangle(0,0);
 			rect.setVisible(false);
-			data1.setNode(rect);
-			series1dis.getData().add(data1);
+			data4.setNode(rect);
+			series1dis.getData().add(data4);
 
 		}
 	
@@ -550,20 +560,21 @@ series1dis.nodeProperty();
 		
 				double voltage = currentByCycle.get(i).getVoltage();
 		
-				XYChart.Data data2 = new XYChart.Data(charge,voltage);
+				XYChart.Data data5 = new XYChart.Data(charge,voltage);
 				Rectangle rect = new Rectangle(0,0);
 				rect.setVisible(false);
-				data2.setNode(rect);
-				series2dis.getData().add(data2);
-
+				data5.setNode(rect);
+				series2dis.getData().add(data5);
+			
 			}
 		
 
 		}
 	
+	
 
 
-lineChart.getData().addAll(series, series1, series2, seriesdis, series1dis, series2dis);
+lineChart.getData().addAll(filler, filler1, filler2, series, series1, series2, seriesdis, series1dis, series2dis);
 
 
 		
