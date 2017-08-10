@@ -1,6 +1,5 @@
 package GraphingPackage;
 
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -18,6 +17,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -81,7 +81,8 @@ public class MainGraphs
 		BorderPane borderPane = new BorderPane();
 		
 		double start = System.currentTimeMillis();
-			
+		
+		
 		borderPane.setBottom(graphOne.display());
 		
 		borderPane.setLeft(graphTwo.display());
@@ -128,6 +129,7 @@ public class MainGraphs
 			        zoomOperator.zoom(borderPane, zoomFactor, event.getSceneX(), event.getSceneY());
 			    }
 			});
+			
 		
 		file.getItems().add(screenshot);
 		topMen.getMenus().addAll(file);
