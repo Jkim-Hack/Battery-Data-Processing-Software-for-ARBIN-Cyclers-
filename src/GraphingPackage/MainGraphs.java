@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.github.javafx.charts.zooming.ZoomManager;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -72,6 +74,7 @@ public class MainGraphs
 	}
 	
 	
+	@SuppressWarnings("restriction")
 	public void displayGraphs()
 	{
 		Stage stage = new Stage();
@@ -114,20 +117,7 @@ public class MainGraphs
 	            }
 			});
 			
-			AnimatedZoomOperator zoomOperator = new AnimatedZoomOperator();
-
-			borderPane.setOnScroll(new EventHandler<ScrollEvent>() {
-			    @Override
-			    public void handle(ScrollEvent event) {
-			        double zoomFactor = 1.5;
-			        if (event.getDeltaY() <= 0) {
-			            // zoom out
-			        	zoomFactor = 1 / zoomFactor;
-			        	
-			       }
-			        zoomOperator.zoom(borderPane, zoomFactor, event.getSceneX(), event.getSceneY());
-			    }
-			});
+			
 		
 		file.getItems().add(screenshot);
 		topMen.getMenus().addAll(file);
@@ -138,6 +128,7 @@ public class MainGraphs
 			
 		Scene scene = new Scene(borderPane, 1100,800);
 		//scene.getStylesheets().add("GraphingPackage/Chart.css");
+		new ZoomManager(borderPane, graphOne.display());
 		stage.setScene(scene);
 		
 		stage.show();
