@@ -571,15 +571,19 @@ series1dis.nodeProperty();
 
 		}
 	
+			
+		
 	
 
 
 lineChart.getData().addAll(filler, filler1, filler2, series, series1, series2, seriesdis, series1dis, series2dis);
 
 
-		
+	
 return lineChart;
+
 	}
+	
 	
 		
 }
