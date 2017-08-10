@@ -180,17 +180,28 @@ final LineChart<Number,Number> lineChart =
 lineChart.setTitle("Voltage vs Charge Capacity");
 lineChart.getStylesheets().add("GraphingPackage/Chart.css");
 
-XYChart.Series filler = new XYChart.Series();
+return lineChart;
+	}
+	
+
+public XYChart.Series filler(){ 	
+final XYChart.Series filler = new XYChart.Series();
 filler.nodeProperty();
-
-XYChart.Series filler1 = new XYChart.Series();
+return filler;
+}
+public XYChart.Series filler1(){ 	
+final XYChart.Series filler1 = new XYChart.Series();
 filler1.nodeProperty();
-
-XYChart.Series filler2 = new XYChart.Series();
+return filler1;
+}
+public XYChart.Series filler2(){ 	
+final XYChart.Series filler2 = new XYChart.Series();
 filler2.nodeProperty();
-
+return filler2;
+}
 //defining a series
-XYChart.Series series = new XYChart.Series();
+public XYChart.Series series(){ 	
+final XYChart.Series series = new XYChart.Series();
 series.setName("Cycle " + cycleOne);
 series.nodeProperty();
 
@@ -254,10 +265,13 @@ if(excelReader != null)
 
 	}
 
-
+}
+return series;
 }
 
-XYChart.Series series1 = new XYChart.Series();
+
+public XYChart.Series series1() { 	
+final XYChart.Series series1 = new XYChart.Series();
 series1.setName("Cycle " + cycleTwo);
 series1.nodeProperty();
 
@@ -317,10 +331,13 @@ if(excelReader != null)
 
 	}
 
-
+}
+return series1;
 }
 
-XYChart.Series series2 = new XYChart.Series();
+public XYChart.Series series2() { 	
+
+final XYChart.Series series2 = new XYChart.Series();
 series2.setName("Cycle " + cycleThree);
 series2.nodeProperty();
 
@@ -383,8 +400,12 @@ if(excelReader != null)
 
 
 }
+return series2;
+}
 
-XYChart.Series seriesdis = new XYChart.Series();
+public XYChart.Series seriesdis() { 	
+
+final XYChart.Series seriesdis = new XYChart.Series();
 seriesdis.nodeProperty();
 
 
@@ -444,8 +465,12 @@ seriesdis.nodeProperty();
 
 		}
 	}
+	return seriesdis;
+}
 
-XYChart.Series series1dis = new XYChart.Series();
+public XYChart.Series series1dis() { 	
+
+final XYChart.Series series1dis = new XYChart.Series();
 series1dis.nodeProperty();
 
 //populating the series with data
@@ -506,10 +531,12 @@ series1dis.nodeProperty();
 	
 
 	}
+return series1dis;	
+}
 
-//populating the series with data
+public XYChart.Series series2dis() { 	
 
-	XYChart.Series series2dis = new XYChart.Series();
+	final XYChart.Series series2dis = new XYChart.Series();
 	series2dis.nodeProperty();
 	
 	//populating the series with data
@@ -570,20 +597,20 @@ series1dis.nodeProperty();
 		
 
 		}
+		
+		return series2dis;
+		
+	}
+
+
+}
 	
 			
 		
 	
 
 
-lineChart.getData().addAll(filler, filler1, filler2, series, series1, series2, seriesdis, series1dis, series2dis);
 
-
-	
-return lineChart;
-
-	}
-	
 	
 		
-}
+
