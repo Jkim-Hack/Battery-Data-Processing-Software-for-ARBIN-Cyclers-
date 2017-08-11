@@ -35,14 +35,11 @@ public class MainGraphs
 	
 
 	
-	public MainGraphs(Graph one, Graph two, Graph three)
+	public MainGraphs(Graph one)
 	{
 		this.graphOne = one;
-		this.graphTwo = two;
-		this.graphThree = three;
+		
 	}
-	
-
 	public Graph getGraphOne() 
 	{
 		return graphOne;
@@ -77,19 +74,13 @@ public class MainGraphs
 	@SuppressWarnings("restriction")
 	public void displayGraphs()
 	{
-		Stage stage = new Stage();
-	
-		VBox topMenu = new VBox();
+		final Stage stage = new Stage();
 		
-		BorderPane Pane = new BorderPane();
+		final BorderPane Pane = new BorderPane();
 		
 		double start = System.currentTimeMillis();
 			
-		Pane.setBottom(graphOne.display());
-		
-		Pane.setRight(graphTwo.display());
-		
-		Pane.setLeft(graphThree.display());
+		Pane.setCenter(graphOne.display());
 		
 		double end = System.currentTimeMillis();
 		
@@ -120,21 +111,17 @@ public class MainGraphs
 			
 		
 		file.getItems().add(screenshot);
-		Pane.setTop(topMenu);
+		Pane.setTop(topMen);
 		topMen.getMenus().addAll(file);
-		topMenu.getChildren().addAll(topMen);
 		
+		
+		System.out.println(graphOne.series());
 		
 			
 		Scene scene = new Scene(Pane, 1100,800);
 	
 		new ZoomManager(Pane, graphOne.display(), graphOne.filler(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
 				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.series2dis());
-		
-		
-		new ZoomManager(Pane, graphTwo.display(), graphTwo.filler(), graphTwo.filler2(), graphTwo.series(),
-				graphOne.series1(), graphTwo.series2(), graphTwo.seriesdis(), graphTwo.series1dis(), graphTwo.series2dis());
-		
 		
 		stage.setScene(scene);
 		stage.show();

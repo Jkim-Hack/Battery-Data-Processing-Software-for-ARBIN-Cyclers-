@@ -142,53 +142,12 @@ lineChart.setTitle("Coulombic Efficiency vs Cycle Number");
 
 //defining a series
 
-XYChart.Series series = new XYChart.Series();
-series.nodeProperty();
-series.setName("All Cycles");
-//populating the series with data
-
-if(excelReader!= null)
-{
-
-for(int i = 0; i < electricityData1.size(); i ++)
-{
-	double cycle = electricityData1.get(i).getCycle_NumberStat();
-	
-	double CoulGet = (((electricityData1.get(i).getDischarge_CapacityStat() * 1000)/mass)/
-			((electricityData1.get(i).getCharge_CapacityStat() * 1000)/mass)) * 100;
-
-	
-	//System.out.println(CoulGet);
-	
-	XYChart.Data data = new XYChart.Data(cycle,CoulGet);
-	series.getData().add(data);
-	
-	
-}
-
-//populating the series with data
-
-
-
-
-lineChart.getData().add(series);
-
-
-
-
-
-
-
-
-
-
-		}
 
 return lineChart;
 	
 	}
 	public XYChart.Series series(){
-	XYChart.Series series = new XYChart.Series();
+	final XYChart.Series series = new XYChart.Series();
 	series.nodeProperty();
 	series.setName("All Cycles");
 	//populating the series with data
