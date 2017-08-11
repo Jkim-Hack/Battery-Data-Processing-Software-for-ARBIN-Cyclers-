@@ -82,16 +82,21 @@ public class MainGraphs
 	
 		VBox topMenu = new VBox();
 		
-		BorderPane borderPane = new BorderPane();
+		BorderPane Pane = new BorderPane();
 		
 		double start = System.currentTimeMillis();
+<<<<<<< HEAD
 		
 		
 		borderPane.setBottom(graphOne.display());
+=======
+			
+		Pane.setBottom(graphOne.display());
+>>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
 		
-		borderPane.setLeft(graphTwo.display());
+		Pane.setRight(graphTwo.display());
 		
-		borderPane.setRight(graphThree.display());
+		Pane.setLeft(graphThree.display());
 		
 		double end = System.currentTimeMillis();
 		
@@ -104,7 +109,7 @@ public class MainGraphs
 		MenuItem screenshot = new MenuItem("Save Image...");
 			
 			screenshot.setOnAction((ActionEvent event) -> { 
-				WritableImage image = borderPane.snapshot(new SnapshotParameters(), null);
+				WritableImage image = Pane.snapshot(new SnapshotParameters(), null);
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("jpeg files (*.jpg)", "*.jpg"));
@@ -124,17 +129,23 @@ public class MainGraphs
 			
 		
 		file.getItems().add(screenshot);
+		Pane.setTop(topMenu);
 		topMen.getMenus().addAll(file);
-			
-		borderPane.setTop(topMenu);
-		topMenu.setAlignment(Pos.TOP_LEFT);
 		topMenu.getChildren().addAll(topMen);
-			
-		Scene scene = new Scene(borderPane, 1100,800);
-		//scene.getStylesheets().add("GraphingPackage/Chart.css");
-		new ZoomManager(borderPane, graphOne.display());
-		stage.setScene(scene);
 		
+		
+			
+		Scene scene = new Scene(Pane, 1100,800);
+	
+		new ZoomManager(Pane, graphOne.display(), graphOne.filler(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
+				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.series2dis());
+		
+		
+		new ZoomManager(Pane, graphTwo.display(), graphTwo.filler(), graphTwo.filler2(), graphTwo.series(),
+				graphOne.series1(), graphTwo.series2(), graphTwo.seriesdis(), graphTwo.series1dis(), graphTwo.series2dis());
+		
+		
+		stage.setScene(scene);
 		stage.show();
 		
 		

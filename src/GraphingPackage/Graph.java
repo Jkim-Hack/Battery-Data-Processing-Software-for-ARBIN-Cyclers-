@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 
 public class Graph
 {
@@ -116,6 +117,58 @@ public class Graph
 		
 		
 		
+	}
+	public XYChart.Series filler() { 	
+		final XYChart.Series seriess = new XYChart.Series();
+		seriess.nodeProperty();
+		return seriess;
+	}
+	
+	public XYChart.Series filler1() { 	
+		final XYChart.Series seriess = new XYChart.Series();
+		seriess.nodeProperty();
+		return seriess;
+	}
+	
+	public XYChart.Series filler2() { 	
+		final XYChart.Series seriess = new XYChart.Series();
+		seriess.nodeProperty();
+		return seriess;
+	}
+	
+	public XYChart.Series series() { 	
+	final XYChart.Series seriess = new XYChart.Series();
+		seriess.nodeProperty();
+		return seriess;
+	}
+	
+	public XYChart.Series series1() { 	
+		final XYChart.Series seriess = new XYChart.Series();
+		seriess.nodeProperty();
+		return seriess;
+	}
+	
+	public XYChart.Series series2() { 	
+		final XYChart.Series seriess = new XYChart.Series();
+		seriess.nodeProperty();
+		return seriess;
+	}
+	
+	public XYChart.Series seriesdis() { 	
+		final XYChart.Series seriess = new XYChart.Series();
+		seriess.nodeProperty();
+		return seriess;
+	}
+	
+	public XYChart.Series series1dis() { 	
+		final XYChart.Series seriess = new XYChart.Series();
+		seriess.nodeProperty();
+		return seriess;
+	}
+	public XYChart.Series series2dis() { 	
+		final XYChart.Series seriess = new XYChart.Series();
+		seriess.nodeProperty();
+		return seriess;
 	}
 	
 	
