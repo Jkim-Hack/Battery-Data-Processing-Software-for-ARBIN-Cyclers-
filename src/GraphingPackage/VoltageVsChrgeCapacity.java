@@ -149,23 +149,6 @@ return leastDoubleV;
 	{		
 	
 
-	
-
-	
-
-// DISPLAY
-// DISPLAY
-
-	
-
-	
-/*System.out.println(FindLeastV());
-System.out.println(FindLeastCC());
-System.out.println(FindGreatestCC());
-System.out.println(FindGreatestV());
-*/
-
-
 //defining the axes
 final NumberAxis xAxis = new NumberAxis();
 final NumberAxis yAxis = new NumberAxis();
@@ -182,6 +165,7 @@ final LineChart<Number,Number> lineChart =
         new LineChart<Number,Number>(xAxis,yAxis);
         
 lineChart.setTitle("Voltage vs Charge Capacity");
+lineChart.setCreateSymbols(false);
 lineChart.getStylesheets().add("GraphingPackage/Chart.css");
 
 return lineChart;

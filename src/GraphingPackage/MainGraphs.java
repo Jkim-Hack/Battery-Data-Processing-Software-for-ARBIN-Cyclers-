@@ -83,15 +83,12 @@ public class MainGraphs
 		
 		final NumberAxis xAxis = new NumberAxis();
 		final NumberAxis yAxis = new NumberAxis();
-		xAxis.setAutoRanging(true);
-		xAxis.setForceZeroInRange(false);
-		yAxis.setAutoRanging(true);
-		yAxis.setForceZeroInRange(false);
+		
 		// creating the chart
-		final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-		 lineChart.setCreateSymbols(false);
-		 lineChart.getStylesheets().add("GraphingPackage/Chart.css");
-
+		LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
+		
+		lineChart = graphOne.display();
+		
 		double start = System.currentTimeMillis();
 			
 		Pane.setCenter(lineChart);
@@ -130,10 +127,19 @@ public class MainGraphs
 			
 		Scene scene = new Scene(Pane, 1100,800);
 	
+		if (graphOne.filler() == null || graphOne.filler() == null || graphOne.filler1() == null || 
+				graphOne.filler2() == null || graphOne.series1() == null || graphOne.series2() == null || graphOne.series1dis() == null ||
+				graphOne.seriesdis() == null || graphOne.series2dis() == null) {
+			
+			new ZoomManager(Pane, lineChart, graphOne.series());
+			
+		}
+		
+		else {
 		
 		new ZoomManager(Pane, lineChart, graphOne.filler(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
 				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.series2dis());
-	
+		}
 		
 		stage.setScene(scene);
 		stage.show();

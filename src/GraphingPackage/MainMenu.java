@@ -144,13 +144,10 @@ public class MainMenu extends Application
              
         	double mass = toMassDouble(insertMass.getText());
         	
-        	String ChargeCap = "Voltage vs Charge Capacity";
-        	String dischargeTitle = "Voltage vs Discharge Capacity";
+        	String ChargeCap = "Voltage vs Charge Capacity & Discharge Capacity";
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
              graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap ,
-            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
-             graphs.add(new DischargeGraph(fileName, mass, dischargeTitle,
             		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
              graphs.add(new CycleNumberDC(fileName, mass, "Discharge Capacity vs Cycle Number",
             		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
@@ -263,7 +260,7 @@ public class MainMenu extends Application
        Image icon = new Image(new File("favicon.png").toURI().toString());
        
         primaryStage.getIcons().add(icon);
-        primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler)");
+        primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler) v1.0");
         primaryStage.setScene(scene);
         primaryStage.show();
          
