@@ -6,8 +6,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import com.github.javafx.charts.zooming.ZoomManager;
+
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -15,6 +18,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -31,14 +35,11 @@ public class MainGraphs
 	
 
 	
-	public MainGraphs(Graph one, Graph two, Graph three)
+	public MainGraphs(Graph one)
 	{
 		this.graphOne = one;
-		this.graphTwo = two;
-		this.graphThree = three;
+		
 	}
-	
-
 	public Graph getGraphOne() 
 	{
 		return graphOne;
@@ -70,21 +71,16 @@ public class MainGraphs
 	}
 	
 	
+	@SuppressWarnings("restriction")
 	public void displayGraphs()
 	{
 		Stage stage = new Stage();
-	
-		VBox topMenu = new VBox();
 		
-		BorderPane borderPane = new BorderPane();
+		BorderPane Pane = new BorderPane();
 		
 		double start = System.currentTimeMillis();
 			
-		borderPane.setBottom(graphOne.display());
-		
-		borderPane.setLeft(graphTwo.display());
-		
-		borderPane.setRight(graphThree.display());
+		Pane.setCenter(graphOne.display());
 		
 		double end = System.currentTimeMillis();
 		
@@ -97,7 +93,7 @@ public class MainGraphs
 		MenuItem screenshot = new MenuItem("Save Image...");
 			
 			screenshot.setOnAction((ActionEvent event) -> { 
-				WritableImage image = borderPane.snapshot(new SnapshotParameters(), null);
+				WritableImage image = Pane.snapshot(new SnapshotParameters(), null);
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("jpeg files (*.jpg)", "*.jpg"));
@@ -111,23 +107,24 @@ public class MainGraphs
 			    }
 	            }
 			});
-		
+			
+			
 		file.getItems().add(screenshot);
+		Pane.setTop(topMen);
 		topMen.getMenus().addAll(file);
-			
-		borderPane.setTop(topMenu);
-		topMenu.setAlignment(Pos.TOP_LEFT);
-		topMenu.getChildren().addAll(topMen);
-			
-		Scene scene = new Scene(borderPane, 1100,800);
-		scene.getStylesheets().add("GraphingPackage/Chart.css");
-		stage.setScene(scene);
 		
+			
+		Scene scene = new Scene(Pane, 1100,800);
+	
+		
+		new ZoomManager(Pane, graphOne.display(), graphOne.filler(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
+				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.series2dis());
+	
+		
+		stage.setScene(scene);
 		stage.show();
 		
 		
 	}
-	
-	
 	
 }

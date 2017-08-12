@@ -178,12 +178,29 @@ final LineChart<Number,Number> lineChart =
         new LineChart<Number,Number>(xAxis,yAxis);
         
 lineChart.setTitle("Voltage vs Charge Capacity");
+lineChart.getStylesheets().add("GraphingPackage/Chart.css");
 
+return lineChart;
+	}
+	
 
+public XYChart.Series filler(){ 	
+final XYChart.Series filler = new XYChart.Series();
+return filler;
+}
+public XYChart.Series filler1(){ 	
+final XYChart.Series filler1 = new XYChart.Series();
+return filler1;
+}
+public XYChart.Series filler2(){ 	
+final XYChart.Series filler2 = new XYChart.Series();
+return filler2;
+}
 //defining a series
-XYChart.Series series = new XYChart.Series();
+public XYChart.Series series(){ 	
+final XYChart.Series series = new XYChart.Series();
 series.setName("Cycle " + cycleOne);
-series.nodeProperty();
+
 
 //populating the series with data
 
@@ -238,19 +255,21 @@ if(excelReader != null)
 
 		XYChart.Data data = new XYChart.Data(charge,voltage);
 		Rectangle rect = new Rectangle(0,0);
-		Rectangle rect1 = new Rectangle(0,0);
 		rect.setVisible(false);
 		data.setNode(rect);
 		series.getData().addAll(data);
 
 	}
 
-
+}
+return series;
 }
 
-XYChart.Series series1 = new XYChart.Series();
+
+public XYChart.Series series1() { 	
+final XYChart.Series series1 = new XYChart.Series();
 series1.setName("Cycle " + cycleTwo);
-series1.nodeProperty();
+
 
 //populating the series with data
 
@@ -308,12 +327,15 @@ if(excelReader != null)
 
 	}
 
-
+}
+return series1;
 }
 
-XYChart.Series series2 = new XYChart.Series();
+public XYChart.Series series2() { 	
+
+final XYChart.Series series2 = new XYChart.Series();
 series2.setName("Cycle " + cycleThree);
-series2.nodeProperty();
+
 
 //populating the series with data
 
@@ -374,9 +396,14 @@ if(excelReader != null)
 
 
 }
+return series2;
+}
 
-XYChart.Series seriesdis = new XYChart.Series();
-seriesdis.nodeProperty();
+public XYChart.Series seriesdis() { 	
+
+final XYChart.Series seriesdis = new XYChart.Series();
+
+
 
 //populating the series with data
 
@@ -426,17 +453,20 @@ seriesdis.nodeProperty();
 	
 			double voltage = currentByCycle.get(i).getVoltage();
 	
-			XYChart.Data data = new XYChart.Data(charge,voltage);
+			XYChart.Data data3 = new XYChart.Data(charge,voltage);
 			Rectangle rect = new Rectangle(0,0);
 			rect.setVisible(false);
-			data.setNode(rect);
-			seriesdis.getData().add(data);
+			data3.setNode(rect);
+			seriesdis.getData().add(data3);
 
 		}
 	}
+	return seriesdis;
+}
 
-XYChart.Series series1dis = new XYChart.Series();
-series1dis.nodeProperty();
+public XYChart.Series series1dis() { 	
+
+final XYChart.Series series1dis = new XYChart.Series();
 
 //populating the series with data
 
@@ -486,21 +516,23 @@ series1dis.nodeProperty();
 	
 			double voltage = currentByCycle.get(i).getVoltage();
 	
-			XYChart.Data data1 = new XYChart.Data(charge,voltage);
+			XYChart.Data data4 = new XYChart.Data(charge,voltage);
 			Rectangle rect = new Rectangle(0,0);
 			rect.setVisible(false);
-			data1.setNode(rect);
-			series1dis.getData().add(data1);
+			data4.setNode(rect);
+			series1dis.getData().add(data4);
 
 		}
 	
 
 	}
+return series1dis;	
+}
 
-//populating the series with data
+public XYChart.Series series2dis() { 	
 
-	XYChart.Series series2dis = new XYChart.Series();
-	series2dis.nodeProperty();
+	final XYChart.Series series2dis = new XYChart.Series();
+
 	
 	//populating the series with data
 
@@ -550,25 +582,31 @@ series1dis.nodeProperty();
 		
 				double voltage = currentByCycle.get(i).getVoltage();
 		
-				XYChart.Data data2 = new XYChart.Data(charge,voltage);
+				XYChart.Data data5 = new XYChart.Data(charge,voltage);
 				Rectangle rect = new Rectangle(0,0);
 				rect.setVisible(false);
-				data2.setNode(rect);
-				series2dis.getData().add(data2);
-
+				data5.setNode(rect);
+				series2dis.getData().add(data5);
+			
 			}
 		
 
 		}
-	
-
-
-lineChart.getData().addAll(series, series1, series2, seriesdis, series1dis, series2dis);
-
-
 		
-return lineChart;
+		return series2dis;
+		
 	}
+
+
+
+}
+	
+			
+		
+	
+
+
+
 	
 		
-}
+

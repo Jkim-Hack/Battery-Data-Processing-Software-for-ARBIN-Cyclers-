@@ -5,6 +5,9 @@ import java.util.List;
 
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
+import javafx.scene.shape.Rectangle;
 
 public class Graph
 {
@@ -111,18 +114,62 @@ public class Graph
 		final NumberAxis xAxis = new NumberAxis();
 		final NumberAxis yAxis = new NumberAxis();
 		
-		LineChart<Number,Number> defaultGraph = new LineChart<Number,Number>(xAxis,yAxis);
+		final LineChart<Number,Number> defaultGraph = new LineChart<Number,Number>(xAxis,yAxis);
 		return defaultGraph;
 		
 		
 		
 	}
+	public XYChart.Series filler() { 	
+		XYChart.Series seriess = new XYChart.Series();
+		return seriess;
+	}
 	
+	public XYChart.Series filler1() { 	
+		XYChart.Series seriess = new XYChart.Series();
+		return seriess;
+	}
+	
+	public XYChart.Series filler2() { 	
+		XYChart.Series seriess = new XYChart.Series();
+		return seriess;
+	}
+	
+	public XYChart.Series series() { 	
+		XYChart.Series seriess = new XYChart.Series();
+		return seriess;
+	}
+	
+	public XYChart.Series series1() { 	
+		XYChart.Series seriess = new XYChart.Series();
+		return seriess;
+	}
+	
+	public XYChart.Series series2() { 	
+		XYChart.Series seriess = new XYChart.Series();
+		return seriess;
+	}
+	
+	public XYChart.Series seriesdis() { 	
+		XYChart.Series seriess = new XYChart.Series();
+		return seriess;
+	}
+	
+	public XYChart.Series series1dis() { 	
+		XYChart.Series seriess = new XYChart.Series();
+		return seriess;
+	}
+	public XYChart.Series series2dis() { 	
+		XYChart.Series seriess = new XYChart.Series();
+		return seriess;
+	}
 	
 	@Override
 	public String toString()
 	{
 		return title;
 	}
+
+
 
 }

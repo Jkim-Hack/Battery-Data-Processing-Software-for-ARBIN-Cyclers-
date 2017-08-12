@@ -7,15 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.poi.hslf.util.SystemTimeUtils;
-
-import com.jogamp.newt.event.KeyEvent;
-
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -28,8 +23,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -50,7 +43,8 @@ public class MainMenu extends Application
 	
 
 	
-    @Override public void start(Stage primaryStage)
+    @SuppressWarnings("restriction")
+	@Override public void start(Stage primaryStage)
     {	
     	
     	
@@ -79,12 +73,15 @@ public class MainMenu extends Application
         Label topLabel = new Label("Bottom Pane 							    ");
         ChoiceBox<Graph> box1 = new ChoiceBox<Graph>();
         
+        
+        
+        /*
         Label botLeft = new Label("Top Left Pane 						    	    ");
         ChoiceBox<Graph> box2 = new ChoiceBox<Graph>();
         
         Label botRight = new Label("Top Right Pane 						    ");
         ChoiceBox<Graph> box3 = new ChoiceBox<Graph>();
-        
+        */
        
         
        
@@ -161,12 +158,12 @@ public class MainMenu extends Application
             		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
              
              box1.getItems().clear();
-             box2.getItems().clear();
-             box3.getItems().clear();  
+            // box2.getItems().clear();
+            // box3.getItems().clear();  
              
              box1.getItems().addAll(graphs);
-             box2.getItems().addAll(graphs);
-             box3.getItems().addAll(graphs);  
+            // box2.getItems().addAll(graphs);
+            // box3.getItems().addAll(graphs);  
            
              createGraph.setDisable(false);
              long end = System.currentTimeMillis();
@@ -229,7 +226,7 @@ public class MainMenu extends Application
     	createGraph.setOnAction((ActionEvent event) ->
     	{
     		
-    		MainGraphs graph = new MainGraphs(box1.getValue(), box2.getValue(), box3.getValue());
+    		MainGraphs graph = new MainGraphs(box1.getValue());
     		graph.displayGraphs();
     		
         });
@@ -244,13 +241,13 @@ public class MainMenu extends Application
     	BorderPane pane = new BorderPane();
     	
        	pane.setRight(GraphChoose);
-       	GraphChoose.setMargin(createGraph, new Insets(115,0,0,0));
+       	GraphChoose.setMargin(createGraph, new Insets(280,0,0,0));
        	GraphChoose.setPadding(new Insets(20,20,20,20));
        	GraphChoose.setAlignment(Pos.TOP_RIGHT);
-       	GraphChoose.getChildren().addAll(topLabel,box1, botLeft, box2, botRight, box3, createGraph);
+       	GraphChoose.getChildren().addAll(topLabel,box1, createGraph);
        	box1.setPrefWidth(250);
-       	box2.setPrefWidth(250);
-       	box3.setPrefWidth(250);
+       //	box2.setPrefWidth(250);
+       //	box3.setPrefWidth(250);
        
        	pane.setTop(topContainer);
        	topContainer.getChildren().add(ddMenu);
