@@ -137,30 +137,60 @@ public class Graph
 	
 	public XYChart.Series series() { 	
 		XYChart.Series seriess = new XYChart.Series();
+		XYChart.Data data = new XYChart.Data();
+		Rectangle rect = new Rectangle(0,0);
+		rect.setVisible(false);
+		data.setNode(rect);
+		seriess.getData().addAll(data);
 		return seriess;
 	}
 	
 	public XYChart.Series series1() { 	
 		XYChart.Series seriess = new XYChart.Series();
+		XYChart.Data data = new XYChart.Data();
+		Rectangle rect = new Rectangle(0,0);
+		rect.setVisible(false);
+		data.setNode(rect);
+		seriess.getData().addAll(data);
 		return seriess;
 	}
 	
 	public XYChart.Series series2() { 	
 		XYChart.Series seriess = new XYChart.Series();
+		XYChart.Data data = new XYChart.Data();
+		Rectangle rect = new Rectangle(0,0);
+		rect.setVisible(false);
+		data.setNode(rect);
+		seriess.getData().addAll(data);
 		return seriess;
 	}
 	
 	public XYChart.Series seriesdis() { 	
 		XYChart.Series seriess = new XYChart.Series();
+		XYChart.Data data = new XYChart.Data();
+		Rectangle rect = new Rectangle(0,0);
+		rect.setVisible(false);
+		data.setNode(rect);
+		seriess.getData().addAll(data);
 		return seriess;
 	}
 	
 	public XYChart.Series series1dis() { 	
 		XYChart.Series seriess = new XYChart.Series();
+		XYChart.Data data = new XYChart.Data();
+		Rectangle rect = new Rectangle(0,0);
+		rect.setVisible(false);
+		data.setNode(rect);
+		seriess.getData().addAll(data);
 		return seriess;
 	}
 	public XYChart.Series series2dis() { 	
 		XYChart.Series seriess = new XYChart.Series();
+		XYChart.Data data = new XYChart.Data();
+		Rectangle rect = new Rectangle(0,0);
+		rect.setVisible(false);
+		data.setNode(rect);
+		seriess.getData().addAll(data);
 		return seriess;
 	}
 	

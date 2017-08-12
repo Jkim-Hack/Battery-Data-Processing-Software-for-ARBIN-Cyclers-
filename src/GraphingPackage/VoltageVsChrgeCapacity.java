@@ -167,8 +167,12 @@ System.out.println(FindGreatestV());
 
 
 //defining the axes
-final NumberAxis xAxis = new NumberAxis(FindLeastCC(), FindGreatestCC() + (FindGreatestCC()/4), (FindGreatestCC())/6);
-final NumberAxis yAxis = new NumberAxis(0, FindGreatestV() + (FindGreatestV()/4), (FindGreatestV())/6);
+final NumberAxis xAxis = new NumberAxis();
+final NumberAxis yAxis = new NumberAxis();
+xAxis.setAutoRanging(true);
+xAxis.setForceZeroInRange(false);
+yAxis.setAutoRanging(true);
+yAxis.setForceZeroInRange(false);
 xAxis.setLabel("Charge Capacity (mAh/g)");
 yAxis.setLabel("Voltage (V)");
 

@@ -19,6 +19,9 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -78,9 +81,20 @@ public class MainGraphs
 		
 		BorderPane Pane = new BorderPane();
 		
+		final NumberAxis xAxis = new NumberAxis();
+		final NumberAxis yAxis = new NumberAxis();
+		xAxis.setAutoRanging(true);
+		xAxis.setForceZeroInRange(false);
+		yAxis.setAutoRanging(true);
+		yAxis.setForceZeroInRange(false);
+		// creating the chart
+		final LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
+		 lineChart.setCreateSymbols(false);
+		 lineChart.getStylesheets().add("GraphingPackage/Chart.css");
+
 		double start = System.currentTimeMillis();
 			
-		Pane.setCenter(graphOne.display());
+		Pane.setCenter(lineChart);
 		
 		double end = System.currentTimeMillis();
 		
@@ -117,7 +131,7 @@ public class MainGraphs
 		Scene scene = new Scene(Pane, 1100,800);
 	
 		
-		new ZoomManager(Pane, graphOne.display(), graphOne.filler(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
+		new ZoomManager(Pane, lineChart, graphOne.filler(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
 				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.series2dis());
 	
 		
