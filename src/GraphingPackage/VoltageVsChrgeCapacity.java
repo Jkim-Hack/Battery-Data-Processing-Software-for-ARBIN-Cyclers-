@@ -145,7 +145,7 @@ return leastDoubleV;
 }
 	
 
-	public final LineChart<Number,Number> display()
+	public LineChart<Number,Number> display()
 	{		
 	
 
@@ -596,6 +596,7 @@ public XYChart.Series series2dis() {
 		return series2dis;
 		
 	}
+
 
 
 }

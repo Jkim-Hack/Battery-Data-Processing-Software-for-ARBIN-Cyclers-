@@ -74,9 +74,9 @@ public class MainGraphs
 	@SuppressWarnings("restriction")
 	public void displayGraphs()
 	{
-		final Stage stage = new Stage();
+		Stage stage = new Stage();
 		
-		final BorderPane Pane = new BorderPane();
+		BorderPane Pane = new BorderPane();
 		
 		double start = System.currentTimeMillis();
 			
@@ -109,26 +109,22 @@ public class MainGraphs
 			});
 			
 			
-		
 		file.getItems().add(screenshot);
 		Pane.setTop(topMen);
 		topMen.getMenus().addAll(file);
 		
-		
-		System.out.println(graphOne.series());
-		
 			
 		Scene scene = new Scene(Pane, 1100,800);
 	
+		
 		new ZoomManager(Pane, graphOne.display(), graphOne.filler(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
 				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.series2dis());
+	
 		
 		stage.setScene(scene);
 		stage.show();
 		
 		
 	}
-	
-	
 	
 }
