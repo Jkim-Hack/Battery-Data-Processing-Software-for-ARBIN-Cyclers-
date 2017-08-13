@@ -172,6 +172,11 @@ final NumberAxis yAxis = new NumberAxis(0, FindGreatestV() + (FindGreatestV()/4)
 xAxis.setLabel("Charge Capacity (mAh/g)");
 yAxis.setLabel("Voltage (V)");
 
+
+//xAxis.setAutoRanging(true);
+//xAxis.setForceZeroInRange(false);
+//yAxis.setAutoRanging(true);
+//yAxis.setForceZeroInRange(false);
 //creating the chart
 
 final LineChart<Number,Number> lineChart = 

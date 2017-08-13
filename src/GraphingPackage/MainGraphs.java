@@ -82,21 +82,21 @@ public class MainGraphs
 	
 		VBox topMenu = new VBox();
 		
-		BorderPane Pane = new BorderPane();
+		//BorderPane Pane = new BorderPane();
 		
 		double start = System.currentTimeMillis();
-<<<<<<< HEAD
 		
 		
-		borderPane.setBottom(graphOne.display());
-=======
+		final StackPane stack = new StackPane();
+		stack.getChildren().add(graphOne.display());
+
 			
-		Pane.setBottom(graphOne.display());
->>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
 		
-		Pane.setRight(graphTwo.display());
+
 		
-		Pane.setLeft(graphThree.display());
+		//Pane.setRight(graphTwo.display());
+		
+		//Pane.setLeft(graphThree.display());
 		
 		double end = System.currentTimeMillis();
 		
@@ -109,18 +109,18 @@ public class MainGraphs
 		MenuItem screenshot = new MenuItem("Save Image...");
 			
 			screenshot.setOnAction((ActionEvent event) -> { 
-				WritableImage image = Pane.snapshot(new SnapshotParameters(), null);
+				//WritableImage image = Pane.snapshot(new SnapshotParameters(), null);
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("jpeg files (*.jpg)", "*.jpg"));
 	            fileChooser.setTitle("Save Image");
 	            File filech = fileChooser.showSaveDialog(stage);
 	            if (filech != null) {
-			    try {
-			        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", filech);
-			    } catch (IOException e) {
+			   // try {
+			     //   ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", filech);
+			   // } catch (IOException e) {
 			       
-			    }
+			    //}
 	            }
 			});
 			
@@ -129,22 +129,23 @@ public class MainGraphs
 			
 		
 		file.getItems().add(screenshot);
-		Pane.setTop(topMenu);
+		//Pane.setTop(topMenu);
 		topMen.getMenus().addAll(file);
 		topMenu.getChildren().addAll(topMen);
 		
 		
 			
-		Scene scene = new Scene(Pane, 1100,800);
+		final Scene scene = new Scene(stack, 1100,800);
 	
-		new ZoomManager(Pane, graphOne.display(), graphOne.filler(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
-				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.series2dis());
+		//new ZoomManager(Pane, graphOne.display(), graphOne.series());
 		
 		
-		new ZoomManager(Pane, graphTwo.display(), graphTwo.filler(), graphTwo.filler2(), graphTwo.series(),
-				graphOne.series1(), graphTwo.series2(), graphTwo.seriesdis(), graphTwo.series1dis(), graphTwo.series2dis());
 		
+		//new ZoomManager(stack, graphTwo.display(), graphTwo.filler(), graphTwo.filler2(), graphTwo.series(),
+			//graphOne.series1(), graphTwo.series2(), graphTwo.seriesdis(), graphTwo.series1dis(), graphTwo.series2dis());
 		
+		new ZoomManager(stack, graphOne.display(), graphOne.series());
+			
 		stage.setScene(scene);
 		stage.show();
 		
