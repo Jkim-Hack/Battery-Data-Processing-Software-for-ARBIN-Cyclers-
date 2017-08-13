@@ -3,19 +3,15 @@
     -fx-stroke-width: 2px;
     -fx-effect: null;
 }
-.default-color0.chart-series-line { -fx-stroke: null; }
-.default-color1.chart-series-line { -fx-stroke: null; }
-.default-color2.chart-series-line { -fx-stroke: null; }
-
+.default-color0.chart-series-line { -fx-stroke: transparent; }
+.default-color1.chart-series-line { -fx-stroke: transparent; }
+.default-color2.chart-series-line { -fx-stroke: transparent; }
 .default-color3.chart-series-line { -fx-stroke: #ff4500; }
 .default-color4.chart-series-line { -fx-stroke: #4169e1; }
 .default-color5.chart-series-line { -fx-stroke:	green; }
-
 .default-color6.chart-series-line { -fx-stroke: #ff4500; }
-.default-color7.chart-series-line { -fx-stroke: #add8e6; }
+.default-color7.chart-series-line { -fx-stroke: #4169e1; }
 .default-color8.chart-series-line { -fx-stroke: green; }
-.default-color9.chart-series-line { -fx-stroke: green; }
-
 
 
 .default-color0.chart-line-symbol { -fx-background-color: null, null; }
@@ -26,6 +22,6 @@
 .default-color4.chart-line-symbol { -fx-background-color: #4169e1, white; }
 .default-color5.chart-line-symbol { -fx-background-color: green, white; }
 
-.default-color6.chart-line-symbol { -fx-background-color: null, null; }
-.default-color7.chart-line-symbol { -fx-background-color: null, null; }
-.default-color8.chart-line-symbol { -fx-background-color: null, null; }
+.default-color6.chart-line-symbol { -fx-background-color: #ff4500, white; }
+.default-color7.chart-line-symbol { -fx-background-color: #4169e1, white; }
+.default-color8.chart-line-symbol { -fx-background-color: green, white; }
