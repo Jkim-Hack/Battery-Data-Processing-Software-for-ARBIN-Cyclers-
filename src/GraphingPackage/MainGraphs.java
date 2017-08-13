@@ -23,7 +23,6 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -80,7 +79,7 @@ public class MainGraphs
 	{
 		Stage stage = new Stage();
 		
-		//BorderPane Pane = new BorderPane();
+		BorderPane Pane = new BorderPane();
 		
 		final NumberAxis xAxis = new NumberAxis();
 		final NumberAxis yAxis = new NumberAxis();
@@ -91,22 +90,8 @@ public class MainGraphs
 		lineChart = graphOne.display();
 		
 		double start = System.currentTimeMillis();
-		
-		
-		final StackPane stack = new StackPane();
-		stack.getChildren().add(graphOne.display());
-
 			
-<<<<<<< HEAD
-		
-
-		
-		//Pane.setRight(graphTwo.display());
-		
-		//Pane.setLeft(graphThree.display());
-=======
 		Pane.setCenter(lineChart);
->>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
 		
 		double end = System.currentTimeMillis();
 		
@@ -119,43 +104,29 @@ public class MainGraphs
 		MenuItem screenshot = new MenuItem("Save Image...");
 			
 			screenshot.setOnAction((ActionEvent event) -> { 
-				//WritableImage image = Pane.snapshot(new SnapshotParameters(), null);
+				WritableImage image = Pane.snapshot(new SnapshotParameters(), null);
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("jpeg files (*.jpg)", "*.jpg"));
 	            fileChooser.setTitle("Save Image");
 	            File filech = fileChooser.showSaveDialog(stage);
 	            if (filech != null) {
-			   // try {
-			     //   ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", filech);
-			   // } catch (IOException e) {
+			    try {
+			        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", filech);
+			    } catch (IOException e) {
 			       
-			    //}
+			    }
 	            }
 			});
 			
-
-
 			
 		file.getItems().add(screenshot);
-<<<<<<< HEAD
-		//Pane.setTop(topMenu);
-=======
 		Pane.setTop(topMen);
->>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
 		topMen.getMenus().addAll(file);
 		
 			
-		final Scene scene = new Scene(stack, 1100,800);
+		Scene scene = new Scene(Pane, 1100,800);
 	
-<<<<<<< HEAD
-		//new ZoomManager(Pane, graphOne.display(), graphOne.series());
-		
-		
-		
-		//new ZoomManager(stack, graphTwo.display(), graphTwo.filler(), graphTwo.filler2(), graphTwo.series(),
-			//graphOne.series1(), graphTwo.series2(), graphTwo.seriesdis(), graphTwo.series1dis(), graphTwo.series2dis());
-=======
 		if (graphOne.filler() == null || graphOne.filler() == null || graphOne.filler1() == null || 
 				graphOne.filler2() == null || graphOne.series1() == null || graphOne.series2() == null || graphOne.series1dis() == null ||
 				graphOne.seriesdis() == null || graphOne.series2dis() == null) {
@@ -169,10 +140,7 @@ public class MainGraphs
 		new ZoomManager(Pane, lineChart, graphOne.filler(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
 				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.series2dis());
 		}
->>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
 		
-		new ZoomManager(stack, graphOne.display(), graphOne.series());
-			
 		stage.setScene(scene);
 		stage.show();
 		
