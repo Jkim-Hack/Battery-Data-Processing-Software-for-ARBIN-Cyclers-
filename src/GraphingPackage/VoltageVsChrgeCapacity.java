@@ -149,26 +149,13 @@ return leastDoubleV;
 	{		
 	
 
-	
-
-	
-
-// DISPLAY
-// DISPLAY
-
-	
-
-	
-/*System.out.println(FindLeastV());
-System.out.println(FindLeastCC());
-System.out.println(FindGreatestCC());
-System.out.println(FindGreatestV());
-*/
-
-
 //defining the axes
-final NumberAxis xAxis = new NumberAxis(FindLeastCC(), FindGreatestCC() + (FindGreatestCC()/4), (FindGreatestCC())/6);
-final NumberAxis yAxis = new NumberAxis(0, FindGreatestV() + (FindGreatestV()/4), (FindGreatestV())/6);
+final NumberAxis xAxis = new NumberAxis();
+final NumberAxis yAxis = new NumberAxis();
+xAxis.setAutoRanging(true);
+xAxis.setForceZeroInRange(false);
+yAxis.setAutoRanging(true);
+yAxis.setForceZeroInRange(false);
 xAxis.setLabel("Charge Capacity (mAh/g)");
 yAxis.setLabel("Voltage (V)");
 
@@ -183,6 +170,7 @@ final LineChart<Number,Number> lineChart =
         new LineChart<Number,Number>(xAxis,yAxis);
         
 lineChart.setTitle("Voltage vs Charge Capacity");
+lineChart.setCreateSymbols(false);
 lineChart.getStylesheets().add("GraphingPackage/Chart.css");
 
 return lineChart;
@@ -191,24 +179,21 @@ return lineChart;
 
 public XYChart.Series filler(){ 	
 final XYChart.Series filler = new XYChart.Series();
-filler.nodeProperty();
 return filler;
 }
 public XYChart.Series filler1(){ 	
 final XYChart.Series filler1 = new XYChart.Series();
-filler1.nodeProperty();
 return filler1;
 }
 public XYChart.Series filler2(){ 	
 final XYChart.Series filler2 = new XYChart.Series();
-filler2.nodeProperty();
 return filler2;
 }
 //defining a series
 public XYChart.Series series(){ 	
 final XYChart.Series series = new XYChart.Series();
 series.setName("Cycle " + cycleOne);
-series.nodeProperty();
+
 
 //populating the series with data
 
@@ -263,7 +248,6 @@ if(excelReader != null)
 
 		XYChart.Data data = new XYChart.Data(charge,voltage);
 		Rectangle rect = new Rectangle(0,0);
-		Rectangle rect1 = new Rectangle(0,0);
 		rect.setVisible(false);
 		data.setNode(rect);
 		series.getData().addAll(data);
@@ -278,7 +262,7 @@ return series;
 public XYChart.Series series1() { 	
 final XYChart.Series series1 = new XYChart.Series();
 series1.setName("Cycle " + cycleTwo);
-series1.nodeProperty();
+
 
 //populating the series with data
 
@@ -344,7 +328,7 @@ public XYChart.Series series2() {
 
 final XYChart.Series series2 = new XYChart.Series();
 series2.setName("Cycle " + cycleThree);
-series2.nodeProperty();
+
 
 //populating the series with data
 
@@ -411,7 +395,7 @@ return series2;
 public XYChart.Series seriesdis() { 	
 
 final XYChart.Series seriesdis = new XYChart.Series();
-seriesdis.nodeProperty();
+
 
 
 //populating the series with data
@@ -476,7 +460,6 @@ seriesdis.nodeProperty();
 public XYChart.Series series1dis() { 	
 
 final XYChart.Series series1dis = new XYChart.Series();
-series1dis.nodeProperty();
 
 //populating the series with data
 
@@ -542,7 +525,7 @@ return series1dis;
 public XYChart.Series series2dis() { 	
 
 	final XYChart.Series series2dis = new XYChart.Series();
-	series2dis.nodeProperty();
+
 	
 	//populating the series with data
 
@@ -606,6 +589,7 @@ public XYChart.Series series2dis() {
 		return series2dis;
 		
 	}
+
 
 
 }

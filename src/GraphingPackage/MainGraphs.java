@@ -19,6 +19,9 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -36,14 +39,11 @@ public class MainGraphs
 	
 
 	
-	public MainGraphs(Graph one, Graph two, Graph three)
+	public MainGraphs(Graph one)
 	{
 		this.graphOne = one;
-		this.graphTwo = two;
-		this.graphThree = three;
+		
 	}
-	
-
 	public Graph getGraphOne() 
 	{
 		return graphOne;
@@ -79,10 +79,16 @@ public class MainGraphs
 	public void displayGraphs()
 	{
 		Stage stage = new Stage();
-	
-		VBox topMenu = new VBox();
 		
 		//BorderPane Pane = new BorderPane();
+		
+		final NumberAxis xAxis = new NumberAxis();
+		final NumberAxis yAxis = new NumberAxis();
+		
+		// creating the chart
+		LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
+		
+		lineChart = graphOne.display();
 		
 		double start = System.currentTimeMillis();
 		
@@ -91,12 +97,16 @@ public class MainGraphs
 		stack.getChildren().add(graphOne.display());
 
 			
+<<<<<<< HEAD
 		
 
 		
 		//Pane.setRight(graphTwo.display());
 		
 		//Pane.setLeft(graphThree.display());
+=======
+		Pane.setCenter(lineChart);
+>>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
 		
 		double end = System.currentTimeMillis();
 		
@@ -127,22 +137,39 @@ public class MainGraphs
 
 
 			
-		
 		file.getItems().add(screenshot);
+<<<<<<< HEAD
 		//Pane.setTop(topMenu);
+=======
+		Pane.setTop(topMen);
+>>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
 		topMen.getMenus().addAll(file);
-		topMenu.getChildren().addAll(topMen);
-		
 		
 			
 		final Scene scene = new Scene(stack, 1100,800);
 	
+<<<<<<< HEAD
 		//new ZoomManager(Pane, graphOne.display(), graphOne.series());
 		
 		
 		
 		//new ZoomManager(stack, graphTwo.display(), graphTwo.filler(), graphTwo.filler2(), graphTwo.series(),
 			//graphOne.series1(), graphTwo.series2(), graphTwo.seriesdis(), graphTwo.series1dis(), graphTwo.series2dis());
+=======
+		if (graphOne.filler() == null || graphOne.filler() == null || graphOne.filler1() == null || 
+				graphOne.filler2() == null || graphOne.series1() == null || graphOne.series2() == null || graphOne.series1dis() == null ||
+				graphOne.seriesdis() == null || graphOne.series2dis() == null) {
+			
+			new ZoomManager(Pane, lineChart, graphOne.series());
+			
+		}
+		
+		else {
+		
+		new ZoomManager(Pane, lineChart, graphOne.filler(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
+				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.series2dis());
+		}
+>>>>>>> branch 'master' of https://github.com/Jkim-Hack/OSUGrapherEEngineering.git
 		
 		new ZoomManager(stack, graphOne.display(), graphOne.series());
 			
@@ -151,7 +178,5 @@ public class MainGraphs
 		
 		
 	}
-	
-	
 	
 }
