@@ -2,6 +2,7 @@ About Battery Data Processing Software (Dedicated to ARBIN Cycler)
 
 This program uses the ARBIN Cylcer data and graphs it based on the user's parameters.
 
+.xls or .xlsx files only work with this program.
 
 Developers: Main Dev: John Kim - johnkim1108@gmail.com
  	    Helper: Chris Yao - chrisyao2@gmail.com
@@ -15,6 +16,8 @@ API used: Apache POI (see LICENSE.txt) - https://poi.apache.org/
 	  JavaFX - docs.oracle.com/javafx/
 		  
 		  
+		    
+		  
 		
 ---------- SYSTEM REQUIREMENTS ----------
 
@@ -24,9 +27,6 @@ RAM: 3GB of free RAM (At least for the largest data)
 Drive Space: About 110mb of free space
 
 ---------- SYSTEM REQUIREMENTS ----------
-
-
-
 
 
 
