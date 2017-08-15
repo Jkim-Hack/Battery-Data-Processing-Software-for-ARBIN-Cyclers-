@@ -5,11 +5,16 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -28,6 +33,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import AlertBox.Alert;
+
 
 public class MainMenu extends Application 
 {
@@ -36,7 +43,7 @@ public class MainMenu extends Application
 	
 	public File fileName;
 
-
+	private final PseudoClass errorClass = PseudoClass.getPseudoClass("error");
 
 	public FileChoose fileChooser = new FileChoose();
 		
@@ -136,13 +143,38 @@ public class MainMenu extends Application
 
         	 int Channel = toSheetInt(SheetText.getText());
              int Stat = toSheetInt(StatText.getText());
-        	 
-        	 double cycleOne = toCycleDouble(insertCycle1.getText());
-             double cycleTwo = toCycleDouble(insertCycle2.getText());
-             double cycleThree = toCycleDouble(insertCycle3.getText());
-
              
-        	double mass = toMassDouble(insertMass.getText());
+             //double cycleOne = 0;
+            // double cycleTwo = 0;
+            // double cycleThree = 0;
+             
+             setUpValidation(insertCycle1);
+             setUpValidation(insertCycle2);
+             setUpValidation(insertCycle3);
+             setUpValidation(insertMass);
+            // double mass = 0;
+             double cycleOne = 0;
+             double cycleTwo = 0;
+             double cycleThree = 0;
+             double mass = 0;
+             
+             try
+             {
+        	 
+            	 cycleOne = toCycleDouble(insertCycle1.getText());
+            	 cycleTwo = toCycleDouble(insertCycle2.getText());
+            	 cycleThree = toCycleDouble(insertCycle3.getText());
+            	 mass = toMassDouble(insertMass.getText());
+             }
+             catch (Exception e) 
+             {
+            	 Alert alert = new Alert();
+            	 alert.displayBox("Error in input fields");
+            	 
+             }
+             
+        	 
+            
         	
         	String ChargeCap = "Voltage vs Charge Capacity & Discharge Capacity";
         	
@@ -257,6 +289,8 @@ public class MainMenu extends Application
        	
        Scene scene = new Scene(pane, 600, 497);
        
+       scene.getStylesheets().add(getClass().getResource("text-field-red-border.css").toExternalForm());
+       
        Image icon = new Image(new File("favicon.png").toURI().toString());
        
         primaryStage.getIcons().add(icon);
@@ -307,6 +341,34 @@ public class MainMenu extends Application
     {
     	double AllCycle = Double.parseDouble(Cycle);
     	return AllCycle;
+    }
+    
+    private void setUpValidation(final TextField tf) { 
+        tf.textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                    String oldValue, String newValue) {
+                validate(tf);
+            }
+
+        });
+
+        validate(tf);
+    }
+
+    private void validate(TextField tf) {
+    	
+    	 ObservableList<String> styleClass = tf.getStyleClass();
+         if (tf.getText().trim().length()==0 ) {
+             if (! styleClass.contains("error")) {
+                 styleClass.add("error");
+             }
+         } else {
+             // remove all occurrences:
+             styleClass.removeAll(Collections.singleton("error"));                    
+         }
+
     }
     
     
