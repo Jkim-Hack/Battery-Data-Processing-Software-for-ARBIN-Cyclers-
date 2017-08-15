@@ -373,7 +373,7 @@ public class MainMenu extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
          
-        primaryStage.setOnCloseRequest(e -> Platform.exit());
+        
         
     }
     
