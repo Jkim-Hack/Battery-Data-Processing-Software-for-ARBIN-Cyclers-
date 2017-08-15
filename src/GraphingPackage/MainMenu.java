@@ -163,6 +163,7 @@ public class MainMenu extends Application
         TextField insertCycle2 = new TextField();
         TextField insertCycle3 = new TextField();
         
+        
        
         //Mass textfield
         Button createGraph = new Button();
@@ -190,9 +191,23 @@ public class MainMenu extends Application
 
         	 long start = System.currentTimeMillis();
         	 isDouble(insertMass, insertMass.getText());
-
-        	 int Channel = toSheetInt(SheetText.getText());
-             int Stat = toSheetInt(StatText.getText());
+        	 
+        	 setUpValidation(SheetText);
+             setUpValidation(StatText);	
+        	 int Channel = 0;
+        	 int Stat = 0;
+        	 
+        	 
+        	 try {
+        	 
+        	 Channel = toSheetInt(SheetText.getText());
+        	 Stat = toSheetInt(StatText.getText());
+        	 }
+        	 catch (Exception e) {
+        		 Alert alert1 = new Alert();
+        		 alert1.displayBox("Error in input fields");
+        	 }
+             
              
              //double cycleOne = 0;
             // double cycleTwo = 0;
@@ -208,9 +223,10 @@ public class MainMenu extends Application
              double cycleThree = 0;
              double mass = 0;
              
+             
+             
              try
              {
-        	 
             	 cycleOne = toCycleDouble(insertCycle1.getText());
             	 cycleTwo = toCycleDouble(insertCycle2.getText());
             	 cycleThree = toCycleDouble(insertCycle3.getText());
@@ -223,7 +239,7 @@ public class MainMenu extends Application
             	 
              }
              
-        	 
+        
             
         	
         	String ChargeCap = "Voltage vs Charge Capacity & Discharge Capacity";

@@ -1,0 +1,18 @@
+How to Zoom
+
+1. Hold down your left mouse button and drag a box to where you want to zoom in.
+
+2. Double left click to zoom back to default. 
+
+
+NOTICE: Volatge vs Capacity may be difficult to zoom. You must have some of the Charge Capacity in the zoombox in order to zoom into Dischare Capacity 
+
+and vice versa. 
+
+
+Example usage:
+
+http://recordit.co/SkTQ5AobYa
+
+
+API source: https://github.com/kerner1000/javafx-chart-zooming  (Has more examples)

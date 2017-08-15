@@ -5,6 +5,7 @@
 
 package GraphingPackage;
 
+import java.awt.Desktop;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
@@ -37,11 +38,7 @@ public class MainGraphs
 
 	private Graph graphOne;
 	
-	private Graph graphTwo;
 	
-	private Graph graphThree;
-	
-
 	
 	public MainGraphs(Graph one)
 	{
@@ -58,25 +55,8 @@ public class MainGraphs
 		this.graphOne = graphOne;
 	}
 
-	public Graph getGraphTwo() 
-	{
-		return graphTwo;
-	}
 
-	public void setGraphTwo(Graph graphTwo) 
-	{
-		this.graphTwo = graphTwo;
-	}
 
-	public Graph getGraphThree() 
-	{
-		return graphThree;
-	}
-
-	public void setGraphThree(Graph graphThree)
-	{
-		this.graphThree = graphThree;
-	}
 	
 	
 	@SuppressWarnings("restriction")
@@ -104,12 +84,25 @@ public class MainGraphs
 		
 		MenuBar topMen = new MenuBar();
 		
+		Menu help = new Menu("Help");
+		MenuItem Htu = new MenuItem("How to Zoom");
+		
+		Htu.setOnAction((ActionEvent event) -> {
+	    	  
+	    	   File howtouse = new File("HowToZoom.txt");
+	    	   try {
+				Desktop.getDesktop().open(howtouse);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+	       });
+		
 		Menu file = new Menu("File"); 
 		
 		MenuItem screenshot = new MenuItem("Save Image...");
 			
 			screenshot.setOnAction((ActionEvent event) -> { 
-				WritableImage image = Pane.snapshot(new SnapshotParameters(), null);
+				WritableImage image = Pane.getCenter().snapshot(new SnapshotParameters(), null);
 				FileChooser fileChooser = new FileChooser();
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
 				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("jpeg files (*.jpg)", "*.jpg"));
@@ -130,7 +123,7 @@ public class MainGraphs
 		topMen.getMenus().addAll(file);
 		
 			
-		Scene scene = new Scene(Pane, 1100,800);
+		Scene scene = new Scene(Pane, 630,450);
 	
 		
 		new ZoomManager(Pane, lineChart, graphOne.series2dis(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),

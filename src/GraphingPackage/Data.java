@@ -87,8 +87,8 @@ public class Data
 
 
 
-	public void setCycle_Number(double cycle_Number) {
-		Cycle_Number = cycle_Number;
+	public void setCycle_Number(double cycle_number) {
+		Cycle_Number = cycle_number;
 	}
 
 

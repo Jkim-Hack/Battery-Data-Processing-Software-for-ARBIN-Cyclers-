@@ -29,120 +29,7 @@ public class VoltageVsChrgeCapacity extends Graph
 	
 	
 	
-	public double FindGreatestCC()
-	{
 	
-		
-		
-		double greatestDoubleCC = ((electricityData.get(0).getCharge_Capacity()) * 1000)/mass;
-
-		for(int i = 1; i < electricityData.size(); i ++)
-		{
-		
-			double chargeGetin = (electricityData.get(i).getCharge_Capacity()) * 1000;
-			double chargein = chargeGetin/mass;
-			double current = electricityData.get(i).getCurrent();
-			
-			
-			if( greatestDoubleCC < chargein )
-			{
-				if (current < 0)
-				{
-					break;
-				}
-				greatestDoubleCC = chargein;
-			}
-		 }
-		
-		 return greatestDoubleCC;
-						
-	 }
-
-public double FindGreatestV()
-{
-
-	
-	
-
-
-double greatestDoubleV = electricityData.get(0).getVoltage();
-
-for(int i = 0; i < electricityData.size(); i ++)	{
-	
-		double voltagein = electricityData.get(i).getVoltage();
-		double current = electricityData.get(i).getCurrent();
-		
-
-		if( greatestDoubleV < voltagein ){
-			if (current < 0){
-				break;
-		}
-			greatestDoubleV = voltagein;
-	}
-}
-	return greatestDoubleV;
-					
-}
-
-public double FindLeastCC()
-{
-
-	
-	
-
-
-double leastDoubleCC = electricityData.get(0).getCharge_Capacity();
-
-for(int i = 0; i < electricityData.size(); i ++)	{
-	
-		double chargeGetin = (electricityData.get(i).getCharge_Capacity()) * 1000;
-		double chargein = chargeGetin/mass;
-		double current = electricityData.get(i).getCurrent();
-		
-		if (current == 0){
-				
-			if (leastDoubleCC == chargein){
-					return leastDoubleCC;
-			
-			}
-				
-			break;
-			
-		}
-	}
-return leastDoubleCC;
-}
-
-public double FindLeastV()
-{
-
-
-	
-
-	
-
-double leastDoubleV = electricityData.get(0).getVoltage();
-
-for(int i = 0; i < electricityData.size(); i ++)	{
-	
-	double voltagein = electricityData.get(i).getVoltage();
-	double current = electricityData.get(i).getCurrent();
-		
-		if (current == 0){
-				
-			if (leastDoubleV == voltagein){
-					return leastDoubleV;
-			
-			}
-				
-			break;
-			
-		}
-	}
-
-return leastDoubleV;
-
-}
 	
 
 	public LineChart<Number,Number> display()
@@ -156,7 +43,7 @@ xAxis.setAutoRanging(true);
 xAxis.setForceZeroInRange(false);
 yAxis.setAutoRanging(true);
 yAxis.setForceZeroInRange(false);
-xAxis.setLabel("Charge Capacity (mAh/g)");
+xAxis.setLabel("Capacity (mAh/g)");
 yAxis.setLabel("Voltage (V)");
 
 
@@ -169,7 +56,7 @@ yAxis.setLabel("Voltage (V)");
 final LineChart<Number,Number> lineChart = 
         new LineChart<Number,Number>(xAxis,yAxis);
         
-lineChart.setTitle("Voltage vs Charge Capacity");
+lineChart.setTitle("Voltage vs Capacity");
 lineChart.setCreateSymbols(false);
 lineChart.getStylesheets().add("GraphingPackage/Chart.css");
 

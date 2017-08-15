@@ -16,21 +16,16 @@ public class Alert
 		Stage stage = new Stage();
 		
 		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.setMinWidth(500);
-		stage.setMinHeight(350);
+		stage.setMinWidth(230);
+		stage.setMinHeight(150);
 		
 		
 		Label messageLabel = new Label(message);
 		
-		Button exitButton = new Button("Close");
 		
-		exitButton.setOnAction(e ->
-		{
-			stage.close();
-		});
 		
 		VBox pane = new VBox();
-		pane.getChildren().addAll(messageLabel,exitButton);
+		pane.getChildren().addAll(messageLabel);
 		pane.setAlignment(Pos.CENTER);
 		
 		Scene scene = new Scene(pane);
