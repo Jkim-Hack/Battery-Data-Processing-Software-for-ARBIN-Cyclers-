@@ -364,11 +364,6 @@ public class MainMenu extends Application
        	
        Scene scene = new Scene(pane, 600, 497);
        
-       scene.getStylesheets().add(getClass().getResource("text-field-red-border.css").toExternalForm());
-       
-       
-       
-        
         primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler) v1.0");
         primaryStage.setScene(scene);
         primaryStage.show();
