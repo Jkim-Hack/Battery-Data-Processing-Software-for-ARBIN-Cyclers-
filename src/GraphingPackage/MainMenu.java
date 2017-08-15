@@ -54,6 +54,7 @@ package GraphingPackage;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -362,8 +363,14 @@ public class MainMenu extends Application
        			SheetField, SheetText, StatField, StatText, pseudoSave, saveLabel);
 
        	
+       InputStream in = this.getClass().getClassLoader().getResourceAsStream("favicon.PNG");
+       	
        Scene scene = new Scene(pane, 600, 497);
        
+       
+       Image icon = new Image(in);
+       
+        primaryStage.getIcons().add(icon);
         primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler) v1.0");
         primaryStage.setScene(scene);
         primaryStage.show();
