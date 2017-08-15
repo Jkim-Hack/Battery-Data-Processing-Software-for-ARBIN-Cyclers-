@@ -1,3 +1,8 @@
+/*
+ This class uses kerner1000's "Javafx-Chart-Zooming" API https://github.com/kerner1000/javafx-chart-zooming	
+ */
+
+
 package GraphingPackage;
 
 import java.awt.image.RenderedImage;
@@ -127,19 +132,10 @@ public class MainGraphs
 			
 		Scene scene = new Scene(Pane, 1100,800);
 	
-		if (graphOne.filler() == null || graphOne.filler() == null || graphOne.filler1() == null || 
-				graphOne.filler2() == null || graphOne.series1() == null || graphOne.series2() == null || graphOne.series1dis() == null ||
-				graphOne.seriesdis() == null || graphOne.series2dis() == null) {
-			
-			new ZoomManager(Pane, lineChart, graphOne.series());
-			
-		}
 		
-		else {
+		new ZoomManager(Pane, lineChart, graphOne.series2dis(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
+				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.filler());
 		
-		new ZoomManager(Pane, lineChart, graphOne.filler(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
-				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.series2dis());
-		}
 		
 		stage.setScene(scene);
 		stage.show();
