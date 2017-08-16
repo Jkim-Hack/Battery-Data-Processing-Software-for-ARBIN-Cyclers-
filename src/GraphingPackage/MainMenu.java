@@ -367,7 +367,6 @@ public class MainMenu extends Application
        	
        Scene scene = new Scene(pane, 600, 497);
        
-       
        Image icon = new Image(in);
        
         primaryStage.getIcons().add(icon);
