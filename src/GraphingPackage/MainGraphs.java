@@ -123,7 +123,7 @@ public class MainGraphs
 		topMen.getMenus().addAll(file);
 		
 			
-		Scene scene = new Scene(Pane, 630,450);
+		Scene scene = new Scene(Pane, 750,450);
 	
 		
 		new ZoomManager(Pane, lineChart, graphOne.series2dis(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),

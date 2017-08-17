@@ -34,7 +34,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import org.slf4j.LoggerFactory;
 
 import com.monitorjbl.xlsx.StreamingReader;
 
@@ -101,7 +100,7 @@ public class ExcelReader
 		this.cycleThree = cycleThree;
 	}
 
-	public ExcelReader(File fileName, double cycleOne, double cycleTwo, double cycleThree, int Channel, int Stat) throws IOException
+	public ExcelReader(File fileName, double cycleOne, double cycleTwo, double cycleThree, int Channel) throws IOException
 	{
 		this.fileName = fileName;
 		
@@ -110,7 +109,7 @@ public class ExcelReader
 		this.cycleThree = cycleThree;
 		
 		this.Channel = Channel;
-		this.Stat = Stat;
+	
 		
 		data = new SheetData();
 		
@@ -189,7 +188,7 @@ public class ExcelReader
 		
 		}
 		
-		int s = Channel + Stat;
+		int s = Channel + 1;
 		
 		Sheet statSheet = workbook.getSheetAt(s);
 	

@@ -27,13 +27,13 @@ public class Graph
 	
 	
 	public Graph(File fileName, double value, String title, 
-			double cycleOne, double cycleTwo, double cycleThree, int Channel, int Stat)
+			double cycleOne, double cycleTwo, double cycleThree, int Channel)
 	{
 		excelReader = null;
 		
 		try
 		{
-			excelReader = new ExcelReader(fileName, cycleOne, cycleTwo, cycleThree, Channel, Stat);
+			excelReader = new ExcelReader(fileName, cycleOne, cycleTwo, cycleThree, Channel);
 			electricityData = excelReader.getData().electrictyData;
 			electricityData1 = excelReader.getData().electrictyData1;
 		}

@@ -14,9 +14,9 @@ public class CycleNumberDC extends Graph {
 
 	
 	public CycleNumberDC(File fileName, double value,String title,
-			double cycleOne, double cycleTwo, double cycleThree, int Channel, int Stat) 
+			double cycleOne, double cycleTwo, double cycleThree, int Channel) 
 	{
-		super(fileName, value, title,cycleOne,cycleTwo,cycleThree, Channel, Stat);	
+		super(fileName, value, title,cycleOne,cycleTwo,cycleThree, Channel);	
 	}
 	public LineChart<Number,Number> display()
 	{

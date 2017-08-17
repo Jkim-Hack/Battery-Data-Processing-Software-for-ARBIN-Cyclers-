@@ -20,10 +20,10 @@ public class VoltageVsChrgeCapacity extends Graph
 	
 
 	public VoltageVsChrgeCapacity(File fileName, double value, String title,
-			double cycleOne, double cycleTwo, double cycleThree, int Channel, int Stat) 
+			double cycleOne, double cycleTwo, double cycleThree, int Channel) 
 	{
 		
-		super(fileName, value, title, cycleOne, cycleTwo, cycleThree, Channel, Stat);
+		super(fileName, value, title, cycleOne, cycleTwo, cycleThree, Channel);
 		
 	}
 	
@@ -58,7 +58,7 @@ final LineChart<Number,Number> lineChart =
         
 lineChart.setTitle("Voltage vs Capacity");
 lineChart.setCreateSymbols(false);
-lineChart.getStylesheets().add("GraphingPackage/Chart.css");
+lineChart.getStylesheets().add("Chart.css");
 
 return lineChart;
 	}

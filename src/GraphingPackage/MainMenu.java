@@ -53,14 +53,17 @@ package GraphingPackage;
  
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -151,9 +154,7 @@ public class MainMenu extends Application
         
         Label SheetField = new Label("Enter Amount of Channel Sheets: ");
         TextField SheetText = new TextField();
-        
-        Label StatField = new Label("Enter Amount of Statistic Sheets");
-        TextField StatText = new TextField();
+       
         
     
         
@@ -179,14 +180,8 @@ public class MainMenu extends Application
         {
         	
         	
-        	saveLabel.setVisible(false);
-        	PauseTransition visiblePause = new PauseTransition(
-        	        Duration.seconds(2)
-        	);
-        	visiblePause.setOnFinished(
-        	        event -> saveLabel.setVisible(true)
-        	);
-        	visiblePause.play();
+        			saveLabel.setVisible(false);
+        	  	
         	
         	
 
@@ -194,15 +189,15 @@ public class MainMenu extends Application
         	 isDouble(insertMass, insertMass.getText());
         	 
         	 setUpValidation(SheetText);
-             setUpValidation(StatText);	
+            
         	 int Channel = 0;
-        	 int Stat = 0;
+        	 
         	 
         	 
         	 try {
         	 
         	 Channel = toSheetInt(SheetText.getText());
-        	 Stat = toSheetInt(StatText.getText());
+        	 
         	 }
         	 catch (Exception e) {
         		 Alert alert1 = new Alert();
@@ -247,11 +242,11 @@ public class MainMenu extends Application
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
              graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap ,
-            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
+            		 cycleOne,cycleTwo,cycleThree, Channel));
              graphs.add(new CycleNumberDC(fileName, mass, "Discharge Capacity vs Cycle Number",
-            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
+            		 cycleOne,cycleTwo,cycleThree, Channel));
              graphs.add(new CoulombicEff(fileName, mass, "Coulombic Efficiency vs Cycle Number",
-            		 cycleOne,cycleTwo,cycleThree, Channel, Stat));
+            		 cycleOne,cycleTwo,cycleThree, Channel));
              
              box1.getItems().clear();
             // box2.getItems().clear();
@@ -263,6 +258,7 @@ public class MainMenu extends Application
            
              createGraph.setDisable(false);
              long end = System.currentTimeMillis();
+             saveLabel.setVisible(true);
              System.out.println(end - start);
         });
                 
@@ -293,35 +289,9 @@ public class MainMenu extends Application
        
        files.getItems().add(openFile);
       
-       Menu help = new Menu("Help");
        
-       MenuItem htu = new MenuItem("How to Use");
-       MenuItem about = new MenuItem("About");
-      
-       help.getItems().addAll(htu, about);
        
-       htu.setOnAction((ActionEvent event) -> {
-    	  
-    	   File howtouse = new File("HowToUse.txt");
-    	   try {
-			Desktop.getDesktop().open(howtouse);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-       });
-       
-       about.setOnAction((ActionEvent event) -> {
-    	   
-    	   File howtouse = new File("README.txt");
-    	   try {
-			Desktop.getDesktop().open(howtouse);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-    	   
-       });
-       
-       ddMenu.getMenus().addAll(files, help);
+       ddMenu.getMenus().addAll(files);
        
     	//Button for the graph window created
     	
@@ -360,13 +330,15 @@ public class MainMenu extends Application
        	pane.setLeft(midinserts);
        	midinserts.setPadding(new Insets(20, 20, 20, 20));
        	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass, Cycles, insertCycle1, insertCycle2, insertCycle3, 
-       			SheetField, SheetText, StatField, StatText, pseudoSave, saveLabel);
+       			SheetField, SheetText, pseudoSave, saveLabel);
 
        	
        InputStream in = this.getClass().getClassLoader().getResourceAsStream("favicon.PNG");
-       	
-       Scene scene = new Scene(pane, 600, 497);
        
+       
+       
+       Scene scene = new Scene(pane, 600, 497);
+      
        Image icon = new Image(in);
        
         primaryStage.getIcons().add(icon);
@@ -389,13 +361,9 @@ public class MainMenu extends Application
     	try
     	{
     		double dataMass = Double.parseDouble(input.getText());
-    		System.out.println("Saved!");
     		return true;
     		
     	} catch(NumberFormatException e){
-    		System.out.println(mass + " is not a number");
-    		Label notNum = new Label(mass + " is not a number");
-    		notNum.setVisible(true);
     		return false;
     	}
     }
