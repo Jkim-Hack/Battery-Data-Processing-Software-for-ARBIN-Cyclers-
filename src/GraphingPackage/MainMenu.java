@@ -153,7 +153,7 @@ public class MainMenu extends Application
         TextField fileField = new TextField("File -> Open File...");
         
         Label SheetField = new Label("Enter Amount of Channel Sheets: ");
-        TextField SheetText = new TextField();
+        TextField SheetText = new TextField("1");
        
         
     
