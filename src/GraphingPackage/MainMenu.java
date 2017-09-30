@@ -54,11 +54,8 @@ package GraphingPackage;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,7 +90,7 @@ import javafx.util.Duration;
 import AlertBox.Alert;
 
 
-public class MainMenu extends Application implements java.io.Serializable
+public class MainMenu extends Application 
 {
  
 	//Instance Variables
@@ -185,19 +182,7 @@ public class MainMenu extends Application implements java.io.Serializable
         	
         			saveLabel.setVisible(false);
         	  	
-        			 try {
-        		           FileInputStream fileIn = new FileInputStream("C:/Test/path.ser");
-        		           ObjectInputStream in = new ObjectInputStream(fileIn);
-        		           fileChooser = (FileChoose) in.readObject();
-        		           in.close();
-        		           fileIn.close();
-        		        }catch(IOException i) {
-        		           i.printStackTrace();
-        		           return;
-        		        }catch(ClassNotFoundException c) {
-        		           c.printStackTrace();
-        		           return;
-        		        }
+        	
         	
 
         	 long start = System.currentTimeMillis();
@@ -284,32 +269,20 @@ public class MainMenu extends Application implements java.io.Serializable
         Menu files = new Menu("File");
         MenuItem openFile = new MenuItem("Open File...");	
        
- 
-        
         
        openFile.setOnAction((ActionEvent event) -> {
         	
             //File Chooser class
-    	    
-            fileChooser.chooseFile(primaryStage);
-            fileName = fileChooser.getFileName();
-            try {
-                FileOutputStream fileOut = new FileOutputStream("C:/Test/path.ser");
-                ObjectOutputStream out = new ObjectOutputStream(fileOut);
-                out.writeObject(fileChooser);
-                out.close();
-                fileOut.close();
-             }catch(IOException i) {
-                i.printStackTrace();
-             }
-            
+    	   
+        	FileChoose file;
+        	file = new FileChoose();
+            file.chooseFile(primaryStage);
+            fileName = file.getFileName();
             fileField.setText(fileName.getName());
-            
 
             //File Chooser class
             
        });
-       
        
        
        fileField.setEditable(false);
