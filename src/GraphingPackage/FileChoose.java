@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class FileChoose implements java.io.Serializable
+public class FileChoose
 {
 
 	private File fileName;
