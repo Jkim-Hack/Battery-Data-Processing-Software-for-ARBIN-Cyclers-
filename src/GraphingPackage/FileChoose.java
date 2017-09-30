@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class FileChoose
+public class FileChoose implements java.io.Serializable
 {
 
 	private File fileName;
@@ -28,7 +28,7 @@ public class FileChoose
     FileChooser.ExtensionFilter extFilter1 = new FileChooser.ExtensionFilter("XLSX Files (*.xlsx)", "*.xlsx");
     fileChooser.getExtensionFilters().addAll(extFilter, extFilter1);
     File fileName = fileChooser.showOpenDialog(primaryStage);   
-    
+  
     if(fileName != null)
     {
     	setFileName(fileName);
