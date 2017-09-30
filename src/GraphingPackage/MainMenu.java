@@ -293,7 +293,7 @@ public class MainMenu extends Application
        
        ddMenu.getMenus().addAll(files);
        
-    	//Button for the graph window created
+    //Button for the graph window created
     	
     	
     	createGraph.setText("Create Graphs");
