@@ -98,7 +98,7 @@ public class MainMenu extends Application
  
 	//Instance Variables
 	
-	public File fileName;
+
 
 	private final PseudoClass errorClass = PseudoClass.getPseudoClass("error");
 
@@ -154,7 +154,7 @@ public class MainMenu extends Application
        
         Label fileLabel = new Label("Chosen File:");
         TextField fileField = new TextField("File -> Open File...");
-        
+      
         Label SheetField = new Label("Enter Amount of Channel Sheets: ");
         TextField SheetText = new TextField("1");
        
@@ -177,7 +177,20 @@ public class MainMenu extends Application
         TextField insertMass = new TextField();
         Button pseudoSave = new Button("Apply");
         
-        
+        try {
+			FileInputStream fileIn = new FileInputStream("C:/Test/path.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			fileChooser = (FileChoose) in.readObject();
+			fileField.setText(fileChooser.fileName.getName());
+			in.close();
+			fileIn.close();
+		}catch(IOException i) {
+			i.printStackTrace();
+			   	return;
+		}catch(ClassNotFoundException c) {
+			c.printStackTrace();
+			return;
+		}
         
         pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
         {
@@ -185,21 +198,7 @@ public class MainMenu extends Application
         	
         			saveLabel.setVisible(false);
         	  	
-        			try {
-        				FileInputStream fileIn = new FileInputStream("C:/Test/path.ser");
-        				ObjectInputStream in = new ObjectInputStream(fileIn);
-        				fileChooser = (FileChoose) in.readObject();
-        				in.close();
-        				fileIn.close();
-        			}catch(IOException i) {
-        				i.printStackTrace();
-        				   	return;
-        			}catch(ClassNotFoundException c) {
-        				c.printStackTrace();
-        				return;
-        			}
-        	
-
+        			
         	 long start = System.currentTimeMillis();
         	 isDouble(insertMass, insertMass.getText());
         	 
@@ -256,11 +255,11 @@ public class MainMenu extends Application
         	String ChargeCap = "Voltage vs Charge Capacity & Discharge Capacity";
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
-             graphs.add(new VoltageVsChrgeCapacity(fileName, mass, ChargeCap ,
+             graphs.add(new VoltageVsChrgeCapacity(fileChooser.fileName, mass, ChargeCap ,
             		 cycleOne,cycleTwo,cycleThree, Channel));
-             graphs.add(new CycleNumberDC(fileName, mass, "Discharge Capacity vs Cycle Number",
+             graphs.add(new CycleNumberDC(fileChooser.fileName, mass, "Discharge Capacity vs Cycle Number",
             		 cycleOne,cycleTwo,cycleThree, Channel));
-             graphs.add(new CoulombicEff(fileName, mass, "Coulombic Efficiency vs Cycle Number",
+             graphs.add(new CoulombicEff(fileChooser.fileName, mass, "Coulombic Efficiency vs Cycle Number",
             		 cycleOne,cycleTwo,cycleThree, Channel));
              
              box1.getItems().clear();
@@ -288,12 +287,11 @@ public class MainMenu extends Application
        openFile.setOnAction((ActionEvent event) -> {
         	
             //File Chooser class
-    	   
-    	   fileChooser.chooseFile(primaryStage);
-    	   fileName = fileChooser.getFileName();
+    	fileChooser.chooseFile(primaryStage);
+    	fileChooser.fileName = fileChooser.getFileName();
     	   
     	try {
-    		FileOutputStream fileOut = new FileOutputStream("path.ser");
+    		FileOutputStream fileOut = new FileOutputStream("C:/Test/path.ser");
     	 	ObjectOutputStream out = new ObjectOutputStream(fileOut);
     	 	out.writeObject(fileChooser);
     	 	out.close();
@@ -302,13 +300,12 @@ public class MainMenu extends Application
     	 		i.printStackTrace();
     	 	}
             
-            fileName = fileChooser.getFileName();
-            fileField.setText(fileName.getName());
+    	 
+            fileField.setText(fileChooser.fileName.getName());
 
             //File Chooser class
             
        });
-       
        
        fileField.setEditable(false);
        
