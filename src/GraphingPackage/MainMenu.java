@@ -371,7 +371,7 @@ public class MainMenu extends Application
        Image icon = new Image(in);
        
         primaryStage.getIcons().add(icon);
-        primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler) v1.0");
+        primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler) v1.1");
         primaryStage.setScene(scene);
         primaryStage.show();
          
