@@ -177,20 +177,26 @@ public class MainMenu extends Application
         TextField insertMass = new TextField();
         Button pseudoSave = new Button("Apply");
         
+
+        
         try {
-			FileInputStream fileIn = new FileInputStream("C:/Test/path.ser");
+			FileInputStream fileIn = new FileInputStream("./path.ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			fileChooser = (FileChoose) in.readObject();
 			fileField.setText(fileChooser.fileName.getName());
 			in.close();
 			fileIn.close();
 		}catch(IOException i) {
-			i.printStackTrace();
-			   	return;
+			
+			fileField.setText("File -> Open File...");
+			   
 		}catch(ClassNotFoundException c) {
-			c.printStackTrace();
-			return;
+			
+			fileField.setText("File -> Open File...");
+		
 		}
+        
+        
         
         pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
         {
@@ -198,6 +204,7 @@ public class MainMenu extends Application
         	
         			saveLabel.setVisible(false);
         	  	
+        			
         			
         	 long start = System.currentTimeMillis();
         	 isDouble(insertMass, insertMass.getText());
@@ -291,7 +298,7 @@ public class MainMenu extends Application
     	fileChooser.fileName = fileChooser.getFileName();
     	   
     	try {
-    		FileOutputStream fileOut = new FileOutputStream("C:/Test/path.ser");
+    		FileOutputStream fileOut = new FileOutputStream("./path.ser");
     	 	ObjectOutputStream out = new ObjectOutputStream(fileOut);
     	 	out.writeObject(fileChooser);
     	 	out.close();
