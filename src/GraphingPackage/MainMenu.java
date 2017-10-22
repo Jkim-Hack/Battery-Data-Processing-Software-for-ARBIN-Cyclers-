@@ -52,9 +52,11 @@ package GraphingPackage;
 
  
 import java.awt.Desktop;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -153,7 +155,7 @@ public class MainMenu extends Application
         
        
         Label fileLabel = new Label("Chosen File:");
-        TextField fileField = new TextField("File -> Open File...");
+        TextField fileField = new TextField();
       
         Label SheetField = new Label("Enter Amount of Channel Sheets: ");
         TextField SheetText = new TextField("1");
@@ -177,10 +179,19 @@ public class MainMenu extends Application
         TextField insertMass = new TextField();
         Button pseudoSave = new Button("Apply");
         
+        File f = new File(System.getenv("APPDATA")+ "\\BatteryDataSftwre\\path.ser");
 
+        f.getParentFile().mkdirs(); 
+        try {
+			f.createNewFile();
+		} catch (IOException e) {
+			System.out.println("Already Exists");
+			
+		}
+        
         
         try {
-			FileInputStream fileIn = new FileInputStream("./path.ser");
+			FileInputStream fileIn = new FileInputStream(System.getenv("APPDATA")+ "\\BatteryDataSftwre\\path.ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			fileChooser = (FileChoose) in.readObject();
 			fileField.setText(fileChooser.fileName.getName());
@@ -296,9 +307,11 @@ public class MainMenu extends Application
             //File Chooser class
     	fileChooser.chooseFile(primaryStage);
     	fileChooser.fileName = fileChooser.getFileName();
-    	   
+    	
+    	
+
     	try {
-    		FileOutputStream fileOut = new FileOutputStream("./path.ser");
+    		FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA")+ "\\BatteryDataSftwre\\path.ser");
     	 	ObjectOutputStream out = new ObjectOutputStream(fileOut);
     	 	out.writeObject(fileChooser);
     	 	out.close();
