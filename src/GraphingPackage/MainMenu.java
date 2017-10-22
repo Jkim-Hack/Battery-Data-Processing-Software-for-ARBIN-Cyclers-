@@ -377,11 +377,13 @@ public class MainMenu extends Application
        	
       
        
-       
+       InputStream in = this.getClass().getClassLoader().getResourceAsStream("favicon.PNG");
        
        Scene scene = new Scene(pane, 600, 497);
       
+       Image icon = new Image(in);
        
+        primaryStage.getIcons().add(icon);
         primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler) v1.1");
         primaryStage.setScene(scene);
         primaryStage.show();
