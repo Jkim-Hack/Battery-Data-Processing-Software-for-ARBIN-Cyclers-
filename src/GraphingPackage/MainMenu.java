@@ -205,7 +205,9 @@ public class MainMenu extends Application
 			
 			fileField.setText("File -> Open File...");
 		
-		}
+		}catch(NullPointerException k){
+            fileField.setText("File -> Open File...");
+        }
         
         
         
@@ -213,34 +215,21 @@ public class MainMenu extends Application
         {
         	
         	
-        			saveLabel.setVisible(false);
-        	  	
-        			
-        			
+            saveLabel.setVisible(false);
         	 long start = System.currentTimeMillis();
         	 isDouble(insertMass, insertMass.getText());
-        	 
         	 setUpValidation(SheetText);
-            
         	 int Channel = 0;
-        	 
-        	 
-        	 
         	 try {
-        	 
         	 Channel = toSheetInt(SheetText.getText());
-        	 
         	 }
         	 catch (Exception e) {
         		 Alert alert1 = new Alert();
         		 alert1.displayBox("Error in input fields");
         	 }
-             
-             
              //double cycleOne = 0;
             // double cycleTwo = 0;
             // double cycleThree = 0;
-             
              setUpValidation(insertCycle1);
              setUpValidation(insertCycle2);
              setUpValidation(insertCycle3);
@@ -250,9 +239,7 @@ public class MainMenu extends Application
              double cycleTwo = 0;
              double cycleThree = 0;
              double mass = 0;
-             
-             
-             
+
              try
              {
             	 cycleOne = toCycleDouble(insertCycle1.getText());
@@ -266,10 +253,7 @@ public class MainMenu extends Application
             	 alert.displayBox("Error in input fields");
             	 
              }
-             
-        
-            
-        	
+
         	String ChargeCap = "Voltage vs Charge Capacity & Discharge Capacity";
         	
         	 List<Graph> graphs = new ArrayList<Graph>();
@@ -320,8 +304,8 @@ public class MainMenu extends Application
     	 		i.printStackTrace();
     	 	}
             
-    	 
-            fileField.setText(fileChooser.fileName.getName());
+
+    	 	fileField.setText(fileChooser.fileName.getName());
 
             //File Chooser class
             

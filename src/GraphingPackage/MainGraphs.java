@@ -12,8 +12,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import com.github.javafx.charts.zooming.ZoomManager;
+//import com.github.javafx.charts.zooming.ZoomManager;
 
+import com.github.javafx.charts.zooming.ZoomManager;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
