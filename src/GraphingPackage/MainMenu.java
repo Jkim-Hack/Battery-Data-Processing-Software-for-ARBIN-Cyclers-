@@ -73,6 +73,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -208,74 +209,97 @@ public class MainMenu extends Application
 		}catch(NullPointerException k){
             fileField.setText("File -> Open File...");
         }
-        
-        
+
+
+
+
         
         pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
         {
-        	
-        	
-            saveLabel.setVisible(false);
-        	 long start = System.currentTimeMillis();
-        	 isDouble(insertMass, insertMass.getText());
-        	 setUpValidation(SheetText);
-        	 int Channel = 0;
-        	 try {
-        	 Channel = toSheetInt(SheetText.getText());
-        	 }
-        	 catch (Exception e) {
-        		 Alert alert1 = new Alert();
-        		 alert1.displayBox("Error in input fields");
-        	 }
-             //double cycleOne = 0;
-            // double cycleTwo = 0;
-            // double cycleThree = 0;
-             setUpValidation(insertCycle1);
-             setUpValidation(insertCycle2);
-             setUpValidation(insertCycle3);
-             setUpValidation(insertMass);
-            // double mass = 0;
-             double cycleOne = 0;
-             double cycleTwo = 0;
-             double cycleThree = 0;
-             double mass = 0;
 
-             try
-             {
-            	 cycleOne = toCycleDouble(insertCycle1.getText());
-            	 cycleTwo = toCycleDouble(insertCycle2.getText());
-            	 cycleThree = toCycleDouble(insertCycle3.getText());
-            	 mass = toMassDouble(insertMass.getText());
-             }
-             catch (Exception e) 
-             {
-            	 Alert alert = new Alert();
-            	 alert.displayBox("Error in input fields");
-            	 
-             }
+            Task<Void> insertionCycles = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+                    double cycleOne = 0;
+                    double cycleTwo = 0;
+                    double cycleThree = 0;
+                    double mass = 0;
 
-        	String ChargeCap = "Voltage vs Charge Capacity & Discharge Capacity";
-        	
-        	 List<Graph> graphs = new ArrayList<Graph>();
-             graphs.add(new VoltageVsChrgeCapacity(fileChooser.fileName, mass, ChargeCap ,
-            		 cycleOne,cycleTwo,cycleThree, Channel));
-             graphs.add(new CycleNumberDC(fileChooser.fileName, mass, "Discharge Capacity vs Cycle Number",
-            		 cycleOne,cycleTwo,cycleThree, Channel));
-             graphs.add(new CoulombicEff(fileChooser.fileName, mass, "Coulombic Efficiency vs Cycle Number",
-            		 cycleOne,cycleTwo,cycleThree, Channel));
-             
-             box1.getItems().clear();
-            // box2.getItems().clear();
-            // box3.getItems().clear();  
-             
-             box1.getItems().addAll(graphs);
-            // box2.getItems().addAll(graphs);
-            // box3.getItems().addAll(graphs);  
-           
-             createGraph.setDisable(false);
-             long end = System.currentTimeMillis();
-             saveLabel.setVisible(true);
-             System.out.println(end - start);
+                    cycleOne = toCycleDouble(insertCycle1.getText());
+                    cycleTwo = toCycleDouble(insertCycle2.getText());
+                    cycleThree = toCycleDouble(insertCycle3.getText());
+                    mass = toMassDouble(insertMass.getText());
+
+                    return null;
+                }
+            };
+            Thread t = new Thread(insertionCycles);
+            t.setDaemon(true);
+            t.start();
+
+            insertionCycles.setOnFailed(event -> {
+
+                    Alert alert = new Alert();
+                    alert.displayBox("Error in input fields");
+
+            });
+        	insertionCycles.setOnSucceeded(event -> {
+
+                saveLabel.setVisible(false);
+                long start = System.currentTimeMillis();
+                isDouble(insertMass, insertMass.getText());
+                setUpValidation(SheetText);
+                int Channel = 0;
+                try {
+                    Channel = toSheetInt(SheetText.getText());
+                }
+                catch (Exception e) {
+                    Alert alert1 = new Alert();
+                    alert1.displayBox("Error in input fields");
+                }
+                //double cycleOne = 0;
+                // double cycleTwo = 0;
+                // double cycleThree = 0;
+                setUpValidation(insertCycle1);
+                setUpValidation(insertCycle2);
+                setUpValidation(insertCycle3);
+                setUpValidation(insertMass);
+                // double mass = 0;
+                double cycleOne = 0;
+                double cycleTwo = 0;
+                double cycleThree = 0;
+                double mass = 0;
+                cycleOne = toCycleDouble(insertCycle1.getText());
+                cycleTwo = toCycleDouble(insertCycle2.getText());
+                cycleThree = toCycleDouble(insertCycle3.getText());
+                mass = toMassDouble(insertMass.getText());
+
+
+                String ChargeCap = "Voltage vs Charge Capacity & Discharge Capacity";
+
+                List<Graph> graphs = new ArrayList<Graph>();
+                graphs.add(new VoltageVsChrgeCapacity(fileChooser.fileName, mass, ChargeCap ,
+                        cycleOne,cycleTwo,cycleThree, Channel));
+                graphs.add(new CycleNumberDC(fileChooser.fileName, mass, "Discharge Capacity vs Cycle Number",
+                        cycleOne,cycleTwo,cycleThree, Channel));
+                graphs.add(new CoulombicEff(fileChooser.fileName, mass, "Coulombic Efficiency vs Cycle Number",
+                        cycleOne,cycleTwo,cycleThree, Channel));
+
+                box1.getItems().clear();
+                // box2.getItems().clear();
+                // box3.getItems().clear();
+
+                box1.getItems().addAll(graphs);
+                // box2.getItems().addAll(graphs);
+                // box3.getItems().addAll(graphs);
+
+                createGraph.setDisable(false);
+                long end = System.currentTimeMillis();
+                saveLabel.setVisible(true);
+                System.out.println(end - start);
+
+            });
+
         });
                 
        
