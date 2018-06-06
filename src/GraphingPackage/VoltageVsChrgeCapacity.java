@@ -18,9 +18,9 @@ public class VoltageVsChrgeCapacity extends Graph {
 
 
     public VoltageVsChrgeCapacity(File fileName, double value, String title,
-                                  double cycleOne, double cycleTwo, double cycleThree, int Channel) {
+                                ArrayList<Double> cycles , int Channel) {
 
-        super(fileName, value, title, cycleOne, cycleTwo, cycleThree, Channel);
+        super(fileName, value, title, cycles, Channel);
 
     }
 
@@ -74,7 +74,7 @@ public class VoltageVsChrgeCapacity extends Graph {
     //defining a series
     public XYChart.Series series() {
         final XYChart.Series series = new XYChart.Series();
-        series.setName("Cycle " + cycleOne);
+        //series.setName("Cycle " + cycleOne);
 
 
 //populating the series with data
@@ -128,7 +128,7 @@ public class VoltageVsChrgeCapacity extends Graph {
 
     public XYChart.Series series1() {
         final XYChart.Series series1 = new XYChart.Series();
-        series1.setName("Cycle " + cycleTwo);
+       // series1.setName("Cycle " + cycleTwo);
 
 
 //populating the series with data
@@ -181,7 +181,7 @@ public class VoltageVsChrgeCapacity extends Graph {
     public XYChart.Series series2() {
 
         final XYChart.Series series2 = new XYChart.Series();
-        series2.setName("Cycle " + cycleThree);
+       // series2.setName("Cycle " + cycleThree);
 
 
 //populating the series with data

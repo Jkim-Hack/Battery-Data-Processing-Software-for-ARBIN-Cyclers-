@@ -171,12 +171,12 @@ public class MainMenu extends Application
         
         Label Cycles = new Label("Enter Three Cycles: ");
         TextField insertCycle1 = new TextField();
-        ArrayList<Integer> cycle = new ArrayList<>();
+        ArrayList<Double> cycle = new ArrayList<>();
         //TODO BE ABLE TO DO , - etc
         if(insertCycle1.getText().matches("(.*)(,)(.*)")){
             String[] cycles = insertCycle1.getText().split(",");
             for (int i = 0; i < cycles.length; i++) {
-                cycle.add(Integer.parseInt(cycles[i]));
+                cycle.add(toCycleDouble(cycles[i]));
             }
         }
         
@@ -235,8 +235,6 @@ public class MainMenu extends Application
                     double mass = 0;
 
                     cycleOne = toCycleDouble(insertCycle1.getText());
-                    cycleTwo = toCycleDouble(insertCycle2.getText());
-                    cycleThree = toCycleDouble(insertCycle3.getText());
                     mass = toMassDouble(insertMass.getText());
 
                     return null;
@@ -270,8 +268,6 @@ public class MainMenu extends Application
                 // double cycleTwo = 0;
                 // double cycleThree = 0;
                 setUpValidation(insertCycle1);
-                setUpValidation(insertCycle2);
-                setUpValidation(insertCycle3);
                 setUpValidation(insertMass);
                 // double mass = 0;
                 double cycleOne = 0;
@@ -279,8 +275,7 @@ public class MainMenu extends Application
                 double cycleThree = 0;
                 double mass = 0;
                 cycleOne = toCycleDouble(insertCycle1.getText());
-                cycleTwo = toCycleDouble(insertCycle2.getText());
-                cycleThree = toCycleDouble(insertCycle3.getText());
+
                 mass = toMassDouble(insertMass.getText());
 
                 mass = mass/1000;
@@ -389,7 +384,7 @@ public class MainMenu extends Application
        	
        	pane.setLeft(midinserts);
        	midinserts.setPadding(new Insets(20, 20, 20, 20));
-       	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass, Cycles, insertCycle1, insertCycle2, insertCycle3, 
+       	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass, Cycles, insertCycle1,
        			SheetField, SheetText, pseudoSave, saveLabel);
 
        	

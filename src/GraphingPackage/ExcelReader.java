@@ -43,9 +43,7 @@ public class ExcelReader
 	private SheetData data;
 	private File fileName;
 
-	protected double cycleOne;
-	protected double cycleTwo;
-	protected double cycleThree;
+	protected ArrayList<Double> cycles;
 	protected int Channel;
 	protected int Stat;
 
@@ -69,44 +67,13 @@ public class ExcelReader
 	{
 		this.data = data;
 	}
-	
-	public double getCycleOne()
-	{
-		return cycleOne;
-	}
 
-	public void setCycleOne(double cycleOne) 
-	{
-		this.cycleOne = cycleOne;
-	}
-
-	public double getCycleTwo()
-	{
-		return cycleTwo;
-	}
-
-	public void setCycleTwo(double cycleTwo) 
-	{
-		this.cycleTwo = cycleTwo;
-	}
-
-	public double getCycleThree()
-	{
-		return cycleThree;
-	}
-
-	public void setCycleThree(double cycleThree)
-	{
-		this.cycleThree = cycleThree;
-	}
-
-	public ExcelReader(File fileName, double cycleOne, double cycleTwo, double cycleThree, int Channel) throws IOException
+	public ExcelReader(File fileName, ArrayList<Double> cycles, int Channel) throws IOException
 	{
 		this.fileName = fileName;
 		
-		this.cycleOne = cycleOne;
-		this.cycleTwo = cycleTwo;
-		this.cycleThree = cycleThree;
+		this.cycles = cycles;
+
 		
 		this.Channel = Channel;
 	
@@ -166,14 +133,15 @@ public class ExcelReader
 					case NUMERIC: cellContent = (double)(currentCell.getNumericCellValue());
 					break;
 				}
-				
 
-				if(cycleCell == cycleOne || cycleCell == cycleTwo || cycleCell == cycleThree)
-				{
-					isCycle = true;
-					container.add(cellContent);
+				for (int k = 0; k < cycles.size(); k++) {
+
+
+					if (cycleCell == cycles.get(k)) {
+						isCycle = true;
+						container.add(cellContent);
+					}
 				}
-					
 				
             }
            

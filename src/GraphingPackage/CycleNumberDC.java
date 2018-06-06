@@ -1,6 +1,7 @@
 package GraphingPackage;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.chart.LineChart;
@@ -13,10 +14,10 @@ import javafx.stage.Stage;
 public class CycleNumberDC extends Graph {
 
 	
-	public CycleNumberDC(File fileName, double value,String title,
-			double cycleOne, double cycleTwo, double cycleThree, int Channel) 
+	public CycleNumberDC(File fileName, double value, String title,
+						 ArrayList<Double> cycles, int Channel)
 	{
-		super(fileName, value, title,cycleOne,cycleTwo,cycleThree, Channel);	
+		super(fileName, value, title,cycles, Channel);
 	}
 	public LineChart<Number,Number> display()
 	{
