@@ -99,6 +99,9 @@ import AlertBox.Alert;
 public class MainMenu extends Application 
 {
  
+	//TODO
+	
+	
 	//Instance Variables
 	
 
@@ -125,7 +128,7 @@ public class MainMenu extends Application
         GraphChoose.setSpacing(20);
         
         
-        Label labelMass = new Label("Insert Mass in Grams (g): ");
+        Label labelMass = new Label("Insert Mass in mg: ");
         labelMass.setFont(Font.font ("Segoe UI", 12));
         
         Label saveLabel = new Label(" Saved!");
@@ -168,8 +171,14 @@ public class MainMenu extends Application
         
         Label Cycles = new Label("Enter Three Cycles: ");
         TextField insertCycle1 = new TextField();
-        TextField insertCycle2 = new TextField();
-        TextField insertCycle3 = new TextField();
+        ArrayList<Integer> cycle = new ArrayList<>();
+        //TODO BE ABLE TO DO , - etc
+        if(insertCycle1.getText().matches("(.*)(,)(.*)")){
+            String[] cycles = insertCycle1.getText().split(",");
+            for (int i = 0; i < cycles.length; i++) {
+                cycle.add(Integer.parseInt(cycles[i]));
+            }
+        }
         
         
        
@@ -190,7 +199,7 @@ public class MainMenu extends Application
 			
 		}
         
-        
+        //TODO Opens Directory
         try {
 			FileInputStream fileIn = new FileInputStream(System.getenv("APPDATA")+ "\\BatteryDataSftwre\\path.ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -274,6 +283,7 @@ public class MainMenu extends Application
                 cycleThree = toCycleDouble(insertCycle3.getText());
                 mass = toMassDouble(insertMass.getText());
 
+                mass = mass/1000;
 
                 String ChargeCap = "Voltage vs Charge Capacity & Discharge Capacity";
 
@@ -284,7 +294,7 @@ public class MainMenu extends Application
                         cycleOne,cycleTwo,cycleThree, Channel));
                 graphs.add(new CoulombicEff(fileChooser.fileName, mass, "Coulombic Efficiency vs Cycle Number",
                         cycleOne,cycleTwo,cycleThree, Channel));
-
+                		
                 box1.getItems().clear();
                 // box2.getItems().clear();
                 // box3.getItems().clear();
