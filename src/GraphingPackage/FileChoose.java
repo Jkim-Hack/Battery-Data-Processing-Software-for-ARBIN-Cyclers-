@@ -19,8 +19,6 @@ public class FileChoose implements Serializable
 		return fileName;
 	}
 
-	public void setDir(File fileName){fileChooser.setInitialDirectory(fileName);}
-
 	public void setFileName(File fileName) {
 		this.fileName = fileName;
 	}
@@ -30,8 +28,7 @@ public class FileChoose implements Serializable
     FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XLS Files (*.xls)", "*.xls");
     FileChooser.ExtensionFilter extFilter1 = new FileChooser.ExtensionFilter("XLSX Files (*.xlsx)", "*.xlsx");
     fileChooser.getExtensionFilters().addAll(extFilter, extFilter1);
-    fileName = fileChooser.showSaveDialog(primaryStage);
-    setDir(fileName);
+    fileName = fileChooser.showOpenDialog(primaryStage);
   
     if(fileName != null)
     {

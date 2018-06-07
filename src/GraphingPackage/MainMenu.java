@@ -50,7 +50,7 @@ limitations under the License.
 
 package GraphingPackage;
 
- 
+
 import java.awt.Desktop;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -96,52 +96,45 @@ import javafx.util.Duration;
 import AlertBox.Alert;
 
 
-public class MainMenu extends Application 
-{
- 
-	//TODO
-	
-	
-	//Instance Variables
-	
+public class MainMenu extends Application {
 
 
-	private final PseudoClass errorClass = PseudoClass.getPseudoClass("error");
 
-	FileChoose fileChooser = new FileChoose();
-		
-	
+    //Instance Variables
 
-	
+
+    private final PseudoClass errorClass = PseudoClass.getPseudoClass("error");
+
+    FileChoose fileChooser = new FileChoose();
+    ArrayList<Double> cycle = new ArrayList<>();
+    double mass = 0;
+    int Channel = 0;
+
     @SuppressWarnings("restriction")
-	@Override public void start(Stage primaryStage)
-    {	
-    	
-    	
-    	//Display Panes
+    @Override
+    public void start(Stage primaryStage) {
+
+
+        //Display Panes
         VBox topContainer = new VBox();
         VBox midinserts = new VBox();
         VBox GraphChoose = new VBox();
-        
-        
+
+
         midinserts.setSpacing(10);
         GraphChoose.setSpacing(20);
-        
-        
+
+
         Label labelMass = new Label("Insert Mass in mg: ");
-        labelMass.setFont(Font.font ("Segoe UI", 12));
-        
-        Label saveLabel = new Label(" Saved!");
-        saveLabel.setVisible(false);
-        
+        labelMass.setFont(Font.font("Segoe UI", 12));
+
+
         //Textbox for File 
-        
-        
-       
-        
+
+
         //Creates Drop Down Boxes 
         Label topLabel = new Label("Choose Graph: 						    ");
-        ChoiceBox<Graph> box1 = new ChoiceBox<Graph>();
+        ChoiceBox<String> box1 = new ChoiceBox<String>();
         
         
         
@@ -152,91 +145,124 @@ public class MainMenu extends Application
         Label botRight = new Label("Top Right Pane 						    ");
         ChoiceBox<Graph> box3 = new ChoiceBox<Graph>();
         */
-       
-        
-       
-        
-        
-       
+
+
         Label fileLabel = new Label("Chosen File:");
         TextField fileField = new TextField();
-      
+
         Label SheetField = new Label("Enter Amount of Channel Sheets: ");
         TextField SheetText = new TextField("1");
-       
-        
-    
-        
-        
-        
+
+
         Label Cycles = new Label("Enter Three Cycles: ");
         TextField insertCycle1 = new TextField();
-        ArrayList<Double> cycle = new ArrayList<>();
-        //TODO BE ABLE TO DO , - etc
-        if(insertCycle1.getText().matches("(.*)(,)(.*)")){
-            String[] cycles = insertCycle1.getText().split(",");
-            for (int i = 0; i < cycles.length; i++) {
-                cycle.add(toCycleDouble(cycles[i]));
-            }
-        }
-        
-        
-       
+
+
+
         //Mass textfield
         Button createGraph = new Button();
-        createGraph.setDisable(true);
-        
-        TextField insertMass = new TextField();
-        Button pseudoSave = new Button("Apply");
-        
-        File f = new File(System.getenv("APPDATA")+ "\\BatteryDataSftwre\\path.ser");
 
-        f.getParentFile().mkdirs(); 
+
+        TextField insertMass = new TextField();
+
+        File f = new File(System.getenv("APPDATA") + "\\BatteryDataSftwre\\path.ser");
+
+        f.getParentFile().mkdirs();
         try {
-			f.createNewFile();
-		} catch (IOException e) {
-			System.out.println("Already Exists");
-			
-		}
-        
+            f.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Already Exists");
+
+        }
+
         //TODO Opens Directory
         try {
-			FileInputStream fileIn = new FileInputStream(System.getenv("APPDATA")+ "\\BatteryDataSftwre\\path.ser");
-			ObjectInputStream in = new ObjectInputStream(fileIn);
-			fileChooser = (FileChoose) in.readObject();
-			fileField.setText(fileChooser.fileName.getName());
-			in.close();
-			fileIn.close();
-		}catch(IOException i) {
-			
-			fileField.setText("File -> Open File...");
-			   
-		}catch(ClassNotFoundException c) {
-			
-			fileField.setText("File -> Open File...");
-		
-		}catch(NullPointerException k){
+            FileInputStream fileIn = new FileInputStream(System.getenv("APPDATA") + "\\BatteryDataSftwre\\path.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            fileChooser = (FileChoose) in.readObject();
+            fileField.setText(fileChooser.fileName.getName());
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+
+            fileField.setText("File -> Open File...");
+
+        } catch (ClassNotFoundException c) {
+
+            fileField.setText("File -> Open File...");
+
+        } catch (NullPointerException k) {
             fileField.setText("File -> Open File...");
         }
 
 
+        String ChargeCap = "Voltage vs Charge Capacity & Discharge Capacity";
+
+        List<String> graphs = new ArrayList<String>();
+        graphs.add(ChargeCap);
+        graphs.add("Discharge Capacity vs Cycle Number");
+        graphs.add("Coulombic Efficiency vs Cycle Number");
+        box1.getItems().addAll(graphs);
 
 
-        
-        pseudoSave.addEventHandler(ActionEvent.ACTION , ActionEvent -> 
+        //Menu drop down bar
+        MenuBar ddMenu = new MenuBar();
+        Menu files = new Menu("File");
+        MenuItem openFile = new MenuItem("Open File...");
+
+
+        openFile.setOnAction((ActionEvent event) -> {
+
+            //File Chooser class
+            fileChooser.chooseFile(primaryStage);
+            fileChooser.fileName = fileChooser.getFileName();
+
+
+            try {
+                FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA") + "\\BatteryDataSftwre\\path.ser");
+                ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                out.writeObject(fileChooser);
+                out.close();
+                fileOut.close();
+            } catch (IOException i) {
+                i.printStackTrace();
+            }
+
+
+            fileField.setText(fileChooser.fileName.getName());
+
+            //File Chooser class
+
+        });
+
+        fileField.setEditable(false);
+
+        files.getItems().add(openFile);
+
+
+        ddMenu.getMenus().addAll(files);
+
+        //Button for the graph window created
+
+
+        createGraph.setText("Create Graphs");
+        createGraph.setFont(Font.font("Segoe UI", 16));
+        createGraph.setOnAction((ActionEvent event) ->
         {
+
 
             Task<Void> insertionCycles = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    double cycleOne = 0;
-                    double cycleTwo = 0;
-                    double cycleThree = 0;
-                    double mass = 0;
-
-                    cycleOne = toCycleDouble(insertCycle1.getText());
+                    //TODO Change this thing with regex
+                    Channel = toSheetInt(SheetText.getText());
                     mass = toMassDouble(insertMass.getText());
-
+                    if (insertCycle1.getText().matches("(.*)(,)(.*)")) {
+                        String[] cycles = insertCycle1.getText().split(",");
+                        for (int i = 0; i < cycles.length; i++) {
+                            cycle.add(toCycleDouble(cycles[i]));
+                        }
+                    }
                     return null;
                 }
             };
@@ -244,236 +270,134 @@ public class MainMenu extends Application
             t.setDaemon(true);
             t.start();
 
-            insertionCycles.setOnFailed(event -> {
+            insertionCycles.setOnFailed(evente -> {
 
-                    Alert alert = new Alert();
-                    alert.displayBox("Error in input fields");
+                Alert alert1 = new Alert();
+                alert1.displayBox("Error in input fields");
 
             });
-        	insertionCycles.setOnSucceeded(event -> {
+            insertionCycles.setOnSucceeded(evente -> {
 
-                saveLabel.setVisible(false);
+
                 long start = System.currentTimeMillis();
-                isDouble(insertMass, insertMass.getText());
-                setUpValidation(SheetText);
-                int Channel = 0;
-                try {
-                    Channel = toSheetInt(SheetText.getText());
+
+                if (insertCycle1.getText().matches("(.*)(,)(.*)")) {
+                    String[] cycles = insertCycle1.getText().split(",");
+                    for (int i = 0; i < cycles.length; i++) {
+                        cycle.add(toCycleDouble(cycles[i]));
+                    }
                 }
-                catch (Exception e) {
-                    Alert alert1 = new Alert();
-                    alert1.displayBox("Error in input fields");
-                }
-                //double cycleOne = 0;
-                // double cycleTwo = 0;
-                // double cycleThree = 0;
-                setUpValidation(insertCycle1);
-                setUpValidation(insertMass);
-                // double mass = 0;
-                double cycleOne = 0;
-                double cycleTwo = 0;
-                double cycleThree = 0;
-                double mass = 0;
-                cycleOne = toCycleDouble(insertCycle1.getText());
+
+                Channel = toSheetInt(SheetText.getText());
 
                 mass = toMassDouble(insertMass.getText());
 
-                mass = mass/1000;
-
-                String ChargeCap = "Voltage vs Charge Capacity & Discharge Capacity";
-
-                List<Graph> graphs = new ArrayList<Graph>();
-                graphs.add(new VoltageVsChrgeCapacity(fileChooser.fileName, mass, ChargeCap ,
-                        cycleOne,cycleTwo,cycleThree, Channel));
-                graphs.add(new CycleNumberDC(fileChooser.fileName, mass, "Discharge Capacity vs Cycle Number",
-                        cycleOne,cycleTwo,cycleThree, Channel));
-                graphs.add(new CoulombicEff(fileChooser.fileName, mass, "Coulombic Efficiency vs Cycle Number",
-                        cycleOne,cycleTwo,cycleThree, Channel));
-                		
-                box1.getItems().clear();
-                // box2.getItems().clear();
-                // box3.getItems().clear();
-
-                box1.getItems().addAll(graphs);
-                // box2.getItems().addAll(graphs);
-                // box3.getItems().addAll(graphs);
+                mass = mass / 1000;
 
                 createGraph.setDisable(false);
                 long end = System.currentTimeMillis();
-                saveLabel.setVisible(true);
                 System.out.println(end - start);
 
+
+                MainGraphs graph = null;
+
+                if (box1.getValue().equals("Voltage vs Charge Capacity & Discharge Capacity")) {
+                    graph = new MainGraphs(new VoltageVsChrgeCapacity(fileChooser.fileName, mass, "Voltage vs Charge Capacity & Discharge Capacity",
+                            cycle, Channel));
+                }
+                if (box1.getValue().equals("Discharge Capacity vs Cycle Number")) {
+                    graph = new MainGraphs(new CycleNumberDC(fileChooser.fileName, mass, "Discharge Capacity vs Cycle Number",
+                            cycle, Channel));
+                }
+                if (box1.getValue().equals("Coulombic Efficiency vs Cycle Number")) {
+                    graph = new MainGraphs(new CoulombicEff(fileChooser.fileName, mass, "Coulombic Efficiency vs Cycle Number",
+                            cycle, Channel));
+                }
+
+                graph.displayGraphs();
             });
-
         });
-                
-       
-        	
-        //Menu drop down bar
-        MenuBar ddMenu = new MenuBar();
-        Menu files = new Menu("File");
-        MenuItem openFile = new MenuItem("Open File...");	
-       
-        
-       openFile.setOnAction((ActionEvent event) -> {
-        	
-            //File Chooser class
-    	fileChooser.chooseFile(primaryStage);
-    	fileChooser.fileName = fileChooser.getFileName();
-    	
-    	
 
-    	try {
-    		FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA")+ "\\BatteryDataSftwre\\path.ser");
-    	 	ObjectOutputStream out = new ObjectOutputStream(fileOut);
-    	 	out.writeObject(fileChooser);
-    	 	out.close();
-    	 	fileOut.close();
-    	 	}catch(IOException i) {
-    	 		i.printStackTrace();
-    	 	}
-            
+        createGraph.setPrefWidth(250);
+        createGraph.setPrefHeight(70);
 
-    	 	fileField.setText(fileChooser.fileName.getName());
 
-            //File Chooser class
-            
-       });
-       
-       fileField.setEditable(false);
-       
-       files.getItems().add(openFile);
-      
-       
-       
-       ddMenu.getMenus().addAll(files);
-       
-    //Button for the graph window created
-    	
-    	
-    	createGraph.setText("Create Graphs");
-    	createGraph.setFont(Font.font ("Segoe UI", 16));
-    	createGraph.setOnAction((ActionEvent event) ->
-    	{
-    		
-    		MainGraphs graph = new MainGraphs(box1.getValue());
-    		graph.displayGraphs();
-    		
-        });
-    	
-    	createGraph.setPrefWidth(250);
-       	createGraph.setPrefHeight(70);
-    	
-    	
-    	
-       //The primary master window is created
-       
-    	BorderPane pane = new BorderPane();
-    	
-       	pane.setRight(GraphChoose);
-       	GraphChoose.setMargin(createGraph, new Insets(280,0,0,0));
-       	GraphChoose.setPadding(new Insets(20,20,20,20));
-       	GraphChoose.setAlignment(Pos.TOP_RIGHT);
-       	GraphChoose.getChildren().addAll(topLabel,box1, createGraph);
-       	box1.setPrefWidth(250);
-       //	box2.setPrefWidth(250);
-       //	box3.setPrefWidth(250);
-       
-       	pane.setTop(topContainer);
-       	topContainer.getChildren().add(ddMenu);
-       	
-       	pane.setLeft(midinserts);
-       	midinserts.setPadding(new Insets(20, 20, 20, 20));
-       	midinserts.getChildren().addAll(fileLabel, fileField, labelMass ,insertMass, Cycles, insertCycle1,
-       			SheetField, SheetText, pseudoSave, saveLabel);
+        //The primary master window is created
 
-       	
-      
-       
-       InputStream in = this.getClass().getClassLoader().getResourceAsStream("favicon.PNG");
-       
-       Scene scene = new Scene(pane, 600, 497);
-      
-       Image icon = new Image(in);
-       
+        BorderPane pane = new BorderPane();
+
+        pane.setRight(GraphChoose);
+        GraphChoose.setMargin(createGraph, new Insets(280, 0, 0, 0));
+        GraphChoose.setPadding(new Insets(20, 20, 20, 20));
+        GraphChoose.setAlignment(Pos.TOP_RIGHT);
+        GraphChoose.getChildren().addAll(topLabel, box1, createGraph);
+        box1.setPrefWidth(250);
+        //	box2.setPrefWidth(250);
+        //	box3.setPrefWidth(250);
+
+        pane.setTop(topContainer);
+        topContainer.getChildren().add(ddMenu);
+
+        pane.setLeft(midinserts);
+        midinserts.setPadding(new Insets(20, 20, 20, 20));
+        midinserts.getChildren().addAll(fileLabel, fileField, labelMass, insertMass, Cycles, insertCycle1,
+                SheetField, SheetText);
+
+
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream("favicon.PNG");
+
+        Scene scene = new Scene(pane, 600, 497);
+
+        Image icon = new Image(in);
+
         primaryStage.getIcons().add(icon);
         primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler) v1.1");
         primaryStage.setScene(scene);
         primaryStage.show();
-         
-        
-        
-    }
-    
-    
-    
-    
-    
-    
-    private boolean isDouble(TextField input, String mass)
-    {
-    	
-    	try
-    	{
-    		double dataMass = Double.parseDouble(input.getText());
-    		return true;
-    		
-    	} catch(NumberFormatException e){
-    		return false;
-    	}
+
+
     }
 
-    
-    public double toMassDouble(String mass)
-    {
-    	double dataMass = Double.parseDouble(mass);
-    	return dataMass;
-    }
-    
-    public int toSheetInt(String number)
-    {
-    	int sheet = Integer.parseInt(number);
-    	return sheet;
-    }
- 
-    public double toCycleDouble(String Cycle)
-    {
-    	double AllCycle = Double.parseDouble(Cycle);
-    	return AllCycle;
-    }
-    
-    private void setUpValidation(final TextField tf) { 
-        tf.textProperty().addListener(new ChangeListener<String>() {
 
-            @Override
-            public void changed(ObservableValue<? extends String> observable,
-                    String oldValue, String newValue) {
-                validate(tf);
-            }
+    private boolean isDouble(TextField input, String mass) {
 
-        });
+        try {
+            double dataMass = Double.parseDouble(input.getText());
+            return true;
 
-        validate(tf);
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
+
+
+    public double toMassDouble(String mass) {
+        double dataMass = Double.parseDouble(mass);
+        return dataMass;
+    }
+
+    public int toSheetInt(String number) {
+        int sheet = Integer.parseInt(number);
+        return sheet;
+    }
+
+    public double toCycleDouble(String Cycle) {
+        double AllCycle = Double.parseDouble(Cycle);
+        return AllCycle;
+    }
+
 
     private void validate(TextField tf) {
-    	
-    	 ObservableList<String> styleClass = tf.getStyleClass();
-         if (tf.getText().trim().length()==0 ) {
-             if (! styleClass.contains("error")) {
-                 styleClass.add("error");
-             }
-         } else {
-             // remove all occurrences:
-             styleClass.removeAll(Collections.singleton("error"));                    
-         }
+
+
+        Alert alert = new Alert();
+        alert.displayBox("Error in input fields");
 
     }
-    
-    
-	public static void main(String[] args)
-    {
-	
+
+
+    public static void main(String[] args) {
+
         launch(args);
     }
 }

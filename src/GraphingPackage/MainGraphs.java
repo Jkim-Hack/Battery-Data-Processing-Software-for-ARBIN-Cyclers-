@@ -9,6 +9,7 @@ import java.awt.Desktop;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -34,107 +35,99 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class MainGraphs
-{
+public class MainGraphs {
 
-	private Graph graphOne;
-	
-	
-	
-	public MainGraphs(Graph one)
-	{
-		this.graphOne = one;
-		
-	}
-	public Graph getGraphOne() 
-	{
-		return graphOne;
-	}
-
-	public void setGraphOne(Graph graphOne) 
-	{
-		this.graphOne = graphOne;
-	}
+    private Graph graphOne;
 
 
+    public MainGraphs(Graph one) {
+        this.graphOne = one;
 
-	
-	
-	@SuppressWarnings("restriction")
-	public void displayGraphs()
-	{
-		Stage stage = new Stage();
-		
-		BorderPane Pane = new BorderPane();
-		
-		final NumberAxis xAxis = new NumberAxis();
-		final NumberAxis yAxis = new NumberAxis();
-		
-		// creating the chart
-		LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
-		
-		lineChart = graphOne.display();
-		
-		double start = System.currentTimeMillis();
-			
-		Pane.setCenter(lineChart);
-		
-		double end = System.currentTimeMillis();
-		
-		System.out.println(end - start);
-		
-		MenuBar topMen = new MenuBar();
-		
-		Menu help = new Menu("Help");
-		MenuItem Htu = new MenuItem("How to Zoom");
-		
-		Htu.setOnAction((ActionEvent event) -> {
-	    	  
-	    	   File howtouse = new File("HowToZoom.txt");
-	    	   try {
-				Desktop.getDesktop().open(howtouse);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-	       });
-		
-		Menu file = new Menu("File"); 
-		
-		MenuItem screenshot = new MenuItem("Save Image...");
-			
-			screenshot.setOnAction((ActionEvent event) -> { 
-				WritableImage image = Pane.getCenter().snapshot(new SnapshotParameters(), null);
-				FileChooser fileChooser = new FileChooser();
-				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
-				fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("jpeg files (*.jpg)", "*.jpg"));
-	            fileChooser.setTitle("Save Image");
-	            File filech = fileChooser.showSaveDialog(stage);
-	            if (filech != null) {
-			    try {
-			        ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", filech);
-			    } catch (IOException e) {
-			       
-			    }
-	            }
-			});
-			
-			
-		file.getItems().add(screenshot);
-		Pane.setTop(topMen);
-		topMen.getMenus().addAll(file);
-		
-			
-		Scene scene = new Scene(Pane, 750,450);
-	
-		
-		new ZoomManager(Pane, lineChart, graphOne.series2dis(),graphOne.filler1(), graphOne.filler2(), graphOne.series(),
-				graphOne.series1(), graphOne.series2(), graphOne.seriesdis(), graphOne.series1dis(), graphOne.filler());
-		
-		
-		stage.setScene(scene);
-		stage.show();
-		
-		
-	}
-	
+    }
+
+    public Graph getGraphOne() {
+        return graphOne;
+    }
+
+    public void setGraphOne(Graph graphOne) {
+        this.graphOne = graphOne;
+    }
+
+
+    @SuppressWarnings("restriction")
+    public void displayGraphs() {
+        Stage stage = new Stage();
+
+        BorderPane Pane = new BorderPane();
+
+        final NumberAxis xAxis = new NumberAxis();
+        final NumberAxis yAxis = new NumberAxis();
+
+        // creating the chart
+        LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
+
+        lineChart = graphOne.display();
+
+        double start = System.currentTimeMillis();
+
+        Pane.setCenter(lineChart);
+
+        double end = System.currentTimeMillis();
+
+        System.out.println(end - start);
+
+        MenuBar topMen = new MenuBar();
+
+        Menu help = new Menu("Help");
+        MenuItem Htu = new MenuItem("How to Zoom");
+
+        Htu.setOnAction((ActionEvent event) -> {
+
+            File howtouse = new File("HowToZoom.txt");
+            try {
+                Desktop.getDesktop().open(howtouse);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+
+        Menu file = new Menu("File");
+
+        MenuItem screenshot = new MenuItem("Save Image...");
+
+        screenshot.setOnAction((ActionEvent event) -> {
+            WritableImage image = Pane.getCenter().snapshot(new SnapshotParameters(), null);
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("png files (*.png)", "*.png"));
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("jpeg files (*.jpg)", "*.jpg"));
+            fileChooser.setTitle("Save Image");
+            File filech = fileChooser.showSaveDialog(stage);
+            if (filech != null) {
+                try {
+                    ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", filech);
+                } catch (IOException e) {
+
+                }
+            }
+        });
+
+
+        file.getItems().add(screenshot);
+        Pane.setTop(topMen);
+        topMen.getMenus().addAll(file);
+
+
+        Scene scene = new Scene(Pane, 750, 450);
+
+
+        //TODO ZoomManager Series List
+        new ZoomManager(Pane, lineChart, graphOne.getSeriesList());
+
+
+        stage.setScene(scene);
+        stage.show();
+
+
+    }
+
 }
