@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 public class VoltageVsChrgeCapacity extends Graph {
 
 
-    protected List<XYChart.Series> seriesList;
+    private ArrayList<XYChart.Series> seriesList = new ArrayList<>();
 
     public VoltageVsChrgeCapacity(File fileName, double value, String title,
                                 ArrayList<Double> cycles , int Channel) {
@@ -52,25 +52,25 @@ public class VoltageVsChrgeCapacity extends Graph {
 
         lineChart.setTitle("Voltage vs Capacity");
         lineChart.setCreateSymbols(false);
-        lineChart.getStylesheets().add("Chart.css");
+        //lineChart.getStylesheets().add("Chart.css");
 
         return lineChart;
     }
 
 
     @Override
-    public List<XYChart.Series> getSeriesList() {
+    public ArrayList<XYChart.Series> getSeriesList() {
         return seriesList;
     }
 
     //defining a series
+    @Override
     public void series() {
-        XYChart.Series series = new XYChart.Series();
         //series.setName("Cycle " + cycleOne);
 
         for (int u = 0; u < cycles.size(); u++) {
 
-
+            XYChart.Series series = new XYChart.Series();
             if (excelReader != null) {
 
 
@@ -118,20 +118,20 @@ public class VoltageVsChrgeCapacity extends Graph {
             seriesList.add(series);
 
         }
+
     }
 
-
+    @Override
     public void seriesdis() {
 
-        XYChart.Series seriesdis = new XYChart.Series();
 
 
-//populating the series with data
+    //populating the series with data
 
         if (excelReader != null) {
 
             for (int u = 0; u < cycles.size(); u++) {
-
+                XYChart.Series seriesdis = new XYChart.Series();
 
                 List<Data> currentByCycle = new ArrayList<Data>();
                 for (int i = 0; i < electricityData.size(); i++) {

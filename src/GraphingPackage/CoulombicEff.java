@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 public class CoulombicEff extends Graph {
 
 
-    private List<XYChart.Series> seriesList;
+    private ArrayList<XYChart.Series> seriesList;
 
     public CoulombicEff(File fileName, double value, String title,
                         ArrayList<Double> cycles, int Channel) {
@@ -56,7 +56,7 @@ public class CoulombicEff extends Graph {
     }
 
     @Override
-    public List<XYChart.Series> getSeriesList() {
+    public ArrayList<XYChart.Series> getSeriesList() {
         return seriesList;
     }
 

@@ -123,11 +123,14 @@ public class ExcelReader {
                             break;
                     }
 
-
-                    if (cycleCell == cycles.get(k)) {
-                        isCycle = true;
-                        container.add(cellContent);
-                        k++;
+                    try {
+                        if (cycleCell == cycles.get(k)) {
+                            isCycle = true;
+                            container.add(cellContent);
+                            k++;
+                        }
+                    } catch (Exception e) {
+                        break;
                     }
 
                 }

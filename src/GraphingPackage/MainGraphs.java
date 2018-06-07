@@ -116,6 +116,8 @@ public class MainGraphs {
         Pane.setTop(topMen);
         topMen.getMenus().addAll(file);
 
+        graphOne.series();
+        graphOne.seriesdis();
 
         Scene scene = new Scene(Pane, 750, 450);
 

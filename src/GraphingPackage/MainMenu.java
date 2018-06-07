@@ -51,28 +51,17 @@ limitations under the License.
 package GraphingPackage;
 
 
-import java.awt.Desktop;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import javafx.animation.PauseTransition;
 import javafx.application.Application;
-import javafx.application.HostServices;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
@@ -91,7 +80,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import AlertBox.Alert;
 
@@ -105,10 +93,10 @@ public class MainMenu extends Application {
 
     private final PseudoClass errorClass = PseudoClass.getPseudoClass("error");
 
-    FileChoose fileChooser = new FileChoose();
-    ArrayList<Double> cycle = new ArrayList<>();
-    double mass = 0;
-    int Channel = 0;
+    public FileChoose fileChooser = new FileChoose();
+    public ArrayList<Double> cycle = new ArrayList<>();
+    public double mass = 0;
+    public int Channel = 0;
 
     @SuppressWarnings("restriction")
     @Override
@@ -175,7 +163,6 @@ public class MainMenu extends Application {
 
         }
 
-        //TODO Opens Directory
         try {
             FileInputStream fileIn = new FileInputStream(System.getenv("APPDATA") + "\\BatteryDataSftwre\\path.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -209,7 +196,6 @@ public class MainMenu extends Application {
         MenuBar ddMenu = new MenuBar();
         Menu files = new Menu("File");
         MenuItem openFile = new MenuItem("Open File...");
-
 
         openFile.setOnAction((ActionEvent event) -> {
 
@@ -280,13 +266,6 @@ public class MainMenu extends Application {
 
 
                 long start = System.currentTimeMillis();
-
-                if (insertCycle1.getText().matches("(.*)(,)(.*)")) {
-                    String[] cycles = insertCycle1.getText().split(",");
-                    for (int i = 0; i < cycles.length; i++) {
-                        cycle.add(toCycleDouble(cycles[i]));
-                    }
-                }
 
                 Channel = toSheetInt(SheetText.getText());
 

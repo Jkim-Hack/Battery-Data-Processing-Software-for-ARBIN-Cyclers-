@@ -77,15 +77,20 @@ public class Graph {
 
     }
 
-    public List<XYChart.Series> getSeriesList() {
-        List<XYChart.Series> seriesList = new ArrayList<>();
+    public ArrayList<XYChart.Series> getSeriesList() {
+        ArrayList<Series> seriesList = new ArrayList<>();
         return seriesList;
     }
 
     public void series() {
+
+        XYChart.Series series = new XYChart.Series();
+        getSeriesList().add(series);
     }
 
     public void seriesdis() {
+        XYChart.Series series = new XYChart.Series();
+        getSeriesList().add(series);
     }
 
 
