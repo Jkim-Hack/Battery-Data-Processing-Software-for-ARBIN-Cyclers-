@@ -108,7 +108,7 @@ public class MainMenu extends Application
 
 	private final PseudoClass errorClass = PseudoClass.getPseudoClass("error");
 
-	public FileChoose fileChooser = new FileChoose();
+	FileChoose fileChooser = new FileChoose();
 		
 	
 

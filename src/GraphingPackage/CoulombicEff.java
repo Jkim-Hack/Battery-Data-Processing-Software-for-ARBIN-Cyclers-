@@ -1,6 +1,7 @@
 package GraphingPackage;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.chart.LineChart;
@@ -14,9 +15,9 @@ public class CoulombicEff extends Graph {
 
 	
 	public CoulombicEff(File fileName, double value, String title,
-			double cycleOne, double cycleTwo, double cycleThree, int Channel) 
+						ArrayList<Double> cycles, int Channel)
 	{
-		super(fileName, value, title, cycleOne,cycleTwo,cycleThree, Channel);
+		super(fileName, value, title, cycles, Channel);
 	
 	}
 
