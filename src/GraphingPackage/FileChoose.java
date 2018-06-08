@@ -35,8 +35,7 @@ public class FileChoose implements Serializable {
         } catch (NullPointerException e){
             fileChooser.setInitialDirectory(fileName.getParentFile());
         }
-        fileName = fileChooser.showOpenDialog(primaryStage);
-
+            fileName = fileChooser.showOpenDialog(primaryStage);
         if (fileName != null) {
             setFileName(fileName);
         }

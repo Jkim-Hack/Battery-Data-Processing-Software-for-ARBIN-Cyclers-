@@ -124,13 +124,11 @@ public class MainGraphs {
         //TODO ZoomManager Series List
         new ZoomManager(Pane, lineChart, graphOne.getSeriesList());
 
+        graphOne.getSeriesList().clear();
+        MainMenu.cycle.clear();
 
         stage.setScene(scene);
         stage.show();
-        stage.setOnCloseRequest(event -> {
-            graphOne.getSeriesList().clear();
-            MainMenu.cycle.clear();
-        });
 
 
     }
