@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class CycleNumberDC extends Graph {
 
-    private ArrayList<XYChart.Series> seriesList;
+    private ArrayList<XYChart.Series> seriesList = new ArrayList<>();
 
     public CycleNumberDC(File fileName, double value, String title,
                          ArrayList<Double> cycles, int Channel) {

@@ -65,6 +65,7 @@ import javafx.application.Application;
 import javafx.concurrent.Task;
 import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -76,6 +77,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -94,7 +96,7 @@ public class MainMenu extends Application {
     private final PseudoClass errorClass = PseudoClass.getPseudoClass("error");
 
     public FileChoose fileChooser = new FileChoose();
-    public ArrayList<Double> cycle = new ArrayList<>();
+    public static ArrayList<Double> cycle = new ArrayList<>();
     public double mass = 0;
     public int Channel = 0;
 
@@ -191,7 +193,6 @@ public class MainMenu extends Application {
         graphs.add("Coulombic Efficiency vs Cycle Number");
         box1.getItems().addAll(graphs);
 
-
         //Menu drop down bar
         MenuBar ddMenu = new MenuBar();
         Menu files = new Menu("File");
@@ -265,6 +266,7 @@ public class MainMenu extends Application {
             insertionCycles.setOnSucceeded(evente -> {
 
 
+
                 long start = System.currentTimeMillis();
 
                 Channel = toSheetInt(SheetText.getText());
@@ -274,8 +276,6 @@ public class MainMenu extends Application {
                 mass = mass / 1000;
 
                 createGraph.setDisable(false);
-                long end = System.currentTimeMillis();
-                System.out.println(end - start);
 
 
                 MainGraphs graph = null;
@@ -283,14 +283,20 @@ public class MainMenu extends Application {
                 if (box1.getValue().equals("Voltage vs Charge Capacity & Discharge Capacity")) {
                     graph = new MainGraphs(new VoltageVsChrgeCapacity(fileChooser.fileName, mass, "Voltage vs Charge Capacity & Discharge Capacity",
                             cycle, Channel));
+                    long end = System.currentTimeMillis();
+                    System.out.println(end - start);
                 }
                 if (box1.getValue().equals("Discharge Capacity vs Cycle Number")) {
                     graph = new MainGraphs(new CycleNumberDC(fileChooser.fileName, mass, "Discharge Capacity vs Cycle Number",
                             cycle, Channel));
+                    long end = System.currentTimeMillis();
+                    System.out.println(end - start);
                 }
                 if (box1.getValue().equals("Coulombic Efficiency vs Cycle Number")) {
                     graph = new MainGraphs(new CoulombicEff(fileChooser.fileName, mass, "Coulombic Efficiency vs Cycle Number",
                             cycle, Channel));
+                    long end = System.currentTimeMillis();
+                    System.out.println(end - start);
                 }
 
                 graph.displayGraphs();

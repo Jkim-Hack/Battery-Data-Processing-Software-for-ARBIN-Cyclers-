@@ -120,14 +120,17 @@ public class MainGraphs {
         graphOne.seriesdis();
 
         Scene scene = new Scene(Pane, 750, 450);
-
-
+        lineChart.setLegendVisible(false);
         //TODO ZoomManager Series List
         new ZoomManager(Pane, lineChart, graphOne.getSeriesList());
 
 
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(event -> {
+            graphOne.getSeriesList().clear();
+            MainMenu.cycle.clear();
+        });
 
 
     }

@@ -4,18 +4,21 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 
 public class VoltageVsChrgeCapacity extends Graph {
-
 
     private ArrayList<XYChart.Series> seriesList = new ArrayList<>();
 
@@ -52,7 +55,7 @@ public class VoltageVsChrgeCapacity extends Graph {
 
         lineChart.setTitle("Voltage vs Capacity");
         lineChart.setCreateSymbols(false);
-        //lineChart.getStylesheets().add("Chart.css");
+        lineChart.getStylesheets().add("Chart.css");
 
         return lineChart;
     }
@@ -106,9 +109,7 @@ public class VoltageVsChrgeCapacity extends Graph {
                     double voltage = currentByCycle.get(i).getVoltage();
 
                     XYChart.Data data = new XYChart.Data(charge, voltage);
-                    Rectangle rect = new Rectangle(0, 0);
-                    rect.setVisible(false);
-                    data.setNode(rect);
+                    data.setNode(new HoverOverPane(1));
                     series.getData().addAll(data);
 
                 }
@@ -164,9 +165,7 @@ public class VoltageVsChrgeCapacity extends Graph {
                     double voltage = currentByCycle.get(i).getVoltage();
 
                     XYChart.Data data3 = new XYChart.Data(charge, voltage);
-                    Rectangle rect = new Rectangle(0, 0);
-                    rect.setVisible(false);
-                    data3.setNode(rect);
+                    data3.setNode(new HoverOverPane(1));
                     seriesdis.getData().add(data3);
 
                 }
@@ -177,9 +176,38 @@ public class VoltageVsChrgeCapacity extends Graph {
 
     }
 
+    class HoverOverPane extends StackPane{
+
+        HoverOverPane(double cycleNumber){
+            setPrefSize(15, 15);
+
+            final Label label = new Label("Cycle #" + cycleNumber);
+            label.setStyle("-fx-font-size: 20;");
+            label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+
+            setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    System.out.println("HHEEEE");
+                    getChildren().addAll(label);
+                    toFront();
+                }
+            });
+
+            setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    getChildren().clear();
+                }
+            });
+
+        }
+
+
+    }
+
 
 }
-	
 			
 		
 	

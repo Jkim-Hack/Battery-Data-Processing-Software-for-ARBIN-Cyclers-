@@ -102,7 +102,6 @@ public class ExcelReader {
             Iterator<Row> iterator = firstSheet.iterator();
             iterator.next();
 
-            int k = 0;
             while (iterator.hasNext()) {
                 Row nextRow = iterator.next();
 
@@ -123,16 +122,15 @@ public class ExcelReader {
                             break;
                     }
 
-                    try {
-                        if (cycleCell == cycles.get(k)) {
+                    for (int k = 0; k < cycles.size(); k++) {
+
+
+                        if (cycleCell == cycles.get(k).doubleValue()) {
                             isCycle = true;
                             container.add(cellContent);
-                            k++;
-                        }
-                    } catch (Exception e) {
-                        break;
-                    }
 
+                        }
+                    }
                 }
 
                 if (isCycle) {
