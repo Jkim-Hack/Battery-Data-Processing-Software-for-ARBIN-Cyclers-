@@ -99,6 +99,7 @@ public class MainMenu extends Application {
     public static ArrayList<Double> cycle = new ArrayList<>();
     public double mass = 0;
     public int Channel = 0;
+    public boolean rem = false;
 
     @SuppressWarnings("restriction")
     @Override
@@ -172,16 +173,15 @@ public class MainMenu extends Application {
             fileField.setText(fileChooser.fileName.getName());
             in.close();
             fileIn.close();
+            rem = true;
         } catch (IOException i) {
-
-            fileField.setText("File -> Open File...");
+            fileField.setText("Click to open file");
 
         } catch (ClassNotFoundException c) {
-
-            fileField.setText("File -> Open File...");
+            fileField.setText("Click to open file");
 
         } catch (NullPointerException k) {
-            fileField.setText("File -> Open File...");
+            fileField.setText("Click to open file");
         }
 
 
@@ -195,39 +195,37 @@ public class MainMenu extends Application {
 
         //Menu drop down bar
         MenuBar ddMenu = new MenuBar();
-        Menu files = new Menu("File");
-        MenuItem openFile = new MenuItem("Open File...");
-
-        openFile.setOnAction((ActionEvent event) -> {
-
-            //File Chooser class
-            fileChooser.chooseFile(primaryStage);
-            fileChooser.fileName = fileChooser.getFileName();
 
 
-            try {
-                FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA") + "\\BatteryDataSftwre\\path.ser");
-                ObjectOutputStream out = new ObjectOutputStream(fileOut);
-                out.writeObject(fileChooser);
-                out.close();
-                fileOut.close();
-            } catch (IOException i) {
-                i.printStackTrace();
+        fileField.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(rem) {
+                    fileChooser.chooseFile(primaryStage);
+                } else {
+                    fileChooser.chooseFileFirst(primaryStage);
+                }
+                fileChooser.fileName = fileChooser.getFileName();
+
+
+                try {
+                    FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA") + "\\BatteryDataSftwre\\path.ser");
+                    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                    out.writeObject(fileChooser);
+                    out.close();
+                    fileOut.close();
+                } catch (IOException i) {
+                    i.printStackTrace();
+                }
+
+
+                fileField.setText(fileChooser.fileName.getName());
+
+                //File Chooser class
             }
-
-
-            fileField.setText(fileChooser.fileName.getName());
-
-            //File Chooser class
-
         });
 
         fileField.setEditable(false);
-
-        files.getItems().add(openFile);
-
-
-        ddMenu.getMenus().addAll(files);
 
         //Button for the graph window created
 
@@ -249,6 +247,14 @@ public class MainMenu extends Application {
                         for (int i = 0; i < cycles.length; i++) {
                             cycle.add(toCycleDouble(cycles[i]));
                         }
+                    } else if(insertCycle1.getText().matches("[\\d]+[\\-][\\d]+")) {
+                        String[] cycles = insertCycle1.getText().split("[\\-]");
+                        for (int i = Integer.parseInt(cycles[0]); i <= Integer.parseInt(cycles[cycles.length-1]); i++) {
+                            double l = (double)i;
+                            cycle.add(l);
+                        }
+                    } else {
+                        throw new Exception("Error");
                     }
                     return null;
                 }
@@ -264,8 +270,6 @@ public class MainMenu extends Application {
 
             });
             insertionCycles.setOnSucceeded(evente -> {
-
-
 
                 long start = System.currentTimeMillis();
 

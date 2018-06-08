@@ -4,10 +4,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.event.EventHandler;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -79,6 +83,7 @@ public class CycleNumberDC extends Graph {
                 //System.out.println(charge);
 
                 XYChart.Data data = new XYChart.Data(cycle, charge);
+                data.setNode(new HoverOverPane(1));
                 series.getData().add(data);
 
 
@@ -90,6 +95,38 @@ public class CycleNumberDC extends Graph {
 
     }
 
+
+    class HoverOverPane extends StackPane {
+
+        HoverOverPane(double cycleNumber){
+            setPrefSize(15, 15);
+
+            final Label label = new Label("Cycle #" + cycleNumber);
+            label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
+            label.setStyle("-fx-font-size: 20;");
+            label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+
+            setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    System.out.println("HHEEEE");
+                    getChildren().addAll(label);
+                    toFront();
+                }
+            });
+
+            setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    getChildren().clear();
+                    System.out.println("k");
+                }
+            });
+
+        }
+
+
+    }
 
 }
 	

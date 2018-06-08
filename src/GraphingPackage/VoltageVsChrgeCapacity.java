@@ -182,6 +182,7 @@ public class VoltageVsChrgeCapacity extends Graph {
             setPrefSize(15, 15);
 
             final Label label = new Label("Cycle #" + cycleNumber);
+            label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
             label.setStyle("-fx-font-size: 20;");
             label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
 
@@ -198,6 +199,7 @@ public class VoltageVsChrgeCapacity extends Graph {
                 @Override
                 public void handle(MouseEvent event) {
                     getChildren().clear();
+                    System.out.println("k");
                 }
             });
 
