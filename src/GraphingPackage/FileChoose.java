@@ -10,10 +10,7 @@ import javafx.stage.Stage;
 
 public class FileChoose implements Serializable {
 
-
     public File fileName;
-
-    public File fileDir;
 
     public File getFileName() {
         return fileName;

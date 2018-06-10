@@ -100,6 +100,8 @@ public class MainMenu extends Application {
     public double mass = 0;
     public int Channel = 0;
     public boolean rem = false;
+    public String fileText = "Click to open file";
+    public String filePath = "";
 
     @SuppressWarnings("restriction")
     @Override
@@ -171,9 +173,12 @@ public class MainMenu extends Application {
             ObjectInputStream in = new ObjectInputStream(fileIn);
             fileChooser = (FileChoose) in.readObject();
             fileField.setText(fileChooser.fileName.getName());
+            fileText = fileField.getText();
+            filePath = fileChooser.fileName.getPath();
             in.close();
             fileIn.close();
             rem = true;
+
         } catch (IOException i) {
             fileField.setText("Click to open file");
 
@@ -204,6 +209,9 @@ public class MainMenu extends Application {
                     fileChooser.chooseFile(primaryStage);
                 } else {
                     fileChooser.chooseFileFirst(primaryStage);
+                    rem = true;
+                    filePath = fileChooser.getFileName().getPath();
+                    fileText = fileChooser.getFileName().getName();
                 }
                 fileChooser.fileName = fileChooser.getFileName();
 
@@ -218,8 +226,21 @@ public class MainMenu extends Application {
                     i.printStackTrace();
                 }
 
-
-                fileField.setText(fileChooser.fileName.getName());
+                try {
+                    fileField.setText(fileChooser.fileName.getName());
+                } catch (Exception e){
+                    fileField.setText(fileText);
+                    fileChooser.setFileName(new File(filePath));
+                    try {
+                        FileOutputStream fileOut = new FileOutputStream(System.getenv("APPDATA") + "\\BatteryDataSftwre\\path.ser");
+                        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                        out.writeObject(fileChooser);
+                        out.close();
+                        fileOut.close();
+                    } catch (IOException i) {
+                        i.printStackTrace();
+                    }
+                }
 
                 //File Chooser class
             }
@@ -239,7 +260,6 @@ public class MainMenu extends Application {
             Task<Void> insertionCycles = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    //TODO Change this thing with regex
                     Channel = toSheetInt(SheetText.getText());
                     mass = toMassDouble(insertMass.getText());
                     if (insertCycle1.getText().matches("(.*)(,)(.*)")) {
@@ -390,4 +410,4 @@ public class MainMenu extends Application {
         launch(args);
     }
 }
- 
+
