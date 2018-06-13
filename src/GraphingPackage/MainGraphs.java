@@ -61,6 +61,8 @@ public class MainGraphs {
     public void displayGraphs() {
         Stage stage = new Stage();
 
+        StackPane stackPane = new StackPane();
+
         BorderPane Pane = new BorderPane();
 
         final NumberAxis xAxis = new NumberAxis();
@@ -71,9 +73,11 @@ public class MainGraphs {
 
         lineChart = graphOne.display();
 
+        stackPane.getChildren().add(lineChart);
+
         double start = System.currentTimeMillis();
 
-        Pane.setCenter(lineChart);
+        Pane.setCenter(stackPane);
 
         double end = System.currentTimeMillis();
 
@@ -122,18 +126,23 @@ public class MainGraphs {
         graphOne.series();
         graphOne.seriesdis();
 
+
         Scene scene = new Scene(Pane, 750, 450);
         lineChart.setLegendVisible(true);
 
         new ZoomManager(Pane, lineChart, graphOne.getSeriesList());
+
+
 
         lineChart.getData().get(0).nodeProperty().get().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 final Label label = new Label("Cycle #" + 1);
                 label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
-                label.setStyle("-fx-font-size: 20;");
+                label.setStyle("-fx-font-size: 10;");
                 label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+                label.toFront();
+                stackPane.getChildren().add(label);
 
             }
         });
@@ -141,7 +150,7 @@ public class MainGraphs {
         lineChart.getData().get(0).nodeProperty().get().setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("b8ted");
+                stackPane.getChildren().remove(1);
             }
         });
 
