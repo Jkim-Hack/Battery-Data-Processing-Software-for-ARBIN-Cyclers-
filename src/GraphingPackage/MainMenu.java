@@ -98,7 +98,6 @@ public class MainMenu extends Application {
     public FileChoose fileChooser = new FileChoose();
     public static ArrayList<Double> cycle = new ArrayList<>();
     public double mass = 0;
-    public int Channel = 0;
     public boolean rem = false;
     public String fileText = "Click to open file";
     public String filePath = "";
@@ -143,11 +142,8 @@ public class MainMenu extends Application {
         Label fileLabel = new Label("Chosen File:");
         TextField fileField = new TextField();
 
-        Label SheetField = new Label("Enter Amount of Channel Sheets: ");
-        TextField SheetText = new TextField("1");
 
-
-        Label Cycles = new Label("Enter Three Cycles: ");
+        Label Cycles = new Label("Enter Cycles:   (Ex. 1,3,4 or 1-4)");
         TextField insertCycle1 = new TextField();
 
 
@@ -260,7 +256,6 @@ public class MainMenu extends Application {
             Task<Void> insertionCycles = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    Channel = toSheetInt(SheetText.getText());
                     mass = toMassDouble(insertMass.getText());
                     if (insertCycle1.getText().matches("(.*)(,)(.*)")) {
                         String[] cycles = insertCycle1.getText().split(",");
@@ -293,8 +288,6 @@ public class MainMenu extends Application {
 
                 long start = System.currentTimeMillis();
 
-                Channel = toSheetInt(SheetText.getText());
-
                 mass = toMassDouble(insertMass.getText());
 
                 mass = mass / 1000;
@@ -306,19 +299,19 @@ public class MainMenu extends Application {
 
                 if (box1.getValue().equals("Voltage vs Charge Capacity & Discharge Capacity")) {
                     graph = new MainGraphs(new VoltageVsChrgeCapacity(fileChooser.fileName, mass, "Voltage vs Charge Capacity & Discharge Capacity",
-                            cycle, Channel));
+                            cycle));
                     long end = System.currentTimeMillis();
                     System.out.println(end - start);
                 }
                 if (box1.getValue().equals("Discharge Capacity vs Cycle Number")) {
                     graph = new MainGraphs(new CycleNumberDC(fileChooser.fileName, mass, "Discharge Capacity vs Cycle Number",
-                            cycle, Channel));
+                            cycle));
                     long end = System.currentTimeMillis();
                     System.out.println(end - start);
                 }
                 if (box1.getValue().equals("Coulombic Efficiency vs Cycle Number")) {
                     graph = new MainGraphs(new CoulombicEff(fileChooser.fileName, mass, "Coulombic Efficiency vs Cycle Number",
-                            cycle, Channel));
+                            cycle));
                     long end = System.currentTimeMillis();
                     System.out.println(end - start);
                 }
@@ -336,7 +329,7 @@ public class MainMenu extends Application {
         BorderPane pane = new BorderPane();
 
         pane.setRight(GraphChoose);
-        GraphChoose.setMargin(createGraph, new Insets(280, 0, 0, 0));
+        GraphChoose.setMargin(createGraph, new Insets(110, 0, 0, 0));
         GraphChoose.setPadding(new Insets(20, 20, 20, 20));
         GraphChoose.setAlignment(Pos.TOP_RIGHT);
         GraphChoose.getChildren().addAll(topLabel, box1, createGraph);
@@ -349,59 +342,31 @@ public class MainMenu extends Application {
 
         pane.setLeft(midinserts);
         midinserts.setPadding(new Insets(20, 20, 20, 20));
-        midinserts.getChildren().addAll(fileLabel, fileField, labelMass, insertMass, Cycles, insertCycle1,
-                SheetField, SheetText);
+        midinserts.getChildren().addAll(fileLabel, fileField, labelMass, insertMass, Cycles, insertCycle1);
 
 
         InputStream in = this.getClass().getClassLoader().getResourceAsStream("favicon.PNG");
 
-        Scene scene = new Scene(pane, 600, 497);
+        Scene scene = new Scene(pane, 500, 300);
 
         Image icon = new Image(in);
 
         primaryStage.getIcons().add(icon);
-        primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler) v1.1");
+        primaryStage.setTitle("Battery Data Processing Software (Dedicated to ARBIN Cycler) v1.2");
         primaryStage.setScene(scene);
         primaryStage.show();
 
 
     }
 
-
-    private boolean isDouble(TextField input, String mass) {
-
-        try {
-            double dataMass = Double.parseDouble(input.getText());
-            return true;
-
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-
     public double toMassDouble(String mass) {
         double dataMass = Double.parseDouble(mass);
         return dataMass;
     }
 
-    public int toSheetInt(String number) {
-        int sheet = Integer.parseInt(number);
-        return sheet;
-    }
-
     public double toCycleDouble(String Cycle) {
         double AllCycle = Double.parseDouble(Cycle);
         return AllCycle;
-    }
-
-
-    private void validate(TextField tf) {
-
-
-        Alert alert = new Alert();
-        alert.displayBox("Error in input fields");
-
     }
 
 

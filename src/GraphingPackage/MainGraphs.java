@@ -22,15 +22,18 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -120,9 +123,28 @@ public class MainGraphs {
         graphOne.seriesdis();
 
         Scene scene = new Scene(Pane, 750, 450);
-        lineChart.setLegendVisible(false);
-        //TODO ZoomManager Series List
+        lineChart.setLegendVisible(true);
+
         new ZoomManager(Pane, lineChart, graphOne.getSeriesList());
+
+        lineChart.getData().get(0).nodeProperty().get().setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                final Label label = new Label("Cycle #" + 1);
+                label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
+                label.setStyle("-fx-font-size: 20;");
+                label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+
+            }
+        });
+
+        lineChart.getData().get(0).nodeProperty().get().setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("b8ted");
+            }
+        });
+
 
         graphOne.getSeriesList().clear();
         MainMenu.cycle.clear();
@@ -132,5 +154,35 @@ public class MainGraphs {
 
 
     }
+
+}
+
+class HoverOverPane extends StackPane {
+
+    HoverOverPane(double cycleNumber){
+        setPrefSize(15, 15);
+
+        final Label label = new Label("Cycle #" + cycleNumber);
+        label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
+        label.setStyle("-fx-font-size: 20;");
+        label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+
+        setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                getChildren().addAll(label);
+                toFront();
+            }
+        });
+
+        setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                getChildren().clear();
+            }
+        });
+
+    }
+
 
 }

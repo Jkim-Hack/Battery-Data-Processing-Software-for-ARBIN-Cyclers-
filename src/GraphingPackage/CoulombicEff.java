@@ -17,8 +17,8 @@ public class CoulombicEff extends Graph {
     private ArrayList<XYChart.Series> seriesList = new ArrayList<>();
 
     public CoulombicEff(File fileName, double value, String title,
-                        ArrayList<Double> cycles, int Channel) {
-        super(fileName, value, title, cycles, Channel);
+                        ArrayList<Double> cycles) {
+        super(fileName, value, title, cycles);
 
     }
 

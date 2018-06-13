@@ -28,10 +28,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
@@ -45,6 +42,13 @@ public class ExcelReader {
     protected ArrayList<Double> cycles;
     protected int Channel;
     protected int Stat;
+
+    public static int current;
+    public static int voltage;
+    public static int charge;
+    public static int discharge;
+    public static int dvdt;
+
 
     public File getFileName() {
         return fileName;
@@ -63,13 +67,10 @@ public class ExcelReader {
         this.data = data;
     }
 
-    public ExcelReader(File fileName, ArrayList<Double> cycles, int Channel) throws IOException {
+    public ExcelReader(File fileName, ArrayList<Double> cycles) throws IOException {
         this.fileName = fileName;
 
         this.cycles = cycles;
-
-
-        this.Channel = Channel;
 
 
         data = new SheetData();
@@ -94,12 +95,55 @@ public class ExcelReader {
         List<Double> container1;
 
 
+        int ChannelStart = 0;
+        int o = 0;
+        int s = 0;
         for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
-
+            if (workbook.getSheetAt(i).getSheetName().matches("Channel(.*)")) {
+                if(o == 0){
+                    ChannelStart = i;
+                }
+                o++;
+                continue;
+            }if (workbook.getSheetAt(i).getSheetName().matches("(.*)Statistics(.*)")){
+                s = i;
+            }
         }
 
+        Iterator<Row> iterator1 = workbook.getSheetAt(ChannelStart).iterator();
 
-        for (int j = 1; j <= Channel; j++) {
+        Row row = iterator1.next();
+
+        int cycleStuff = 0;
+
+
+        for (int i = 1; i < row.getPhysicalNumberOfCells(); i++) {
+
+            if(row.getCell(i).getStringCellValue().matches("(.*)Cycle_Index(.*)")){
+                cycleStuff = i;
+                continue;
+            }
+
+            if(row.getCell(i)
+                    .getStringCellValue().matches("(.*)Voltage(.*)")){
+                voltage = i - cycleStuff;
+            } else if(row.getCell(i)
+                    .getStringCellValue().matches("(.*)Current(.*)")){
+                current = i - cycleStuff;
+            } else if(row.getCell(i)
+                    .getStringCellValue().matches("Charge_Capacity(.*)")){
+                charge = i - cycleStuff;
+            } else if(row.getCell(i)
+                    .getStringCellValue().matches("Discharge_Capacity(.*)")){
+                discharge = i - cycleStuff;
+            } else if(row.getCell(i)
+                    .getStringCellValue().matches("dV/dt(.*)")){
+                dvdt = i - cycleStuff;
+            }
+        }
+
+        Channel = o;
+        for (int j = ChannelStart; j <= Channel; j++) {
 
             Sheet firstSheet = workbook.getSheetAt(j);
 
@@ -114,12 +158,20 @@ public class ExcelReader {
 
                 boolean isCycle = false;
 
-                for (int i = 5; i <= 12; i++) {
+                for (int i = cycleStuff; i <= (dvdt+cycleStuff); i++) {
                     Cell currentCell = nextRow.getCell(i);
+
+                    try{
+                    if (currentCell.equals(null)){
+                        continue;
+                    }
+                    }catch (Exception e){
+                        continue;
+                    }
 
                     double cellContent = 0;
 
-                    double cycleCell = nextRow.getCell(5).getNumericCellValue();
+                    double cycleCell = nextRow.getCell(cycleStuff).getNumericCellValue();
 
                     switch (currentCell.getCellTypeEnum()) {
                         case NUMERIC:
@@ -148,7 +200,6 @@ public class ExcelReader {
 
         }
 
-        int s = Channel + 1;
 
         Sheet statSheet = workbook.getSheetAt(s);
 
@@ -167,6 +218,14 @@ public class ExcelReader {
                 Cell currentCell = nextRow.getCell(i);
 
                 double cellContent1 = 0;
+
+                try{
+                    if (currentCell.equals(null)){
+                        continue;
+                    }
+                }catch (Exception e){
+                    continue;
+                }
 
                 switch (currentCell.getCellTypeEnum()) {
                     case NUMERIC:

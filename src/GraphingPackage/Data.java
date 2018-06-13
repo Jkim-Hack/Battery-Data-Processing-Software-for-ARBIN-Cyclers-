@@ -13,11 +13,34 @@ public class Data
     private double dtDv;
     private double stepIndx;
 
-
 	public Data(List<Double> data) 
     {
 		for(int i = 0; i < data.size(); i++)
 		{
+
+
+			if(i == 0){
+				setCycle_Number(data.get(i));
+				continue;
+			}if(i == ExcelReader.current){
+				setCurrent(data.get(i));
+				continue;
+			}if(i == ExcelReader.voltage){
+				setVoltage(data.get(i));
+				continue;
+			}if(i == ExcelReader.charge){
+				setCharge_Capacity(data.get(i));
+				continue;
+			}if(i == ExcelReader.discharge){
+				setDischarge_Capacity(data.get(i));
+				continue;
+			}if(i == ExcelReader.dvdt){
+				setDtDv(data.get(i));
+				continue;
+			}
+
+
+			/*
 			switch(i)
 			{
 			
@@ -34,6 +57,8 @@ public class Data
 				case 7:setDtDv(data.get(i));
 				
 			}
+			*/
+
 		}
 	}
 

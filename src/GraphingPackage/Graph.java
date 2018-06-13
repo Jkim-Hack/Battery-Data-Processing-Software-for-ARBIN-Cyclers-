@@ -25,11 +25,11 @@ public class Graph {
 
 
     public Graph(File fileName, double value, String title,
-                 ArrayList<Double> cycles, int Channel) {
+                 ArrayList<Double> cycles) {
         excelReader = null;
 
         try {
-            excelReader = new ExcelReader(fileName, cycles, Channel);
+            excelReader = new ExcelReader(fileName, cycles);
             electricityData = excelReader.getData().electrictyData;
             electricityData1 = excelReader.getData().electrictyData1;
         } catch (Exception ioException) {

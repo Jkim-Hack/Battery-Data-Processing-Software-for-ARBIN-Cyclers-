@@ -20,12 +20,13 @@ import javafx.stage.Stage;
 
 public class VoltageVsChrgeCapacity extends Graph {
 
+
     private ArrayList<XYChart.Series> seriesList = new ArrayList<>();
 
     public VoltageVsChrgeCapacity(File fileName, double value, String title,
-                                ArrayList<Double> cycles , int Channel) {
+                                ArrayList<Double> cycles) {
 
-        super(fileName, value, title, cycles, Channel);
+        super(fileName, value, title, cycles);
 
     }
 
@@ -66,6 +67,9 @@ public class VoltageVsChrgeCapacity extends Graph {
         return seriesList;
     }
 
+
+
+
     //defining a series
     @Override
     public void series() {
@@ -74,6 +78,7 @@ public class VoltageVsChrgeCapacity extends Graph {
         for (int u = 0; u < cycles.size(); u++) {
 
             XYChart.Series series = new XYChart.Series();
+
             if (excelReader != null) {
 
 
@@ -109,7 +114,7 @@ public class VoltageVsChrgeCapacity extends Graph {
                     double voltage = currentByCycle.get(i).getVoltage();
 
                     XYChart.Data data = new XYChart.Data(charge, voltage);
-                    data.setNode(new HoverOverPane(1));
+                    data.setNode(new HoverOverPane(u));
                     series.getData().addAll(data);
 
                 }
@@ -133,6 +138,8 @@ public class VoltageVsChrgeCapacity extends Graph {
 
             for (int u = 0; u < cycles.size(); u++) {
                 XYChart.Series seriesdis = new XYChart.Series();
+
+                seriesdis.setName("Cycle " + u);
 
                 List<Data> currentByCycle = new ArrayList<Data>();
                 for (int i = 0; i < electricityData.size(); i++) {
@@ -165,7 +172,7 @@ public class VoltageVsChrgeCapacity extends Graph {
                     double voltage = currentByCycle.get(i).getVoltage();
 
                     XYChart.Data data3 = new XYChart.Data(charge, voltage);
-                    data3.setNode(new HoverOverPane(1));
+                    data3.setNode(new HoverOverPane(u));
                     seriesdis.getData().add(data3);
 
                 }
@@ -189,7 +196,6 @@ public class VoltageVsChrgeCapacity extends Graph {
             setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    System.out.println("HHEEEE");
                     getChildren().addAll(label);
                     toFront();
                 }
@@ -199,7 +205,6 @@ public class VoltageVsChrgeCapacity extends Graph {
                 @Override
                 public void handle(MouseEvent event) {
                     getChildren().clear();
-                    System.out.println("k");
                 }
             });
 
