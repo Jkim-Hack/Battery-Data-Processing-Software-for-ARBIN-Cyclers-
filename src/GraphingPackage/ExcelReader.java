@@ -49,6 +49,7 @@ public class ExcelReader {
     public static int discharge;
     public static int dvdt;
 
+    public static  double finalCycle;
 
     public File getFileName() {
         return fileName;
@@ -110,6 +111,7 @@ public class ExcelReader {
             }
         }
 
+
         Iterator<Row> iterator1 = workbook.getSheetAt(ChannelStart).iterator();
 
         Row row = iterator1.next();
@@ -141,6 +143,8 @@ public class ExcelReader {
                 dvdt = i - cycleStuff;
             }
         }
+
+        finalCycle = workbook.getSheetAt(o).getRow(workbook.getSheetAt(o).getLastRowNum()).getCell(cycleStuff).getNumericCellValue();
 
         Channel = o;
         for (int j = ChannelStart; j <= Channel; j++) {

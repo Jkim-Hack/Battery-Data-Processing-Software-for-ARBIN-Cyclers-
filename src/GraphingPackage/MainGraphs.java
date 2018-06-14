@@ -19,6 +19,7 @@ import com.github.javafx.charts.zooming.ZoomManager;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -128,12 +129,12 @@ public class MainGraphs {
 
 
         Scene scene = new Scene(Pane, 750, 450);
-        lineChart.setLegendVisible(true);
+        lineChart.setLegendVisible(false);
 
         new ZoomManager(Pane, lineChart, graphOne.getSeriesList());
 
 
-
+/*
         lineChart.getData().get(0).nodeProperty().get().setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -142,6 +143,7 @@ public class MainGraphs {
                 label.setStyle("-fx-font-size: 10;");
                 label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
                 label.toFront();
+                //label.setTranslateX(event.getX()/2);
                 stackPane.getChildren().add(label);
 
             }
@@ -154,7 +156,7 @@ public class MainGraphs {
             }
         });
 
-
+*/
         graphOne.getSeriesList().clear();
         MainMenu.cycle.clear();
 

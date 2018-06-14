@@ -58,7 +58,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javafx.application.Application;
@@ -262,6 +265,10 @@ public class MainMenu extends Application {
                         for (int i = 0; i < cycles.length; i++) {
                             cycle.add(toCycleDouble(cycles[i]));
                         }
+                        Collections.sort(cycle);
+                        if(cycle.get(cycle.size()-1)<=ExcelReader.finalCycle && cycle.get(0)>= 1){
+
+                        }
                     } else if(insertCycle1.getText().matches("[\\d]+[\\-][\\d]+")) {
                         String[] cycles = insertCycle1.getText().split("[\\-]");
                         for (int i = Integer.parseInt(cycles[0]); i <= Integer.parseInt(cycles[cycles.length-1]); i++) {
@@ -271,6 +278,7 @@ public class MainMenu extends Application {
                     } else {
                         throw new Exception("Error");
                     }
+
                     return null;
                 }
             };
