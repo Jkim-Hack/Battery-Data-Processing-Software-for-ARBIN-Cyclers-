@@ -111,7 +111,6 @@ public class ExcelReader {
             }
         }
 
-
         Iterator<Row> iterator1 = workbook.getSheetAt(ChannelStart).iterator();
 
         Row row = iterator1.next();
@@ -144,8 +143,7 @@ public class ExcelReader {
             }
         }
 
-        finalCycle = workbook.getSheetAt(o).getRow(workbook.getSheetAt(o).getLastRowNum()).getCell(cycleStuff).getNumericCellValue();
-
+        Row finalRow = null;
         Channel = o;
         for (int j = ChannelStart; j <= Channel; j++) {
 
@@ -198,12 +196,14 @@ public class ExcelReader {
                     data.electrictyData.add(new Data(container));
                 }
 
-
+                finalRow = nextRow;
             }
 
 
         }
 
+        finalCycle  = finalRow.getCell(cycleStuff).getNumericCellValue();
+        System.out.println(finalCycle);
 
         Sheet statSheet = workbook.getSheetAt(s);
 

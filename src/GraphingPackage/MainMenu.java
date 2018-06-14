@@ -266,15 +266,21 @@ public class MainMenu extends Application {
                             cycle.add(toCycleDouble(cycles[i]));
                         }
                         Collections.sort(cycle);
-                        if(cycle.get(cycle.size()-1)<=ExcelReader.finalCycle && cycle.get(0)> 1){
+                       /*System.out.println(ExcelReader.finalCycle);
+                        if(cycle.get(cycle.size()-1)<=ExcelReader.finalCycle && cycle.get(0)>=1){
 
-                        }
+                        } else {
+                            throw new Exception("Error");
+                        }*/
                     } else if(insertCycle1.getText().matches("[\\d]+[\\-][\\d]+")) {
                         String[] cycles = insertCycle1.getText().split("[\\-]");
                         for (int i = Integer.parseInt(cycles[0]); i <= Integer.parseInt(cycles[cycles.length-1]); i++) {
                             double l = (double)i;
                             cycle.add(l);
                         }
+                    } else if(insertCycle1.getText().matches("[\\d]+")) {
+                        double l = toCycleDouble(insertCycle1.getText());
+                        cycle.add(l);
                     } else {
                         throw new Exception("Error");
                     }
@@ -294,6 +300,8 @@ public class MainMenu extends Application {
             });
             insertionCycles.setOnSucceeded(evente -> {
 
+                boolean isCycle = false;
+
                 long start = System.currentTimeMillis();
 
                 mass = toMassDouble(insertMass.getText());
@@ -308,23 +316,34 @@ public class MainMenu extends Application {
                 if (box1.getValue().equals("Voltage vs Charge Capacity & Discharge Capacity")) {
                     graph = new MainGraphs(new VoltageVsChrgeCapacity(fileChooser.fileName, mass, "Voltage vs Charge Capacity & Discharge Capacity",
                             cycle));
+                    if(cycle.get(cycle.size()-1)<=ExcelReader.finalCycle && cycle.get(0)>=1){
+                        isCycle = true;
+                    }
+
                     long end = System.currentTimeMillis();
                     System.out.println(end - start);
                 }
                 if (box1.getValue().equals("Discharge Capacity vs Cycle Number")) {
                     graph = new MainGraphs(new CycleNumberDC(fileChooser.fileName, mass, "Discharge Capacity vs Cycle Number",
                             cycle));
+                    isCycle = true;
                     long end = System.currentTimeMillis();
                     System.out.println(end - start);
                 }
                 if (box1.getValue().equals("Coulombic Efficiency vs Cycle Number")) {
                     graph = new MainGraphs(new CoulombicEff(fileChooser.fileName, mass, "Coulombic Efficiency vs Cycle Number",
                             cycle));
+                    isCycle = true;
                     long end = System.currentTimeMillis();
                     System.out.println(end - start);
                 }
 
-                graph.displayGraphs();
+                if(isCycle) {
+                    graph.displayGraphs();
+                } else {
+                    Alert alert1 = new Alert();
+                    alert1.displayBox("A cycle is not within the data set");
+                }
             });
         });
 

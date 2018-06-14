@@ -29,7 +29,7 @@ public class Alert
 		pane.setAlignment(Pos.CENTER);
 		
 		Scene scene = new Scene(pane);
-		
+		stage.setTitle("Error");
 		stage.setScene(scene);
 		stage.show();
 	}
