@@ -266,7 +266,7 @@ public class MainMenu extends Application {
                             cycle.add(toCycleDouble(cycles[i]));
                         }
                         Collections.sort(cycle);
-                        if(cycle.get(cycle.size()-1)<=ExcelReader.finalCycle && cycle.get(0)>= 1){
+                        if(cycle.get(cycle.size()-1)<=ExcelReader.finalCycle && cycle.get(0)> 1){
 
                         }
                     } else if(insertCycle1.getText().matches("[\\d]+[\\-][\\d]+")) {
