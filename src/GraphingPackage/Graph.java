@@ -92,6 +92,10 @@ public class Graph {
         ArrayList<String> seriesName = new ArrayList<>();
         return seriesName;
     }
+    public ArrayList<String> getColorFills(){
+        ArrayList<String> colorFills = new ArrayList<>();
+        return colorFills;
+    }
 
     public void series() {
 

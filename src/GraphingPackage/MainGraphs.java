@@ -20,6 +20,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -30,10 +31,7 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
@@ -68,6 +66,8 @@ public class MainGraphs {
 
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
+        graphOne.series();
+        graphOne.seriesdis();
 
         // creating the chart
         LineChart<Number, Number> lineChart = new LineChart<Number, Number>(xAxis, yAxis);
@@ -84,25 +84,36 @@ public class MainGraphs {
 
         System.out.println(end - start);
 
-        ListView<String> CycleNames = new ListView<>();
-        ListView<Rectangle> cycleColors = new ListView<>();
+        BorderPane pane = new BorderPane();
 
-        CycleNames.setPrefSize(10,10);
-        cycleColors.setPrefSize(10,10);
+        VBox label = new VBox();
+        VBox color = new VBox();
 
         for (int i = 0; i < graphOne.getSeriesName().size(); i++) {
-            CycleNames.getItems().add(graphOne.getSeriesName().get(i));
-            Rectangle rect = new Rectangle(5,5);
-            rect.getStyleClass().add(graphOne.getColorCodes().get(i));
-            cycleColors.getItems().add(rect);
+            label.getChildren().add(new Label(graphOne.getSeriesName().get(i)));
+            Rectangle rect = new Rectangle(10,10);
+            rect.setStyle(graphOne.getColorFills().get(i));
+            color.getChildren().add(rect);
         }
 
+
+        label.setSpacing(10);
+        label.setPadding(new Insets(20));
+
+        color.setSpacing(20);
+        color.setPadding(new Insets(22,20,20,20));
+
         HBox labels = new HBox();
-        VBox label = new VBox();
+        labels.getChildren().addAll(label, color);
+        labels.setSpacing(10);
 
-        labels.getChildren().addAll(CycleNames, cycleColors);
-        stackPane.getChildren().add(labels);
+        pane.setCenter(labels);
 
+        Stage graphLabels = new Stage();
+
+        Scene newScene = new Scene(pane, 50, 50);
+
+        graphLabels.setScene(newScene);
 
         MenuBar topMen = new MenuBar();
 
@@ -144,8 +155,6 @@ public class MainGraphs {
         Pane.setTop(topMen);
         topMen.getMenus().addAll(file);
 
-        graphOne.series();
-        graphOne.seriesdis();
 
 
         Scene scene = new Scene(Pane, 750, 450);
@@ -181,6 +190,7 @@ public class MainGraphs {
         MainMenu.cycle.clear();
 
         stage.setScene(scene);
+        graphLabels.show();
         stage.show();
 
 

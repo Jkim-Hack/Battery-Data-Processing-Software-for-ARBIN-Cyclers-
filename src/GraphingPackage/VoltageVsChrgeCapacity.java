@@ -22,6 +22,7 @@ public class VoltageVsChrgeCapacity extends Graph {
 
     private ArrayList<String> colorCodes = new ArrayList<>();
     private ArrayList<String> seriesName = new ArrayList<>();
+    private ArrayList<String> colorFills = new ArrayList<>();
 
     private ArrayList<XYChart.Series> seriesList = new ArrayList<>();
 
@@ -41,7 +42,16 @@ public class VoltageVsChrgeCapacity extends Graph {
         colorCodes.add("{-fx-stroke: #ff3399;}");
         colorCodes.add("{-fx-stroke: yellow;}");
 
-
+        colorFills.add("-fx-fill: red;");
+        colorFills.add("-fx-fill: green;");
+        colorFills.add("-fx-fill: blue;");
+        colorFills.add("-fx-fill: #ffa500;");
+        colorFills.add("-fx-fill: #4169e1;");
+        colorFills.add("-fx-fill: #9933ff;");
+        colorFills.add("-fx-fill: #00ffff;");
+        colorFills.add("-fx-fill: yellow;");
+        colorFills.add("-fx-fill: #ff3399;");
+        colorFills.add("-fx-fill: yellow;");
 
     }
 
@@ -81,6 +91,7 @@ public class VoltageVsChrgeCapacity extends Graph {
         }
 
 
+
         return lineChart;
     }
 
@@ -97,6 +108,10 @@ public class VoltageVsChrgeCapacity extends Graph {
     @Override
     public ArrayList<String> getSeriesName() {
         return seriesName;
+    }
+    @Override
+    public ArrayList<String> getColorFills(){
+        return colorFills;
     }
 
     //defining a series
