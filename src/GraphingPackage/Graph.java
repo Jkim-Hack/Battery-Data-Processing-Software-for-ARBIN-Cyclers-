@@ -66,6 +66,7 @@ public class Graph {
 
     }
 
+
     public LineChart<Number, Number> display() {
 
         final NumberAxis xAxis = new NumberAxis();
@@ -80,6 +81,16 @@ public class Graph {
     public ArrayList<XYChart.Series> getSeriesList() {
         ArrayList<Series> seriesList = new ArrayList<>();
         return seriesList;
+    }
+
+    public ArrayList<String> getColorCodes() {
+        ArrayList<String> colorCodes = new ArrayList<>();
+        return colorCodes;
+    }
+
+    public ArrayList<String> getSeriesName() {
+        ArrayList<String> seriesName = new ArrayList<>();
+        return seriesName;
     }
 
     public void series() {

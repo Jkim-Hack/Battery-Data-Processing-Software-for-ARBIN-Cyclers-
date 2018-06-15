@@ -23,10 +23,7 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -34,8 +31,11 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -83,6 +83,26 @@ public class MainGraphs {
         double end = System.currentTimeMillis();
 
         System.out.println(end - start);
+
+        ListView<String> CycleNames = new ListView<>();
+        ListView<Rectangle> cycleColors = new ListView<>();
+
+        CycleNames.setPrefSize(10,10);
+        cycleColors.setPrefSize(10,10);
+
+        for (int i = 0; i < graphOne.getSeriesName().size(); i++) {
+            CycleNames.getItems().add(graphOne.getSeriesName().get(i));
+            Rectangle rect = new Rectangle(5,5);
+            rect.getStyleClass().add(graphOne.getColorCodes().get(i));
+            cycleColors.getItems().add(rect);
+        }
+
+        HBox labels = new HBox();
+        VBox label = new VBox();
+
+        labels.getChildren().addAll(CycleNames, cycleColors);
+        stackPane.getChildren().add(labels);
+
 
         MenuBar topMen = new MenuBar();
 

@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 
 public class VoltageVsChrgeCapacity extends Graph {
 
+    private ArrayList<String> colorCodes = new ArrayList<>();
+    private ArrayList<String> seriesName = new ArrayList<>();
 
     private ArrayList<XYChart.Series> seriesList = new ArrayList<>();
 
@@ -27,6 +29,19 @@ public class VoltageVsChrgeCapacity extends Graph {
                                 ArrayList<Double> cycles) {
 
         super(fileName, value, title, cycles);
+
+        colorCodes.add("{ -fx-stroke: red; }");
+        colorCodes.add("{-fx-stroke: green;}");
+        colorCodes.add("{-fx-stroke: blue;}");
+        colorCodes.add("{-fx-stroke: #ffa500;}");
+        colorCodes.add("{-fx-stroke: #4169e1;}");
+        colorCodes.add("{-fx-stroke: #9933ff;}");
+        colorCodes.add("{-fx-stroke: #00ffff;}");
+        colorCodes.add("{-fx-stroke: yellow;}");
+        colorCodes.add("{-fx-stroke: #ff3399;}");
+        colorCodes.add("{-fx-stroke: yellow;}");
+
+
 
     }
 
@@ -57,6 +72,14 @@ public class VoltageVsChrgeCapacity extends Graph {
         lineChart.setTitle("Voltage vs Capacity");
         lineChart.setCreateSymbols(false);
         lineChart.getStylesheets().add("Chart.css");
+        int count = 0;
+        for (int i = 0; i < cycles.size(); i++) {
+            lineChart.getStyleClass().add(".default-color" + i + ".chart-series-line " + colorCodes.get(count));
+            if(i % 2 != 0) {
+                count++;
+            }
+        }
+
 
         return lineChart;
     }
@@ -67,8 +90,14 @@ public class VoltageVsChrgeCapacity extends Graph {
         return seriesList;
     }
 
-
-
+    @Override
+    public ArrayList<String> getColorCodes() {
+        return colorCodes;
+    }
+    @Override
+    public ArrayList<String> getSeriesName() {
+        return seriesName;
+    }
 
     //defining a series
     @Override
@@ -78,6 +107,7 @@ public class VoltageVsChrgeCapacity extends Graph {
         for (int u = 0; u < cycles.size(); u++) {
 
             XYChart.Series series = new XYChart.Series();
+            seriesName.add("Cycle #" + u);
 
             if (excelReader != null) {
 
@@ -139,7 +169,7 @@ public class VoltageVsChrgeCapacity extends Graph {
             for (int u = 0; u < cycles.size(); u++) {
                 XYChart.Series seriesdis = new XYChart.Series();
 
-                seriesdis.setName("Cycle " + u);
+                //seriesdis.setName("Cycle " + u);
 
                 List<Data> currentByCycle = new ArrayList<Data>();
                 for (int i = 0; i < electricityData.size(); i++) {
